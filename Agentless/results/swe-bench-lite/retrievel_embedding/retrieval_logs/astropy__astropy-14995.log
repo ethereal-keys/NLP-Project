@@ -1,0 +1,4268 @@
+2025-04-21 15:02:03,553 - INFO - Processing bug astropy__astropy-14995
+2025-04-21 15:02:49,880 - INFO - Total number of considered files: 19
+2025-04-21 15:02:49,895 - INFO - Total number of documents: 19
+2025-04-21 15:25:04,912 - INFO - Processing bug astropy__astropy-14995
+2025-04-21 15:28:51,274 - INFO - Processing bug astropy__astropy-14995
+2025-04-21 15:30:04,900 - INFO - Total number of considered files: 19
+2025-04-21 15:30:04,931 - INFO - Total number of documents: 19
+2025-04-21 15:31:30,495 - INFO - Processing bug astropy__astropy-14995
+2025-04-21 15:32:27,213 - INFO - Processing bug astropy__astropy-14995
+2025-04-21 15:33:44,984 - INFO - Total number of considered files: 19
+2025-04-21 15:33:45,018 - INFO - Total number of documents: 19
+2025-04-21 15:34:58,271 - INFO - Processing bug astropy__astropy-14995
+2025-04-21 15:35:31,848 - INFO - Total number of considered files: 19
+2025-04-21 15:35:49,939 - INFO - Processing bug astropy__astropy-14995
+2025-04-21 15:36:20,967 - INFO - Total number of considered files: 19
+2025-04-21 15:36:20,986 - INFO - Total number of documents: 19
+2025-04-21 15:39:22,118 - INFO - Processing bug astropy__astropy-14995
+2025-04-21 15:40:27,360 - INFO - Total number of considered files: 19
+2025-04-21 15:40:27,375 - INFO - Total number of documents: 19
+2025-04-21 15:41:05,917 - INFO - Processing bug astropy__astropy-14995
+2025-04-21 15:41:39,602 - INFO - Total number of considered files: 19
+2025-04-21 15:41:39,618 - INFO - Total number of documents: 19
+2025-04-22 13:46:21,240 - INFO - Processing bug astropy__astropy-14995
+2025-04-22 13:47:10,999 - INFO - Total number of considered files: 19
+2025-04-22 13:47:11,015 - INFO - Total number of documents: 19
+2025-04-22 13:50:53,655 - INFO - Processing bug astropy__astropy-14995
+2025-04-22 13:51:31,667 - INFO - Total number of considered files: 19
+2025-04-22 13:51:31,687 - INFO - Total number of documents: 19
+2025-04-22 13:52:54,245 - INFO - Processing bug astropy__astropy-14995
+2025-04-22 13:53:29,388 - INFO - Total number of considered files: 19
+2025-04-22 13:53:29,407 - INFO - Total number of documents: 19
+2025-04-22 13:54:35,306 - INFO - Processing bug astropy__astropy-14995
+2025-04-22 13:55:43,778 - INFO - Total number of considered files: 19
+2025-04-22 13:55:43,793 - INFO - Total number of documents: 19
+2025-04-22 13:58:07,081 - INFO - Processing bug astropy__astropy-14995
+2025-04-22 13:58:39,538 - INFO - Total number of considered files: 19
+2025-04-22 13:58:39,552 - INFO - Total number of documents: 19
+2025-04-22 15:14:28,276 - INFO - Processing bug astropy__astropy-14995
+2025-04-22 15:15:05,992 - INFO - Total number of considered files: 19
+2025-04-22 15:15:06,006 - INFO - Total number of documents: 19
+2025-04-22 17:04:13,341 - INFO - Processing bug astropy__astropy-14995
+2025-04-22 17:04:47,806 - INFO - Total number of considered files: 19
+2025-04-22 17:04:47,821 - INFO - Total number of documents: 19
+2025-04-22 17:05:01,779 - INFO - Processing bug astropy__astropy-14995
+2025-04-22 17:05:32,470 - INFO - Total number of considered files: 19
+2025-04-22 17:05:32,485 - INFO - Total number of documents: 19
+2025-04-22 17:06:20,427 - INFO - Processing bug astropy__astropy-14995
+2025-04-22 17:06:53,280 - INFO - Total number of considered files: 19
+2025-04-22 17:06:53,296 - INFO - Total number of documents: 19
+2025-04-22 17:06:53,298 - INFO - Initializing a decoder model: meta-llama/CodeLlama-7b-Instruct-hf ...
+2025-04-22 17:14:48,792 - INFO - Processing bug astropy__astropy-14995
+2025-04-22 17:15:31,895 - INFO - Total number of considered files: 19
+2025-04-22 17:15:31,911 - INFO - Total number of documents: 19
+2025-04-22 17:15:31,918 - INFO - Initializing a decoder model: meta-llama/CodeLlama-7b-Instruct-hf ...
+2025-04-22 17:17:45,045 - INFO - Processing bug astropy__astropy-14995
+2025-04-22 17:18:31,886 - INFO - Total number of considered files: 19
+2025-04-22 17:18:31,902 - INFO - Total number of documents: 19
+2025-04-22 17:18:31,904 - INFO - Initializing a decoder model: meta-llama/CodeLlama-7b-Instruct-hf ...
+2025-04-22 17:23:40,050 - INFO - Processing bug astropy__astropy-14995
+2025-04-22 17:24:24,444 - INFO - Total number of considered files: 19
+2025-04-22 17:24:24,460 - INFO - Total number of documents: 19
+2025-04-22 17:24:24,496 - INFO - Initializing a decoder model: meta-llama/CodeLlama-7b-Instruct-hf ...
+2025-04-22 17:27:56,848 - INFO - Processing bug astropy__astropy-14995
+2025-04-22 17:29:24,825 - INFO - Total number of considered files: 19
+2025-04-22 17:29:24,855 - INFO - Total number of documents: 19
+2025-04-22 20:04:42,900 - INFO - Processing bug astropy__astropy-14995
+2025-04-22 20:05:26,175 - INFO - Total number of considered files: 19
+2025-04-22 20:05:26,189 - INFO - Total number of documents: 19
+2025-04-22 20:08:52,843 - INFO - Processing bug astropy__astropy-14995
+2025-04-22 20:09:25,997 - INFO - Total number of considered files: 19
+2025-04-22 20:09:26,013 - INFO - Total number of documents: 19
+2025-04-22 20:09:35,165 - INFO - Retrieving with query:
+In v5.3, NDDataRef mask propagation fails when one of the operand does not have a mask
+### Description
+
+This applies to v5.3. 
+
+It looks like when one of the operand does not have a mask, the mask propagation when doing arithmetic, in particular with `handle_mask=np.bitwise_or` fails.  This is not a problem in v5.2.
+
+I don't know enough about how all that works, but it seems from the error that the operand without a mask is set as a mask of None's and then the bitwise_or tries to operate on an integer and a None and fails.
+
+### Expected behavior
+
+When one of the operand does not have mask, the mask that exists should just be copied over to the output.  Or whatever was done in that situation in v5.2 where there's no problem.
+
+### How to Reproduce
+
+This is with v5.3.   With v5.2, there are no errors.
+
+```
+>>> import numpy as np
+>>> from astropy.nddata import NDDataRef
+
+>>> array = np.array([[0, 1, 0], [1, 0, 1], [0, 1, 0]])
+>>> mask = np.array([[0, 1, 64], [8, 0, 1], [2, 1, 0]])
+
+>>> nref_nomask = NDDataRef(array)
+>>> nref_mask = NDDataRef(array, mask=mask)
+
+# multiply no mask by constant (no mask * no mask)
+>>> nref_nomask.multiply(1., handle_mask=np.bitwise_or).mask   # returns nothing, no mask,  OK
+
+# multiply no mask by itself (no mask * no mask)
+>>> nref_nomask.multiply(nref_nomask, handle_mask=np.bitwise_or).mask # return nothing, no mask, OK
+
+# multiply mask by constant (mask * no mask)
+>>> nref_mask.multiply(1., handle_mask=np.bitwise_or).mask
+...
+TypeError: unsupported operand type(s) for |: 'int' and 'NoneType'
+
+# multiply mask by itself (mask * mask)
+>>> nref_mask.multiply(nref_mask, handle_mask=np.bitwise_or).mask
+array([[ 0,  1, 64],
+       [ 8,  0,  1],
+       [ 2,  1,  0]])
+
+# multiply mask by no mask (mask * no mask)
+>>> nref_mask.multiply(nref_nomask, handle_mask=np.bitwise_or).mask
+...
+TypeError: unsupported operand type(s) for |: 'int' and 'NoneType'
+```
+
+
+### Versions
+
+>>> import sys; print("Python", sys.version)
+Python 3.10.11 | packaged by conda-forge | (main, May 10 2023, 19:07:22) [Clang 14.0.6 ]
+>>> import astropy; print("astropy", astropy.__version__)
+astropy 5.3
+>>> import numpy; print("Numpy", numpy.__version__)
+Numpy 1.24.3
+>>> import erfa; print("pyerfa", erfa.__version__)
+pyerfa 2.0.0.3
+>>> import scipy; print("Scipy", scipy.__version__)
+Scipy 1.10.1
+>>> import matplotlib; print("Matplotlib", matplotlib.__version__)
+Matplotlib 3.7.1
+
+
+2025-04-22 20:09:35,356 - INFO - Embedding Tokens: 0
+2025-04-22 20:09:35,357 - INFO - ================
+2025-04-22 20:09:35,357 - INFO - examples/template/example-template.py
+2025-04-22 20:09:35,357 - INFO - """
+
+##############################################################################
+# Make print work the same in all versions of Python, set up numpy,
+# matplotlib, and use a nicer set of plot parameters:
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+from astropy.visualization import astropy_mpl_style
+
+plt.style.use(astropy_mpl_style)
+# uncomment if including figures:
+# import matplotlib.pyplot as plt
+# from astropy.visualization import astropy_mpl_style
+# plt.style.use(astropy_mpl_style)
+
+##############################################################################
+# This code block is executed, although it produces no output. Lines starting
+# with a simple hash are code comment and get treated as part of the code
+# block. To include this new comment string we started the new block with a
+# long line of hashes.
+#
+# The sphinx-gallery parser will assume everything after this splitter and that
+# continues to start with a **comment hash and space** (respecting code style)
+# is text that has to be rendered in
+# html format. Keep in mind to always keep your comments always together by
+# comment hashes. That means to break a paragraph you still need to comment
+# that line break.
+#
+# In this example the next block of code produces some plotable data. Code is
+# executed, figure is saved and then code is presented next, followed by the
+# inlined figure.
+
+x = np.linspace(-np.pi, np.pi, 300)
+xx, yy = np.meshgrid(x, x)
+z = np.cos(xx) + np.cos(yy)
+
+plt.figure()
+plt.imshow(z)
+plt.colorbar()
+plt.xlabel('$x$')
+plt.ylabel('$y$')
+
+###########################################################################
+# Again it is possible to continue the discussion with a new Python string. This
+# time to introduce the next code block generates 2 separate figures.
+
+plt.figure()
+plt.imshow(z, cmap=plt.cm.get_cmap('hot'))
+plt.figure()
+plt.imshow(z, cmap=plt.cm.get_cmap('Spectral'), interpolation='none')
+
+##########################################################################
+# There's some subtle differences between rendered html rendered comment
+# strings and code comment strings which I'll demonstrate below. (Some of this
+# only makes sense if you look at the
+# :download:`raw Python script <plot_notebook.py>`)
+#
+# Comments in comment blocks remain nested in the text.
+
+
+def dummy():
+    """Dummy function to make sure docstrings don't get rendered as text"""
+    pass
+2025-04-22 20:09:35,357 - INFO - ================
+2025-04-22 20:09:35,357 - INFO - docs/nddata/examples/cutout2d_tofits.py
+2025-04-22 20:09:35,358 - INFO - # Download an example FITS file, create a 2D cutout, and save it to a
+# new FITS file, including the updated cutout WCS.
+from astropy.io import fits
+from astropy.nddata import Cutout2D
+from astropy.utils.data import download_file
+from astropy.wcs import WCS
+
+
+def download_image_save_cutout(url, position, size):
+    # Download the image
+    filename = download_file(url)
+
+    # Load the image and the WCS
+    hdu = fits.open(filename)[0]
+    wcs = WCS(hdu.header)
+
+    # Make the cutout, including the WCS
+    cutout = Cutout2D(hdu.data, position=position, size=size, wcs=wcs)
+
+    # Put the cutout image in the FITS HDU
+    hdu.data = cutout.data
+
+    # Update the FITS header with the cutout WCS
+    hdu.header.update(cutout.wcs.to_header())
+
+    # Write the cutout to a new FITS file
+    cutout_filename = 'example_cutout.fits'
+    hdu.writeto(cutout_filename, overwrite=True)
+
+
+if __name__ == '__main__':
+    url = 'https://astropy.stsci.edu/data/photometry/spitzer_example_image.fits'
+
+    position = (500, 300)
+    size = (400, 400)
+    download_image_save_cutout(url, position, size)
+2025-04-22 20:09:35,358 - INFO - ================
+2025-04-22 20:09:35,358 - INFO - examples/io/skip_create-large-fits.py
+2025-04-22 20:09:35,358 - INFO - abs(header['BITPIX'])/8
+    # (this example is assuming a 64-bit float)
+    # The -1 is to account for the final byte that we are about to
+    # write:
+    fobj.seek(len(header.tostring()) + (40000 * 40000 * 8) - 1)
+    fobj.write(b'\0')
+
+##############################################################################
+# More generally, this can be written:
+
+shape = tuple(header[f'NAXIS{ii}'] for ii in range(1, header['NAXIS']+1))
+with open('large.fits', 'rb+') as fobj:
+    fobj.seek(len(header.tostring()) + (np.prod(shape) * np.abs(header['BITPIX']//8)) - 1)
+    fobj.write(b'\0')
+
+##############################################################################
+# On modern operating systems this will cause the file (past the header) to be
+# filled with zeros out to the ~12GB needed to hold a 40000 x 40000 image. On
+# filesystems that support sparse file creation (most Linux filesystems, but not
+# the HFS+ filesystem used by most Macs) this is a very fast, efficient
+# operation. On other systems your mileage may vary.
+#
+# This isn't the only way to build up a large file, but probably one of the
+# safest. This method can also be used to create large multi-extension FITS
+# files, with a little care.
+
+##############################################################################
+# Finally, we'll remove the file we created:
+
+os.remove('large.fits')
+2025-04-22 20:09:35,358 - INFO - ================
+2025-04-22 20:09:35,358 - INFO - .pyinstaller/run_astropy_tests.py
+2025-04-22 20:09:35,359 - INFO - os.remove(os.path.join("astropy_tests", "table", "mixins", "tests", "test_registry.py"))
+
+# Copy the top-level conftest.py
+shutil.copy2(
+    os.path.join(ROOT, "astropy", "conftest.py"),
+    os.path.join("astropy_tests", "conftest.py"),
+)
+
+# matplotlib hook in pyinstaller 5.0 and later no longer collects every backend, see
+# https://github.com/pyinstaller/pyinstaller/issues/6760
+matplotlib.use("svg")
+
+# We skip a few tests, which are generally ones that rely on explicitly
+# checking the name of the current module (which ends up starting with
+# astropy_tests rather than astropy).
+
+SKIP_TESTS = [
+    "test_exception_logging_origin",
+    "test_log",
+    "test_configitem",
+    "test_config_noastropy_fallback",
+    "test_no_home",
+    "test_path",
+    "test_rename_path",
+    "test_data_name_third_party_package",
+    "test_pkg_finder",
+    "test_wcsapi_extension",
+    "test_find_current_module_bundle",
+    "test_minversion",
+    "test_imports",
+    "test_generate_config",
+    "test_generate_config2",
+    "test_create_config_file",
+    "test_download_parallel_fills_cache",
+]
+
+# Run the tests!
+sys.exit(
+    pytest.main(
+        ["astropy_tests", "-k " + " and ".join("not " + test for test in SKIP_TESTS)],
+        plugins=[
+            "pytest_astropy.plugin",
+            "pytest_doctestplus.plugin",
+            "pytest_remotedata.plugin",
+            "pytest_astropy_header.display",
+        ],
+    )
+)
+2025-04-22 20:09:35,359 - INFO - ================
+2025-04-22 20:09:35,359 - INFO - docs/conf.py
+2025-04-22 20:09:35,359 - INFO - # so here we mostly need to define Astropy-specific x-refs
+numpydoc_xref_aliases.update(
+    {
+        # python & adjacent
+        "Any": "`~typing.Any`",
+        "file-like": ":term:`python:file-like object`",
+        "file": ":term:`python:file object`",
+        "path-like": ":term:`python:path-like object`",
+        "module": ":term:`python:module`",
+        "buffer-like": ":term:buffer-like",
+        "hashable": ":term:`python:hashable`",
+        # for matplotlib
+        "color": ":term:`color`",
+        # for numpy
+        "ints": ":class:`python:int`",
+        # for astropy
+        "number": ":term:`number`",
+        "Representation": ":class:`~astropy.coordinates.BaseRepresentation`",
+        "writable": ":term:`writable file-like object`",
+        "readable": ":term:`readable file-like object`",
+        "BaseHDU": ":doc:`HDU </io/fits/api/hdus>`",
+    }
+)
+# Add from sphinx-astropy 1) glossary aliases 2) physical types.
+numpydoc_xref_aliases.update(numpydoc_xref_astropy_aliases)
+
+# Turn off table of contents entries for functions and classes
+toc_object_entries = False
+
+# -- Project information ------------------------------------------------------
+
+project = "Astropy"
+author = "The Astropy Developers"
+copyright = f"2011–{datetime.utcnow().year}, " + author
+
+# The version info for the project you're documenting, acts as replacement for
+# |version| and |release|, also used in various other places throughout the
+# built documents.
+
+# The full version, including alpha/beta/rc tags.
+release = metadata.version(project)
+# The short X.Y version.
+version = ".".join(release.split(".")[:2])
+
+# Only include dev docs in dev version.
+dev = "dev" in release
+if not dev:
+    exclude_patterns += ["development/*", "testhelpers.rst"]
+
+# -- Options for the module index ---------------------------------------------
+
+modindex_common_prefix = ["astropy."]
+2025-04-22 20:09:35,359 - INFO - import os
+import shutil
+import sys
+
+import erfa  # noqa: F401
+import matplotlib
+import pytest
+
+import astropy  # noqa: F401
+
+if len(sys.argv) == 3 and sys.argv[1] == "--astropy-root":
+    ROOT = sys.argv[2]
+else:
+    # Make sure we don't allow any arguments to be passed - some tests call
+    # sys.executable which becomes this script when producing a pyinstaller
+    # bundle, but we should just error in this case since this is not the
+    # regular Python interpreter.
+    if len(sys.argv) > 1:
+        print("Extra arguments passed, exiting early")
+        sys.exit(1)
+
+for root, dirnames, files in os.walk(os.path.join(ROOT, "astropy")):
+    # NOTE: we can't simply use
+    # test_root = root.replace('astropy', 'astropy_tests')
+    # as we only want to change the one which is for the module, so instead
+    # we search for the last occurrence and replace that.
+    pos = root.rfind("astropy")
+    test_root = root[:pos] + "astropy_tests" + root[pos + 7 :]
+
+    # Copy over the astropy 'tests' directories and their contents
+    for dirname in dirnames:
+        final_dir = os.path.relpath(os.path.join(test_root, dirname), ROOT)
+        # We only copy over 'tests' directories, but not astropy/tests (only
+        # astropy/tests/tests) since that is not just a directory with tests.
+        if dirname == "tests" and not root.endswith("astropy"):
+            shutil.copytree(os.path.join(root, dirname), final_dir, dirs_exist_ok=True)
+        else:
+            # Create empty __init__.py files so that 'astropy_tests' still
+            # behaves like a single package, otherwise pytest gets confused
+            # by the different conftest.py files.
+2025-04-22 20:09:35,359 - INFO - ================
+2025-04-22 20:09:35,360 - INFO - examples/coordinates/plot_sgr-coordinate-frame.py
+2025-04-22 20:09:35,360 - INFO - ##############################################################################
+# The decorator ``@frame_transform_graph.transform(coord.StaticMatrixTransform,
+# coord.Galactic, Sagittarius)``  registers this function on the
+# ``frame_transform_graph`` as a coordinate transformation. Inside the function,
+# we simply return the previously defined rotation matrix.
+#
+# We then register the inverse transformation by using the transpose of the
+# rotation matrix (which is faster to compute than the inverse):
+
+@frame_transform_graph.transform(coord.StaticMatrixTransform, Sagittarius, coord.Galactic)
+def sgr_to_galactic():
+    """Compute the heliocentric Sgr to spherical Galactic transformation matrix."""
+    return matrix_transpose(SGR_MATRIX)
+
+
+##############################################################################
+# Now that we've registered these transformations between ``Sagittarius`` and
+# `~astropy.coordinates.Galactic`, we can transform between *any* coordinate
+# system and ``Sagittarius`` (as long as the other system has a path to
+# transform to `~astropy.coordinates.Galactic`). For example, to transform from
+# ICRS coordinates to ``Sagittarius``, we would do:
+
+icrs = coord.SkyCoord(280.161732*u.degree, 11.91934*u.degree, frame='icrs')
+sgr = icrs.transform_to(Sagittarius)
+print(sgr)
+
+##############################################################################
+# Or, to transform from the ``Sagittarius`` frame to ICRS coordinates (in this
+# case, a line along the ``Sagittarius`` x-y plane):
+
+sgr = coord.SkyCoord(Lambda=np.linspace(0, 2*np.pi, 128)*u.radian,
+                     Beta=np.zeros(128)*u.radian, frame='sagittarius')
+icrs = sgr.transform_to(coord.ICRS)
+print(icrs)
+
+##############################################################################
+# As an example, we'll now plot the points in both coordinate systems:
+
+fig, axes = plt.subplots(2, 1, figsize=(8, 10),
+                         subplot_kw={'projection': 'aitoff'})
+
+axes[0].set_title("Sagittarius")
+axes[0].plot(sgr.Lambda.wrap_at(180*u.deg).radian, sgr.Beta.radian,
+             linestyle='none', marker='.')
+2025-04-22 20:09:35,360 - INFO - #
+# Create a stub array to initialize the HDU; its
+# exact size is irrelevant, as long as it has the desired number of
+# dimensions
+
+data = np.zeros((100, 100), dtype=np.float64)
+hdu = fits.PrimaryHDU(data=data)
+header = hdu.header
+while len(header) < (36 * 4 - 1):
+    header.append()  # Adds a blank card to the end
+
+##############################################################################
+# Now adjust the NAXISn keywords to the desired size of the array, and write
+# only the header out to a file. Using the ``hdu.writeto()`` method will cause
+# astropy to "helpfully" reset the NAXISn keywords to match the size of the
+# dummy array. That is because it works hard to ensure that only valid FITS
+# files are written. Instead, we can write just the header to a file using the
+# `astropy.io.fits.Header.tofile` method:
+
+header['NAXIS1'] = 40000
+header['NAXIS2'] = 40000
+header.tofile('large.fits')
+
+##############################################################################
+# Finally, grow out the end of the file to match the length of the
+# data (plus the length of the header). This can be done very efficiently on
+# most systems by seeking past the end of the file and writing a single byte,
+# like so:
+
+with open('large.fits', 'rb+') as fobj:
+    # Seek past the length of the header, plus the length of the
+    # Data we want to write.
+    # 8 is the number of bytes per value, i.e.
+2025-04-22 20:09:35,360 - INFO - ================
+2025-04-22 20:09:35,360 - INFO - examples/coordinates/plot_obs-planning.py
+2025-04-22 20:09:35,360 - INFO - #
+# Find the alt,az coordinates of M33 at 100 times evenly spaced between 10pm
+# and 7am EDT:
+
+midnight = Time('2012-7-13 00:00:00') - utcoffset
+delta_midnight = np.linspace(-2, 10, 100)*u.hour
+frame_July13night = AltAz(obstime=midnight+delta_midnight,
+                          location=bear_mountain)
+m33altazs_July13night = m33.transform_to(frame_July13night)
+
+##############################################################################
+# convert alt, az to airmass with `~astropy.coordinates.AltAz.secz` attribute:
+
+m33airmasss_July13night = m33altazs_July13night.secz
+
+##############################################################################
+# Plot the airmass as a function of time:
+
+plt.plot(delta_midnight, m33airmasss_July13night)
+plt.xlim(-2, 10)
+plt.ylim(1, 4)
+plt.xlabel('Hours from EDT Midnight')
+plt.ylabel('Airmass [Sec(z)]')
+plt.show()
+
+##############################################################################
+# Use  `~astropy.coordinates.get_sun` to find the location of the Sun at 1000
+# evenly spaced times between noon on July 12 and noon on July 13:
+
+from astropy.coordinates import get_sun
+
+delta_midnight = np.linspace(-12, 12, 1000)*u.hour
+times_July12_to_13 = midnight + delta_midnight
+frame_July12_to_13 = AltAz(obstime=times_July12_to_13, location=bear_mountain)
+sunaltazs_July12_to_13 = get_sun(times_July12_to_13).transform_to(frame_July12_to_13)
+2025-04-22 20:09:35,361 - INFO - with open("common_links.txt") as cl:
+    rst_epilog += cl.read().format(
+        minimum_python=__minimum_python_version__, **min_versions
+    )
+
+# Manually register doctest options since matplotlib 3.5 messed up allowing them
+# from pytest-doctestplus
+IGNORE_OUTPUT = doctest.register_optionflag("IGNORE_OUTPUT")
+REMOTE_DATA = doctest.register_optionflag("REMOTE_DATA")
+FLOAT_CMP = doctest.register_optionflag("FLOAT_CMP")
+
+# Whether to create cross-references for the parameter types in the
+# Parameters, Other Parameters, Returns and Yields sections of the docstring.
+numpydoc_xref_param_type = True
+
+# Words not to cross-reference. Most likely, these are common words used in
+# parameter type descriptions that may be confused for classes of the same
+# name. The base set comes from sphinx-astropy. We add more here.
+numpydoc_xref_ignore.update(
+    {
+        "mixin",
+        "Any",  # aka something that would be annotated with `typing.Any`
+        # needed in subclassing numpy  # TODO! revisit
+        "Arguments",
+        "Path",
+        # TODO! not need to ignore.
+        "flag",
+        "bits",
+    }
+)
+
+# Mappings to fully qualified paths (or correct ReST references) for the
+# aliases/shortcuts used when specifying the types of parameters.
+# Numpy provides some defaults
+# https://github.com/numpy/numpydoc/blob/b352cd7635f2ea7748722f410a31f937d92545cc/numpydoc/xref.py#L62-L94
+# and a base set comes from sphinx-astropy.
+2025-04-22 20:09:35,361 - INFO - ================
+2025-04-22 20:09:35,361 - INFO - examples/io/split-jpeg-to-fits.py
+2025-04-22 20:09:35,361 - INFO - """
+=====================================================
+Convert a 3-color image (JPG) to separate FITS images
+=====================================================
+
+This example opens an RGB JPEG image and writes out each channel as a separate
+FITS (image) file.
+
+This example uses `pillow <https://python-pillow.org>`_ to read the image,
+`matplotlib.pyplot` to display the image, and `astropy.io.fits` to save FITS files.
+
+
+*By: Erik Bray, Adrian Price-Whelan*
+
+*License: BSD*
+2025-04-22 20:09:35,361 - INFO - """
+
+##############################################################################
+# Make `print` work the same in all versions of Python, set up numpy,
+# matplotlib, and use a nicer set of plot parameters:
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+from astropy.visualization import astropy_mpl_style
+
+plt.style.use(astropy_mpl_style)
+
+
+##############################################################################
+# Import the packages necessary for coordinates
+
+import astropy.coordinates as coord
+import astropy.units as u
+from astropy.coordinates import frame_transform_graph
+from astropy.coordinates.matrix_utilities import matrix_transpose, rotation_matrix
+
+##############################################################################
+# The first step is to create a new class, which we'll call
+# ``Sagittarius`` and make it a subclass of
+# `~astropy.coordinates.BaseCoordinateFrame`:
+2025-04-22 20:09:35,362 - INFO - axes[1].set_title("ICRS")
+axes[1].plot(icrs.ra.wrap_at(180*u.deg).radian, icrs.dec.radian,
+             linestyle='none', marker='.')
+
+plt.show()
+
+##############################################################################
+# This particular transformation is just a spherical rotation, which is a
+# special case of an Affine transformation with no vector offset. The
+# transformation of velocity components is therefore natively supported as
+# well:
+
+sgr = coord.SkyCoord(Lambda=np.linspace(0, 2*np.pi, 128)*u.radian,
+                     Beta=np.zeros(128)*u.radian,
+                     pm_Lambda_cosBeta=np.random.uniform(-5, 5, 128)*u.mas/u.yr,
+                     pm_Beta=np.zeros(128)*u.mas/u.yr,
+                     frame='sagittarius')
+icrs = sgr.transform_to(coord.ICRS)
+print(icrs)
+
+fig, axes = plt.subplots(3, 1, figsize=(8, 10), sharex=True)
+
+axes[0].set_title("Sagittarius")
+axes[0].plot(sgr.Lambda.degree,
+             sgr.pm_Lambda_cosBeta.value,
+             linestyle='none', marker='.')
+axes[0].set_xlabel(r"$\Lambda$ [deg]")
+axes[0].set_ylabel(
+    fr"$\mu_\Lambda \, \cos B$ [{sgr.pm_Lambda_cosBeta.unit.to_string('latex_inline')}]")
+
+axes[1].set_title("ICRS")
+axes[1].plot(icrs.ra.degree, icrs.pm_ra_cosdec.value,
+             linestyle='none', marker='.')
+axes[1].set_ylabel(
+    fr"$\mu_\alpha \, \cos\delta$ [{icrs.pm_ra_cosdec.unit.to_string('latex_inline')}]")
+
+axes[2].set_title("ICRS")
+axes[2].plot(icrs.ra.degree, icrs.pm_dec.value,
+             linestyle='none', marker='.')
+axes[2].set_xlabel("RA [deg]")
+axes[2].set_ylabel(
+    fr"$\mu_\delta$ [{icrs.pm_dec.unit.to_string('latex_inline')}]")
+
+plt.show()
+2025-04-22 20:09:35,362 - INFO - ================
+2025-04-22 20:09:35,362 - INFO - examples/coordinates/rv-to-gsr.py
+2025-04-22 20:09:35,362 - INFO - ################################################################################
+# We could wrap this in a function so we can control the solar velocity and
+# re-use the above code:
+def rv_to_gsr(c, v_sun=None):
+    """Transform a barycentric radial velocity to the Galactic Standard of Rest
+    (GSR).
+
+    The input radial velocity must be passed in as a
+
+    Parameters
+    ----------
+    c : `~astropy.coordinates.BaseCoordinateFrame` subclass instance
+        The radial velocity, associated with a sky coordinates, to be
+        transformed.
+    v_sun : `~astropy.units.Quantity`, optional
+        The 3D velocity of the solar system barycenter in the GSR frame.
+        Defaults to the same solar motion as in the
+        `~astropy.coordinates.Galactocentric` frame.
+
+    Returns
+    -------
+    v_gsr : `~astropy.units.Quantity`
+        The input radial velocity transformed to a GSR frame.
+
+    """
+    if v_sun is None:
+        v_sun = coord.Galactocentric().galcen_v_sun.to_cartesian()
+
+    gal = c.transform_to(coord.Galactic)
+    cart_data = gal.data.to_cartesian()
+    unit_vector = cart_data / cart_data.norm()
+
+    v_proj = v_sun.dot(unit_vector)
+
+    return c.radial_velocity + v_proj
+
+
+rv_gsr = rv_to_gsr(icrs)
+print(rv_gsr)
+2025-04-22 20:09:35,362 - INFO - ================
+2025-04-22 20:09:35,362 - INFO - docs/wcs/examples/programmatic.py
+2025-04-22 20:09:35,363 - INFO - # Set the WCS information manually by setting properties of the WCS
+# object.
+
+import numpy as np
+
+from astropy import wcs
+from astropy.io import fits
+
+# Create a new WCS object.  The number of axes must be set
+# from the start
+w = wcs.WCS(naxis=2)
+
+# Set up an "Airy's zenithal" projection
+# Vector properties may be set with Python lists, or Numpy arrays
+w.wcs.crpix = [-234.75, 8.3393]
+w.wcs.cdelt = np.array([-0.066667, 0.066667])
+w.wcs.crval = [0, -90]
+w.wcs.ctype = ["RA---AIR", "DEC--AIR"]
+w.wcs.set_pv([(2, 1, 45.0)])
+
+# Three pixel coordinates of interest.
+# The pixel coordinates are pairs of [X, Y].
+# The "origin" argument indicates whether the input coordinates
+# are 0-based (as in Numpy arrays) or
+# 1-based (as in the FITS convention, for example coordinates
+# coming from DS9).
+pixcrd = np.array([[0, 0], [24, 38], [45, 98]], dtype=np.float64)
+
+# Convert pixel coordinates to world coordinates.
+# The second argument is "origin" -- in this case we're declaring we
+# have 0-based (Numpy-like) coordinates.
+world = w.wcs_pix2world(pixcrd, 0)
+print(world)
+
+# Convert the same coordinates back to pixel coordinates.
+pixcrd2 = w.wcs_world2pix(world, 0)
+print(pixcrd2)
+
+# These should be the same as the original pixel coordinates, modulo
+# some floating-point error.
+assert np.max(np.abs(pixcrd - pixcrd2)) < 1e-6
+
+# The example below illustrates the use of "origin" to convert between
+# 0- and 1- based coordinates when executing the forward and backward
+# WCS transform.
+2025-04-22 20:09:35,363 - INFO - """
+===================================================================
+Determining and plotting the altitude/azimuth of a celestial object
+===================================================================
+
+This example demonstrates coordinate transformations and the creation of
+visibility curves to assist with observing run planning.
+
+In this example, we make a `~astropy.coordinates.SkyCoord` instance for M33.
+The altitude-azimuth coordinates are then found using
+`astropy.coordinates.EarthLocation` and `astropy.time.Time` objects.
+
+This example is meant to demonstrate the capabilities of the
+`astropy.coordinates` package. For more convenient and/or complex observation
+planning, consider the `astroplan <https://astroplan.readthedocs.org/>`_
+package.
+
+
+*By: Erik Tollerud, Kelle Cruz*
+
+*License: BSD*
+
+
+"""
+
+##############################################################################
+# Let's suppose you are planning to visit picturesque Bear Mountain State Park
+# in New York, USA. You're bringing your telescope with you (of course), and
+# someone told you M33 is a great target to observe there. You happen to know
+# you're free at 11:00 pm local time, and you want to know if it will be up.
+# Astropy can answer that.
+#
+# Import numpy and matplotlib. For the latter, use a nicer set of plot
+# parameters and set up support for plotting/converting quantities.
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+from astropy.visualization import astropy_mpl_style, quantity_support
+
+plt.style.use(astropy_mpl_style)
+quantity_support()
+
+
+##############################################################################
+# Import the packages necessary for finding coordinates and making
+# coordinate transformations
+
+import astropy.units as u
+from astropy.coordinates import AltAz, EarthLocation, SkyCoord
+from astropy.time import Time
+
+##############################################################################
+# `astropy.coordinates.SkyCoord.from_name` uses Simbad to resolve object
+# names and retrieve coordinates.
+2025-04-22 20:09:35,363 - INFO - However, we don't want to cyclically reference astropy in its
+# own build so we remove it here.
+del intersphinx_mapping["astropy"]
+
+# add any custom intersphinx for astropy
+intersphinx_mapping.update(
+    {
+        "astropy-dev": ("https://docs.astropy.org/en/latest/", None),
+        "pyerfa": ("https://pyerfa.readthedocs.io/en/stable/", None),
+        "pytest": ("https://docs.pytest.org/en/stable/", None),
+        "ipython": ("https://ipython.readthedocs.io/en/stable/", None),
+        "pandas": ("https://pandas.pydata.org/pandas-docs/stable/", None),
+        "sphinx_automodapi": (
+            "https://sphinx-automodapi.readthedocs.io/en/stable/",
+            None,
+        ),
+        "asdf-astropy": ("https://asdf-astropy.readthedocs.io/en/latest/", None),
+        "fsspec": ("https://filesystem-spec.readthedocs.io/en/latest/", None),
+    }
+)
+
+# List of patterns, relative to source directory, that match files and
+# directories to ignore when looking for source files.
+# .inc.rst mean *include* files, don't have sphinx process them
+exclude_patterns += ["_templates", "changes", "_pkgtemplate.rst", "**/*.inc.rst"]
+
+# Add any paths that contain templates here, relative to this directory.
+if "templates_path" not in locals():  # in case parent conf.py defines it
+    templates_path = []
+templates_path.append("_templates")
+
+extensions += ["sphinx_changelog"]
+
+# Grab minversion from setup.cfg
+setup_cfg = configparser.ConfigParser()
+setup_cfg.read(os.path.join(os.path.pardir, "setup.cfg"))
+__minimum_python_version__ = setup_cfg["options"]["python_requires"].replace(">=", "")
+
+min_versions = {}
+for line in metadata.requires("astropy"):
+    req = Requirement(line.split(";")[0])
+    min_versions[req.name.lower()] = str(req.specifier)
+
+
+# This is added to the end of RST files - a good place to put substitutions to
+# be used globally.
+2025-04-22 20:09:35,363 - INFO - """
+========================
+Title of Example
+========================
+
+This example <verb> <active tense> <does something>.
+
+The example uses <packages> to <do something> and <other package> to <do other
+thing>. Include links to referenced packages like this: `astropy.io.fits` to
+show the astropy.io.fits or like this `~astropy.io.fits`to show just 'fits'
+
+
+*By: <names>*
+
+*License: BSD*
+2025-04-22 20:09:35,363 - INFO - """
+==========================================
+Create a very large FITS file from scratch
+==========================================
+
+This example demonstrates how to create a large file (larger than will fit in
+memory) from scratch using `astropy.io.fits`.
+
+
+*By: Erik Bray*
+
+*License: BSD*
+
+"""
+
+##############################################################################
+#  Normally to create a single image FITS file one would do something like:
+
+import os
+
+import numpy as np
+
+from astropy.io import fits
+
+data = np.zeros((40000, 40000), dtype=np.float64)
+hdu = fits.PrimaryHDU(data=data)
+
+##############################################################################
+# Then use the `astropy.io.fits.writeto()` method to write out the new
+# file to disk
+
+hdu.writeto('large.fits')
+
+##############################################################################
+# However, a 40000 x 40000 array of doubles is nearly twelve gigabytes! Most
+# systems won't be able to create that in memory just to write out to disk. In
+# order to create such a large file efficiently requires a little extra work,
+# and a few assumptions.
+#
+# First, it is helpful to anticipate about how large (as in, how many keywords)
+# the header will have in it. FITS headers must be written in 2880 byte
+# blocks, large enough for 36 keywords per block (including the END keyword in
+# the final block). Typical headers have somewhere between 1 and 4 blocks,
+# though sometimes more.
+#
+# Since the first thing we write to a FITS file is the header, we want to write
+# enough header blocks so that there is plenty of padding in which to add new
+# keywords without having to resize the whole file. Say you want the header to
+# use 4 blocks by default. Then, excluding the END card which Astropy will add
+# automatically, create the header and pad it out to 36 * 4 cards.
+2025-04-22 20:09:35,363 - INFO - ================
+2025-04-22 20:09:35,363 - INFO - examples/coordinates/plot_galactocentric-frame.py
+2025-04-22 20:09:35,364 - INFO - Note that, as with the positions,
+# the Galactocentric frame is a right-handed system (i.e., the Sun is at negative
+# x values) so ``v_x`` is opposite of the Galactocentric radial velocity:
+
+v_sun = [11.1, 244, 7.25] * (u.km / u.s)  # [vx, vy, vz]
+gc_frame = coord.Galactocentric(
+    galcen_distance=8*u.kpc,
+    galcen_v_sun=v_sun,
+    z_sun=0*u.pc)
+
+##############################################################################
+# We can then transform to this frame instead, with our custom parameters:
+
+gc2 = c1.transform_to(gc_frame)
+print(gc2.v_x, gc2.v_y, gc2.v_z)
+
+##############################################################################
+# It's sometimes useful to specify the solar motion using the `proper motion
+# of Sgr A* <https://arxiv.org/abs/astro-ph/0408107>`_ instead of Cartesian
+# velocity components. With an assumed distance, we can convert proper motion
+# components to Cartesian velocity components using `astropy.units`:
+
+galcen_distance = 8*u.kpc
+pm_gal_sgrA = [-6.379, -0.202] * u.mas/u.yr # from Reid & Brunthaler 2004
+vy, vz = -(galcen_distance * pm_gal_sgrA).to(u.km/u.s, u.dimensionless_angles())
+
+##############################################################################
+# We still have to assume a line-of-sight velocity for the Galactic center,
+# which we will again take to be 11 km/s:
+vx = 11.1 * u.km/u.s
+v_sun2 = u.Quantity([vx, vy, vz])  # List of Quantity -> a single Quantity
+
+gc_frame2 = coord.Galactocentric(galcen_distance=galcen_distance,
+                                 galcen_v_sun=v_sun2,
+                                 z_sun=0*u.pc)
+gc3 = c1.transform_to(gc_frame2)
+print(gc3.v_x, gc3.v_y, gc3.v_z)
+
+##############################################################################
+# The transformations also work in the opposite direction. This can be useful
+# for transforming simulated or theoretical data to observable quantities.
+2025-04-22 20:09:35,364 - INFO - ================
+2025-04-22 20:09:35,364 - INFO - examples/io/create-mef.py
+2025-04-22 20:09:35,364 - INFO - """
+=====================================================
+Create a multi-extension FITS (MEF) file from scratch
+=====================================================
+
+This example demonstrates how to create a multi-extension FITS (MEF)
+file from scratch using `astropy.io.fits`.
+
+
+*By: Erik Bray*
+
+*License: BSD*
+
+
+"""
+
+import os
+
+from astropy.io import fits
+
+##############################################################################
+# HDUList objects are used to hold all the HDUs in a FITS file. This
+# ``HDUList`` class is a subclass of Python's builtin `list` and can be
+# created from scratch. For example, to create a FITS file with
+# three extensions:
+
+new_hdul = fits.HDUList()
+new_hdul.append(fits.ImageHDU())
+new_hdul.append(fits.ImageHDU())
+
+##############################################################################
+# Write out the new file to disk:
+
+new_hdul.writeto('test.fits')
+
+##############################################################################
+# Alternatively, the HDU instances can be created first (or read from an
+# existing FITS file).
+#
+# Create a multi-extension FITS file with two empty IMAGE extensions (a
+# default PRIMARY HDU is prepended automatically if one is not specified;
+# we use ``overwrite=True`` to overwrite the file if it already exists):
+
+hdu1 = fits.PrimaryHDU()
+hdu2 = fits.ImageHDU()
+new_hdul = fits.HDUList([hdu1, hdu2])
+new_hdul.writeto('test.fits', overwrite=True)
+
+##############################################################################
+# Finally, we'll remove the file we created:
+
+os.remove('test.fits')
+2025-04-22 20:09:35,364 - INFO - ================
+2025-04-22 20:09:35,365 - INFO - docs/wcs/examples/from_file.py
+2025-04-22 20:09:35,365 - INFO - def load_wcs_from_file(filename):
+    # Load the FITS hdulist using astropy.io.fits
+    hdulist = fits.open(filename)
+
+    # Parse the WCS keywords in the primary HDU
+    w = wcs.WCS(hdulist[0].header)
+
+    # Print out the "name" of the WCS, as defined in the FITS header
+    print(w.wcs.name)
+
+    # Print out all of the settings that were parsed from the header
+    w.wcs.print_contents()
+
+    # Three pixel coordinates of interest.
+    # Note we've silently assumed an NAXIS=2 image here.
+    # The pixel coordinates are pairs of [X, Y].
+    # The "origin" argument indicates whether the input coordinates
+    # are 0-based (as in Numpy arrays) or
+    # 1-based (as in the FITS convention, for example coordinates
+    # coming from DS9).
+    pixcrd = np.array([[0, 0], [24, 38], [45, 98]], dtype=np.float64)
+
+    # Convert pixel coordinates to world coordinates
+    # The second argument is "origin" -- in this case we're declaring we
+    # have 0-based (Numpy-like) coordinates.
+    world = w.wcs_pix2world(pixcrd, 0)
+    print(world)
+
+    # Convert the same coordinates back to pixel coordinates.
+    pixcrd2 = w.wcs_world2pix(world, 0)
+    print(pixcrd2)
+
+    # These should be the same as the original pixel coordinates, modulo
+    # some floating-point error.
+    assert np.max(np.abs(pixcrd - pixcrd2)) < 1e-6
+
+    # The example below illustrates the use of "origin" to convert between
+    # 0- and 1- based coordinates when executing the forward and backward
+    # WCS transform.
+    x = 0
+    y = 0
+    origin = 0
+    assert (w.wcs_pix2world(x, y, origin) ==
+            w.wcs_pix2world(x + 1, y + 1, origin + 1))
+
+
+if __name__ == '__main__':
+    load_wcs_from_file(sys.argv[-1])
+2025-04-22 20:09:35,365 - INFO - """
+
+import matplotlib.pyplot as plt
+import numpy as np
+from PIL import Image
+
+from astropy.io import fits
+from astropy.visualization import astropy_mpl_style
+
+##############################################################################
+# Set up matplotlib and use a nicer set of plot parameters
+
+plt.style.use(astropy_mpl_style)
+
+##############################################################################
+# Load and display the original 3-color jpeg image:
+
+image = Image.open('Hs-2009-14-a-web.jpg')
+xsize, ysize = image.size
+print(f"Image size: {ysize} x {xsize}")
+print(f"Image bands: {image.getbands()}")
+ax = plt.imshow(image)
+
+##############################################################################
+# Split the three channels (RGB) and get the data as Numpy arrays. The arrays
+# are flattened, so they are 1-dimensional:
+
+r, g, b = image.split()
+r_data = np.array(r.getdata()) # data is now an array of length ysize*xsize
+g_data = np.array(g.getdata())
+b_data = np.array(b.getdata())
+print(r_data.shape)
+
+##############################################################################
+# Reshape the image arrays to be 2-dimensional:
+
+r_data = r_data.reshape(ysize, xsize) # data is now a matrix (ysize, xsize)
+g_data = g_data.reshape(ysize, xsize)
+b_data = b_data.reshape(ysize, xsize)
+print(r_data.shape)
+
+##############################################################################
+# Write out the channels as separate FITS images.
+# Add and visualize header info
+
+red = fits.PrimaryHDU(data=r_data)
+red.header['LATOBS'] = "32:11:56" # add spurious header info
+red.header['LONGOBS'] = "110:56"
+red.writeto('red.fits')
+
+green = fits.PrimaryHDU(data=g_data)
+green.header['LATOBS'] = "32:11:56"
+green.header['LONGOBS'] = "110:56"
+green.writeto('green.fits')
+
+blue = fits.PrimaryHDU(data=b_data)
+blue.header['LATOBS'] = "32:11:56"
+blue.header['LONGOBS'] = "110:56"
+blue.writeto('blue.fits')
+
+from pprint import pprint
+
+pprint(red.header)
+
+##############################################################################
+# Delete the files created
+
+import os
+
+os.remove('red.fits')
+os.remove('green.fits')
+os.remove('blue.fits')
+2025-04-22 20:09:35,365 - INFO - # Code comments not preceded by the hash splitter are left in code blocks.
+
+string = """
+Triple-quoted string which tries to break parser but doesn't.
+"""
+
+############################################################################
+# Output of the script is captured:
+
+print('Some output from Python')
+
+############################################################################
+# Finally, I'll call ``show`` at the end just so someone running the Python
+# code directly will see the plots; this is not necessary for creating the docs
+
+plt.show()
+2025-04-22 20:09:35,365 - INFO - ##############################################################################
+# Breaking this down line-by-line, we define the class as a subclass of
+# `~astropy.coordinates.BaseCoordinateFrame`. Then we include a descriptive
+# docstring.  The final lines are class-level attributes that specify the
+# default representation for the data, default differential for the velocity
+# information, and mappings from the attribute names used by representation
+# objects to the names that are to be used by the ``Sagittarius`` frame. In this
+# case we override the names in the spherical representations but don't do
+# anything with other representations like cartesian or cylindrical.
+#
+# Next we have to define the transformation from this coordinate system to some
+# other built-in coordinate system; we will use Galactic coordinates. We can do
+# this by defining functions that return transformation matrices, or by simply
+# defining a function that accepts a coordinate and returns a new coordinate in
+# the new system. Because the transformation to the Sagittarius coordinate
+# system is just a spherical rotation from Galactic coordinates, we'll just
+# define a function that returns this matrix. We'll start by constructing the
+# transformation matrix using pre-determined Euler angles and the
+# ``rotation_matrix`` helper function:
+
+SGR_PHI = (180 + 3.75) * u.degree # Euler angles (from Law & Majewski 2010)
+SGR_THETA = (90 - 13.46) * u.degree
+SGR_PSI = (180 + 14.111534) * u.degree
+
+# Generate the rotation matrix using the x-convention (see Goldstein)
+SGR_MATRIX = (
+    np.diag([1.,1.,-1.])
+    @ rotation_matrix(SGR_PSI, "z")
+    @ rotation_matrix(SGR_THETA, "x")
+    @ rotation_matrix(SGR_PHI, "z")
+)
+
+
+##############################################################################
+# Since we already constructed the transformation (rotation) matrix above, and
+# the inverse of a rotation matrix is just its transpose, the required
+# transformation functions are very simple:
+
+@frame_transform_graph.transform(coord.StaticMatrixTransform, coord.Galactic, Sagittarius)
+def galactic_to_sgr():
+    """Compute the Galactic spherical to heliocentric Sgr transformation matrix."""
+    return SGR_MATRIX
+2025-04-22 20:09:35,365 - INFO - init_filename = os.path.join(final_dir, "__init__.py")
+            if not os.path.exists(os.path.join(final_dir, "__init__.py")):
+                os.makedirs(final_dir, exist_ok=True)
+                with open(os.path.join(final_dir, "__init__.py"), "w") as f:
+                    f.write("#")
+    # Copy over all conftest.py files
+    for file in files:
+        if file == "conftest.py":
+            final_file = os.path.relpath(os.path.join(test_root, file), ROOT)
+            shutil.copy2(os.path.join(root, file), final_file)
+
+# Add the top-level __init__.py file
+with open(os.path.join("astropy_tests", "__init__.py"), "w") as f:
+    f.write("#")
+
+# Remove test file that tries to import all sub-packages at collection time
+os.remove(
+    os.path.join("astropy_tests", "utils", "iers", "tests", "test_leap_second.py")
+)
+
+# Remove convolution tests for now as there are issues with the loading of the C extension.
+# FIXME: one way to fix this would be to migrate the convolution C extension away from using
+# ctypes and using the regular extension mechanism instead.
+shutil.rmtree(os.path.join("astropy_tests", "convolution"))
+os.remove(os.path.join("astropy_tests", "modeling", "tests", "test_convolution.py"))
+os.remove(os.path.join("astropy_tests", "modeling", "tests", "test_core.py"))
+os.remove(os.path.join("astropy_tests", "visualization", "tests", "test_lupton_rgb.py"))
+
+# FIXME: PIL minversion check does not work
+os.remove(
+    os.path.join("astropy_tests", "visualization", "wcsaxes", "tests", "test_misc.py")
+)
+os.remove(
+    os.path.join("astropy_tests", "visualization", "wcsaxes", "tests", "test_wcsapi.py")
+)
+
+# FIXME: The following tests rely on the fully qualified name of classes which
+# don't seem to be the same.
+2025-04-22 20:09:35,365 - INFO - """
+
+################################################################################
+# Import the required Astropy packages:
+
+import astropy.coordinates as coord
+import astropy.units as u
+
+################################################################################
+# Use the latest convention for the Galactocentric coordinates
+coord.galactocentric_frame_defaults.set('latest')
+
+################################################################################
+# For this example, let's work with the coordinates and barycentric radial
+# velocity of the star HD 155967, as obtained from
+# `Simbad <https://simbad.unistra.fr/simbad/>`_:
+icrs = coord.SkyCoord(ra=258.58356362*u.deg, dec=14.55255619*u.deg,
+                      radial_velocity=-16.1*u.km/u.s, frame='icrs')
+
+################################################################################
+# We next need to decide on the velocity of the Sun in the assumed GSR frame.
+# We'll use the same velocity vector as used in the
+# `~astropy.coordinates.Galactocentric` frame, and convert it to a
+# `~astropy.coordinates.CartesianRepresentation` object using the
+# ``.to_cartesian()`` method of the
+# `~astropy.coordinates.CartesianDifferential` object ``galcen_v_sun``:
+v_sun = coord.Galactocentric().galcen_v_sun.to_cartesian()
+
+################################################################################
+# We now need to get a unit vector in the assumed Galactic frame from the sky
+# position in the ICRS frame above. We'll use this unit vector to project the
+# solar velocity onto the line-of-sight:
+gal = icrs.transform_to(coord.Galactic)
+cart_data = gal.data.to_cartesian()
+unit_vector = cart_data / cart_data.norm()
+
+################################################################################
+# Now we project the solar velocity using this unit vector:
+v_proj = v_sun.dot(unit_vector)
+
+################################################################################
+# Finally, we add the projection of the solar velocity to the radial velocity
+# to get a GSR radial velocity:
+rv_gsr = icrs.radial_velocity + v_proj
+print(rv_gsr)
+2025-04-22 20:09:35,366 - INFO - ================
+2025-04-22 20:09:35,366 - INFO - examples/io/modify-fits-header.py
+2025-04-22 20:09:35,366 - INFO - """
+==================
+Edit a FITS header
+==================
+
+This example describes how to edit a value in a FITS header
+using `astropy.io.fits`.
+
+
+*By: Adrian Price-Whelan*
+
+*License: BSD*
+
+
+"""
+
+from astropy.io import fits
+from astropy.utils.data import get_pkg_data_filename
+
+##############################################################################
+# Download a FITS file:
+
+fits_file = get_pkg_data_filename('tutorials/FITS-Header/input_file.fits')
+
+##############################################################################
+# Look at contents of the FITS file
+
+fits.info(fits_file)
+
+##############################################################################
+# Look at the headers of the two extensions:
+
+print("Before modifications:")
+print()
+print("Extension 0:")
+print(repr(fits.getheader(fits_file, 0)))
+print()
+print("Extension 1:")
+print(repr(fits.getheader(fits_file, 1)))
+
+##############################################################################
+# `astropy.io.fits` provides an object-oriented interface for reading and
+# interacting with FITS files, but for small operations (like this example) it
+# is often easier to use the
+# `convenience functions <https://docs.astropy.org/en/latest/io/fits/index.html#convenience-functions>`_.
+#
+# To edit a single header value in the header for extension 0, use the
+# `~astropy.io.fits.setval()` function. For example, set the OBJECT keyword
+# to 'M31':
+
+fits.setval(fits_file, 'OBJECT', value='M31')
+
+##############################################################################
+# With no extra arguments, this will modify the header for extension 0, but
+# this can be changed using the ``ext`` keyword argument. For example, we can
+# specify extension 1 instead:
+
+fits.setval(fits_file, 'OBJECT', value='M31', ext=1)
+
+##############################################################################
+# This can also be used to create a new keyword-value pair ("card" in FITS
+# lingo):
+
+fits.setval(fits_file, 'ANEWKEY', value='some value')
+
+##############################################################################
+# Again, this is useful for one-off modifications, but can be inefficient
+# for operations like editing multiple headers in the same file
+# because `~astropy.io.fits.setval()` loads the whole file each time it
+# is called.
+2025-04-22 20:09:35,366 - INFO - class Sagittarius(coord.BaseCoordinateFrame):
+    """
+    A Heliocentric spherical coordinate system defined by the orbit
+    of the Sagittarius dwarf galaxy, as described in
+        https://ui.adsabs.harvard.edu/abs/2003ApJ...599.1082M
+    and further explained in
+        https://www.stsci.edu/~dlaw/Sgr/.
+
+    Parameters
+    ----------
+    representation : `~astropy.coordinates.BaseRepresentation` or None
+        A representation object or None to have no data (or use the other keywords)
+    Lambda : `~astropy.coordinates.Angle`, optional, must be keyword
+        The longitude-like angle corresponding to Sagittarius' orbit.
+    Beta : `~astropy.coordinates.Angle`, optional, must be keyword
+        The latitude-like angle corresponding to Sagittarius' orbit.
+    distance : `~astropy.units.Quantity`, optional, must be keyword
+        The Distance for this object along the line-of-sight.
+    pm_Lambda_cosBeta : `~astropy.units.Quantity`, optional, must be keyword
+        The proper motion along the stream in ``Lambda`` (including the
+        ``cos(Beta)`` factor) for this object (``pm_Beta`` must also be given).
+    pm_Beta : `~astropy.units.Quantity`, optional, must be keyword
+        The proper motion in Declination for this object (``pm_ra_cosdec`` must
+        also be given).
+    radial_velocity : `~astropy.units.Quantity`, optional, keyword-only
+        The radial velocity of this object.
+
+    """
+
+    default_representation = coord.SphericalRepresentation
+    default_differential = coord.SphericalCosLatDifferential
+
+    frame_specific_representation_info = {
+        coord.SphericalRepresentation: [
+            coord.RepresentationMapping('lon', 'Lambda'),
+            coord.RepresentationMapping('lat', 'Beta'),
+            coord.RepresentationMapping('distance', 'distance')]
+    }
+2025-04-22 20:09:35,366 - INFO - ================
+2025-04-22 20:09:35,366 - INFO - docs/wcs/examples/cube_wcs.py
+2025-04-22 20:09:35,367 - INFO - # Define the astropy.wcs.WCS object using a Python dictionary as input
+
+import astropy.wcs
+
+wcs_dict = {
+'CTYPE1': 'WAVE    ', 'CUNIT1': 'Angstrom', 'CDELT1': 0.2, 'CRPIX1': 0, 'CRVAL1': 10, 'NAXIS1': 5,
+'CTYPE2': 'HPLT-TAN', 'CUNIT2': 'deg', 'CDELT2': 0.5, 'CRPIX2': 2, 'CRVAL2': 0.5, 'NAXIS2': 4,
+'CTYPE3': 'HPLN-TAN', 'CUNIT3': 'deg', 'CDELT3': 0.4, 'CRPIX3': 2, 'CRVAL3': 1, 'NAXIS3': 3}
+input_wcs = astropy.wcs.WCS(wcs_dict)
+2025-04-22 20:09:35,367 - INFO - ================
+2025-04-22 20:09:35,367 - INFO - examples/io/fits-tables.py
+2025-04-22 20:09:35,367 - INFO - """
+=====================================================================
+Accessing data stored as a table in a multi-extension FITS (MEF) file
+=====================================================================
+
+FITS files can often contain large amount of multi-dimensional data and
+tables. This example opens a FITS file with information
+from Chandra's HETG-S instrument.
+
+The example uses `astropy.utils.data` to download multi-extension FITS (MEF)
+file, `astropy.io.fits` to investigate the header, and
+`astropy.table.Table` to explore the data.
+
+
+*By: Lia Corrales, Adrian Price-Whelan, and Kelle Cruz*
+
+*License: BSD*
+
+
+"""
+
+##############################################################################
+# Use `astropy.utils.data` subpackage to download the FITS file used in this
+# example. Also import `~astropy.table.Table` from the `astropy.table` subpackage
+# and `astropy.io.fits`
+
+from astropy.io import fits
+from astropy.table import Table
+from astropy.utils.data import get_pkg_data_filename
+
+##############################################################################
+# Download a FITS file
+
+event_filename = get_pkg_data_filename('tutorials/FITS-tables/chandra_events.fits')
+
+##############################################################################
+# Display information about the contents of the FITS file.
+
+fits.info(event_filename)
+
+##############################################################################
+# Extension 1, EVENTS, is a Table that contains information about each X-ray
+# photon that hit Chandra's HETG-S detector.
+#
+# Use `~astropy.table.Table` to read the table
+
+events = Table.read(event_filename, hdu=1)
+
+##############################################################################
+# Print the column names of the Events Table.
+
+print(events.columns)
+
+##############################################################################
+# If a column contains unit information, it will have an associated
+# `astropy.units` object.
+
+print(events['energy'].unit)
+
+##############################################################################
+# Print the data stored in the Energy column.
+
+print(events['energy'])
+2025-04-22 20:09:35,367 - INFO - """
+========================================================================
+Transforming positions and velocities to and from a Galactocentric frame
+========================================================================
+
+This document shows a few examples of how to use and customize the
+`~astropy.coordinates.Galactocentric` frame to transform Heliocentric sky
+positions, distance, proper motions, and radial velocities to a Galactocentric,
+Cartesian frame, and the same in reverse.
+
+The main configurable parameters of the `~astropy.coordinates.Galactocentric`
+frame control the position and velocity of the solar system barycenter within
+the Galaxy. These are specified by setting the ICRS coordinates of the
+Galactic center, the distance to the Galactic center (the sun-galactic center
+line is always assumed to be the x-axis of the Galactocentric frame), and the
+Cartesian 3-velocity of the sun in the Galactocentric frame. We'll first
+demonstrate how to customize these values, then show how to set the solar motion
+instead by inputting the proper motion of Sgr A*.
+
+Note that, for brevity, we may refer to the solar system barycenter as just "the
+sun" in the examples below.
+
+
+*By: Adrian Price-Whelan*
+
+*License: BSD*
+
+
+"""
+
+##############################################################################
+# Make `print` work the same in all versions of Python, set up numpy,
+# matplotlib, and use a nicer set of plot parameters:
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+from astropy.visualization import astropy_mpl_style
+
+plt.style.use(astropy_mpl_style)
+
+
+##############################################################################
+# Import the necessary astropy subpackages
+
+import astropy.coordinates as coord
+import astropy.units as u
+
+##############################################################################
+# Let's first define a barycentric coordinate and velocity in the ICRS frame.
+2025-04-22 20:09:35,367 - INFO - # -- Options for manual page output --------------------------------------------
+
+# One entry per manual page. List of tuples
+# (source start file, name, description, authors, manual section).
+man_pages = [("index", project.lower(), project + " Documentation", [author], 1)]
+
+# Setting this URL is requited by sphinx-astropy
+github_issues_url = "https://github.com/astropy/astropy/issues/"
+edit_on_github_branch = "main"
+
+# Enable nitpicky mode - which ensures that all references in the docs
+# resolve.
+
+nitpicky = True
+# See docs/nitpick-exceptions file for the actual listing.
+nitpick_ignore = []
+for line in open("nitpick-exceptions"):
+    if line.strip() == "" or line.startswith("#"):
+        continue
+    dtype, target = line.split(None, 1)
+    nitpick_ignore.append((dtype, target.strip()))
+
+# -- Options for the Sphinx gallery -------------------------------------------
+
+try:
+    import warnings
+
+    import sphinx_gallery
+
+    extensions += ["sphinx_gallery.gen_gallery"]
+
+    sphinx_gallery_conf = {
+        "backreferences_dir": "generated/modules",  # path to store the module using example template
+        "filename_pattern": "^((?!skip_).)*$",  # execute all examples except those that start with "skip_"
+        "examples_dirs": f"..{os.sep}examples",  # path to the examples scripts
+        "gallery_dirs": "generated/examples",  # path to save gallery generated examples
+        "reference_url": {
+            "astropy": None,
+            "matplotlib": "https://matplotlib.org/stable/",
+            "numpy": "https://numpy.org/doc/stable/",
+        },
+        "abort_on_example_error": True,
+    }
+
+    # Filter out backend-related warnings as described in
+    # https://github.com/sphinx-gallery/sphinx-gallery/pull/564
+    warnings.filterwarnings(
+        "ignore",
+        category=UserWarning,
+        message=(
+            "Matplotlib is currently using agg, which is a"
+            " non-GUI backend, so cannot show the figure."
+        ),
+    )
+
+except ImportError:
+    sphinx_gallery = None
+2025-04-22 20:09:35,367 - INFO - ##############################################################################
+# Do the same with `~astropy.coordinates.get_body` to find when the moon is
+# up. Be aware that this will need to download a 10MB file from the internet
+# to get a precise location of the moon.
+
+from astropy.coordinates import get_body
+
+moon_July12_to_13 = get_body("moon", times_July12_to_13)
+moonaltazs_July12_to_13 = moon_July12_to_13.transform_to(frame_July12_to_13)
+
+##############################################################################
+# Find the alt,az coordinates of M33 at those same times:
+
+m33altazs_July12_to_13 = m33.transform_to(frame_July12_to_13)
+
+##############################################################################
+# Make a beautiful figure illustrating nighttime and the altitudes of M33 and
+# the Sun over that time:
+
+plt.plot(delta_midnight, sunaltazs_July12_to_13.alt, color='r', label='Sun')
+plt.plot(delta_midnight, moonaltazs_July12_to_13.alt, color=[0.75]*3, ls='--', label='Moon')
+plt.scatter(delta_midnight, m33altazs_July12_to_13.alt,
+            c=m33altazs_July12_to_13.az, label='M33', lw=0, s=8,
+            cmap='viridis')
+plt.fill_between(delta_midnight, 0*u.deg, 90*u.deg,
+                 sunaltazs_July12_to_13.alt < -0*u.deg, color='0.5', zorder=0)
+plt.fill_between(delta_midnight, 0*u.deg, 90*u.deg,
+                 sunaltazs_July12_to_13.alt < -18*u.deg, color='k', zorder=0)
+plt.colorbar().set_label('Azimuth [deg]')
+plt.legend(loc='upper left')
+plt.xlim(-12*u.hour, 12*u.hour)
+plt.xticks((np.arange(13)*2-12)*u.hour)
+plt.ylim(0*u.deg, 90*u.deg)
+plt.xlabel('Hours from EDT Midnight')
+plt.ylabel('Altitude [deg]')
+plt.show()
+2025-04-22 20:09:35,368 - INFO - x = 0
+y = 0
+origin = 0
+assert (w.wcs_pix2world(x, y, origin) ==
+        w.wcs_pix2world(x + 1, y + 1, origin + 1))
+
+# Now, write out the WCS object as a FITS header
+header = w.to_header()
+
+# header is an astropy.io.fits.Header object.  We can use it to create a new
+# PrimaryHDU and write it to a file.
+hdu = fits.PrimaryHDU(header=header)
+# Save to FITS file
+# hdu.writeto('test.fits')
+2025-04-22 20:09:35,368 - INFO - def setup(app):
+    if sphinx_gallery is None:
+        msg = (
+            "The sphinx_gallery extension is not installed, so the "
+            "gallery will not be built.  You will probably see "
+            "additional warnings about undefined references due "
+            "to this."
+        )
+        try:
+            app.warn(msg)
+        except AttributeError:
+            # Sphinx 1.6+
+            from sphinx.util import logging
+
+            logger = logging.getLogger(__name__)
+            logger.warning(msg)
+
+    # Generate the page from Jinja template
+    app.connect("source-read", rstjinja)
+    # Set this to higher priority than intersphinx; this way when building
+    # dev docs astropy-dev: targets will go to the local docs instead of the
+    # intersphinx mapping
+    app.connect("missing-reference", resolve_astropy_and_dev_reference, priority=400)
+2025-04-22 20:09:35,368 - INFO - Here are
+# the positions and velocities of the rings; note that in the velocity plot,
+# the velocities of the 4 rings are identical and thus overlaid under the same
+# curve:
+fig,axes = plt.subplots(1, 2, figsize=(12,6))
+
+# Positions
+axes[0].plot(gc_rings.x.T, gc_rings.y.T, marker='None', linewidth=3)
+axes[0].text(-8., 0, r'$\odot$', fontsize=20)
+
+axes[0].set_xlim(-30, 30)
+axes[0].set_ylim(-30, 30)
+
+axes[0].set_xlabel('$x$ [kpc]')
+axes[0].set_ylabel('$y$ [kpc]')
+
+# Velocities
+axes[1].plot(gc_rings.v_x.T, gc_rings.v_y.T, marker='None', linewidth=3)
+
+axes[1].set_xlim(-250, 250)
+axes[1].set_ylim(-250, 250)
+
+axes[1].set_xlabel(f"$v_x$ [{(u.km / u.s).to_string('latex_inline')}]")
+axes[1].set_ylabel(f"$v_y$ [{(u.km / u.s).to_string('latex_inline')}]")
+
+fig.tight_layout()
+
+plt.show()
+
+##############################################################################
+# Now we can transform to Galactic coordinates and visualize the rings in
+# observable coordinates:
+gal_rings = gc_rings.transform_to(coord.Galactic)
+
+fig, ax = plt.subplots(1, 1, figsize=(8, 6))
+for i in range(len(ring_distances)):
+    ax.plot(gal_rings[i].l.degree, gal_rings[i].pm_l_cosb.value,
+            label=str(ring_distances[i]), marker='None', linewidth=3)
+
+ax.set_xlim(360, 0)
+
+ax.set_xlabel('$l$ [deg]')
+ax.set_ylabel(fr'$\mu_l \, \cos b$ [{(u.mas/u.yr).to_string("latex_inline")}]')
+
+ax.legend()
+
+plt.show()
+2025-04-22 20:09:35,368 - INFO - #
+# Get the coordinates of M33:
+
+m33 = SkyCoord.from_name('M33')
+
+##############################################################################
+# Use `astropy.coordinates.EarthLocation` to provide the location of Bear
+# Mountain and set the time to 11pm EDT on 2012 July 12:
+
+bear_mountain = EarthLocation(lat=41.3*u.deg, lon=-74*u.deg, height=390*u.m)
+utcoffset = -4*u.hour  # Eastern Daylight Time
+time = Time('2012-7-12 23:00:00') - utcoffset
+
+##############################################################################
+# `astropy.coordinates.EarthLocation.get_site_names` and
+# `~astropy.coordinates.EarthLocation.get_site_names` can be used to get
+# locations of major observatories.
+#
+# Use `astropy.coordinates` to find the Alt, Az coordinates of M33 at as
+# observed from Bear Mountain at 11pm on 2012 July 12.
+
+m33altaz = m33.transform_to(AltAz(obstime=time,location=bear_mountain))
+print(f"M33's Altitude = {m33altaz.alt:.2}")
+
+##############################################################################
+# This is helpful since it turns out M33 is barely above the horizon at this
+# time. It's more informative to find M33's airmass over the course of
+# the night.
+2025-04-22 20:09:35,368 - INFO - # We'll use the data for the star HD 39881 from the `Simbad
+# <https://simbad.unistra.fr/simbad/>`_ database:
+
+c1 = coord.SkyCoord(ra=89.014303*u.degree, dec=13.924912*u.degree,
+                    distance=(37.59*u.mas).to(u.pc, u.parallax()),
+                    pm_ra_cosdec=372.72*u.mas/u.yr,
+                    pm_dec=-483.69*u.mas/u.yr,
+                    radial_velocity=0.37*u.km/u.s,
+                    frame='icrs')
+
+##############################################################################
+# This is a high proper-motion star; suppose we'd like to transform its position
+# and velocity to a Galactocentric frame to see if it has a large 3D velocity
+# as well. To use the Astropy default solar position and motion parameters, we
+# can simply do:
+
+gc1 = c1.transform_to(coord.Galactocentric)
+
+##############################################################################
+# From here, we can access the components of the resulting
+# `~astropy.coordinates.Galactocentric` instance to see the 3D Cartesian
+# velocity components:
+
+print(gc1.v_x, gc1.v_y, gc1.v_z)
+
+##############################################################################
+# The default parameters for the `~astropy.coordinates.Galactocentric` frame
+# are detailed in the linked documentation, but we can modify the most commonly
+# changes values using the keywords ``galcen_distance``, ``galcen_v_sun``, and
+# ``z_sun`` which set the sun-Galactic center distance, the 3D velocity vector
+# of the sun, and the height of the sun above the Galactic midplane,
+# respectively. The velocity of the sun can be specified as an
+# `~astropy.units.Quantity` object with velocity units and is interpreted as a
+# Cartesian velocity, as in the example below.
+2025-04-22 20:09:35,368 - INFO - ================
+2025-04-22 20:09:35,369 - INFO - examples/io/plot_fits-image.py
+2025-04-22 20:09:35,369 - INFO - """
+=======================================
+Read and plot an image from a FITS file
+=======================================
+
+This example opens an image stored in a FITS file and displays it to the screen.
+
+This example uses `astropy.utils.data` to download the file, `astropy.io.fits` to open
+the file, and `matplotlib.pyplot` to display the image.
+
+
+*By: Lia R. Corrales, Adrian Price-Whelan, Kelle Cruz*
+
+*License: BSD*
+
+
+"""
+
+##############################################################################
+# Set up matplotlib and use a nicer set of plot parameters
+
+import matplotlib.pyplot as plt
+
+from astropy.visualization import astropy_mpl_style
+
+plt.style.use(astropy_mpl_style)
+
+##############################################################################
+# Download the example FITS files used by this example:
+
+from astropy.io import fits
+from astropy.utils.data import get_pkg_data_filename
+
+image_file = get_pkg_data_filename('tutorials/FITS-images/HorseHead.fits')
+
+##############################################################################
+# Use `astropy.io.fits.info()` to display the structure of the file:
+
+fits.info(image_file)
+
+##############################################################################
+# Generally the image information is located in the Primary HDU, also known
+# as extension 0. Here, we use `astropy.io.fits.getdata()` to read the image
+# data from this first extension using the keyword argument ``ext=0``:
+
+image_data = fits.getdata(image_file, ext=0)
+
+##############################################################################
+# The data is now stored as a 2D numpy array. Print the dimensions using the
+# shape attribute:
+
+print(image_data.shape)
+
+##############################################################################
+# Display the image data:
+
+plt.figure()
+plt.imshow(image_data, cmap='gray')
+plt.colorbar()
+2025-04-22 20:09:35,369 - INFO - r"""
+==========================================================
+Create a new coordinate class (for the Sagittarius stream)
+==========================================================
+
+This document describes in detail how to subclass and define a custom spherical
+coordinate frame, as discussed in :ref:`astropy:astropy-coordinates-design` and
+the docstring for `~astropy.coordinates.BaseCoordinateFrame`. In this example,
+we will define a coordinate system defined by the plane of orbit of the
+Sagittarius Dwarf Galaxy (hereafter Sgr; as defined in Majewski et al. 2003).
+The Sgr coordinate system is often referred to in terms of two angular
+coordinates, :math:`\Lambda,B`.
+
+To do this, we need to define a subclass of
+`~astropy.coordinates.BaseCoordinateFrame` that knows the names and units of the
+coordinate system angles in each of the supported representations.  In this case
+we support `~astropy.coordinates.SphericalRepresentation` with "Lambda" and
+"Beta". Then we have to define the transformation from this coordinate system to
+some other built-in system. Here we will use Galactic coordinates, represented
+by the `~astropy.coordinates.Galactic` class.
+
+See Also
+--------
+* The `gala package <http://gala.adrian.pw/>`_, which defines a number of
+  Astropy coordinate frames for stellar stream coordinate systems.
+* Majewski et al. 2003, "A Two Micron All Sky Survey View of the Sagittarius
+  Dwarf Galaxy. I. Morphology of the Sagittarius Core and Tidal Arms",
+  https://arxiv.org/abs/astro-ph/0304198
+* Law & Majewski 2010, "The Sagittarius Dwarf Galaxy: A Model for Evolution in a
+  Triaxial Milky Way Halo", https://arxiv.org/abs/1003.1132
+* David Law's Sgr info page https://www.stsci.edu/~dlaw/Sgr/
+
+
+*By: Adrian Price-Whelan, Erik Tollerud*
+
+*License: BSD*
+2025-04-22 20:09:35,369 - INFO - # Load the WCS information from a fits header, and use it
+# to convert pixel coordinates to world coordinates.
+
+import sys
+
+import numpy as np
+
+from astropy import wcs
+from astropy.io import fits
+2025-04-22 20:09:35,369 - INFO - def resolve_astropy_and_dev_reference(app, env, node, contnode):
+    """
+    Reference targets for ``astropy:`` and ``astropy-dev:`` are special cases.
+
+    Documentation links in astropy can be set up as intersphinx links so that
+    affiliate packages do not have to override the docstrings when building
+    the docs.
+
+    If we are building the development docs it is a local ref targeting the
+    label ``astropy-dev:<label>``, but for stable docs it should be an
+    intersphinx resolution to the development docs.
+
+    See https://github.com/astropy/astropy/issues/11366
+    """
+    # should the node be processed?
+    reftarget = node.get("reftarget")  # str or None
+    if str(reftarget).startswith("astropy:"):
+        # This allows Astropy to use intersphinx links to itself and have
+        # them resolve to local links. Downstream packages will see intersphinx.
+        # TODO! deprecate this if sphinx-doc/sphinx/issues/9169 is implemented.
+        process, replace = True, "astropy:"
+    elif dev and str(reftarget).startswith("astropy-dev:"):
+        process, replace = True, "astropy-dev:"
+    else:
+        process, replace = False, ""
+
+    # make link local
+    if process:
+        reftype = node.get("reftype")
+        refdoc = node.get("refdoc", app.env.docname)
+        # convert astropy intersphinx targets to local links.
+        # there are a few types of intersphinx link patterns, as described in
+        # https://docs.readthedocs.io/en/stable/guides/intersphinx.html
+        reftarget = reftarget.replace(replace, "")
+        if reftype == "doc":  # also need to replace the doc link
+            node.replace_attr("reftarget", reftarget)
+        # Delegate to the ref node's original domain/target (typically :ref:)
+        try:
+            domain = app.env.domains[node["refdomain"]]
+            return domain.resolve_xref(
+                app.env, refdoc, app.builder, reftype, reftarget, node, contnode
+            )
+        except Exception:
+            pass
+
+        # Otherwise return None which should delegate to intersphinx
+2025-04-22 20:09:35,369 - INFO - As
+# an example, we'll generate 4 theoretical circular orbits at different
+# Galactocentric radii with the same circular velocity, and transform them to
+# Heliocentric coordinates:
+
+ring_distances = np.arange(10, 25+1, 5) * u.kpc
+circ_velocity = 220 * u.km/u.s
+
+phi_grid = np.linspace(90, 270, 512) * u.degree # grid of azimuths
+ring_rep = coord.CylindricalRepresentation(
+    rho=ring_distances[:,np.newaxis],
+    phi=phi_grid[np.newaxis],
+    z=np.zeros_like(ring_distances)[:,np.newaxis])
+
+angular_velocity = (-circ_velocity / ring_distances).to(u.mas/u.yr,
+                                                        u.dimensionless_angles())
+ring_dif = coord.CylindricalDifferential(
+    d_rho=np.zeros(phi_grid.shape)[np.newaxis]*u.km/u.s,
+    d_phi=angular_velocity[:,np.newaxis],
+    d_z=np.zeros(phi_grid.shape)[np.newaxis]*u.km/u.s
+)
+
+ring_rep = ring_rep.with_differentials(ring_dif)
+gc_rings = coord.SkyCoord(ring_rep, frame=coord.Galactocentric)
+
+##############################################################################
+# First, let's visualize the geometry in Galactocentric coordinates.
+2025-04-22 20:09:35,370 - INFO - import configparser
+import doctest
+import os
+import sys
+from datetime import datetime
+from importlib import metadata
+
+from packaging.requirements import Requirement
+from packaging.specifiers import SpecifierSet
+
+# -- Check for missing dependencies -------------------------------------------
+missing_requirements = {}
+for line in metadata.requires("astropy"):
+    if 'extra == "docs"' in line:
+        req = Requirement(line.split(";")[0])
+        req_package = req.name.lower()
+        req_specifier = str(req.specifier)
+
+        try:
+            version = metadata.version(req_package)
+        except metadata.PackageNotFoundError:
+            missing_requirements[req_package] = req_specifier
+
+        if version not in SpecifierSet(req_specifier, prereleases=True):
+            missing_requirements[req_package] = req_specifier
+
+if missing_requirements:
+    print(
+        "The following packages could not be found and are required to "
+        "build the documentation:"
+    )
+    for key, val in missing_requirements.items():
+        print(f"    * {key} {val}")
+    print('Please install the "docs" requirements.')
+    sys.exit(1)
+
+from sphinx_astropy.conf.v1 import *  # noqa: E402
+from sphinx_astropy.conf.v1 import (  # noqa: E402
+    exclude_patterns,
+    extensions,
+    intersphinx_mapping,
+    numpydoc_xref_aliases,
+    numpydoc_xref_astropy_aliases,
+    numpydoc_xref_ignore,
+    rst_epilog,
+)
+
+# -- Plot configuration -------------------------------------------------------
+plot_rcparams = {
+    "axes.labelsize": "large",
+    "figure.figsize": (6, 6),
+    "figure.subplot.hspace": 0.5,
+    "savefig.bbox": "tight",
+    "savefig.facecolor": "none",
+}
+plot_apply_rcparams = True
+plot_html_show_source_link = False
+plot_formats = ["png", "svg", "pdf"]
+# Don't use the default - which includes a numpy and matplotlib import
+plot_pre_code = ""
+
+# -- General configuration ----------------------------------------------------
+
+# If your documentation needs a minimal Sphinx version, state it here.
+needs_sphinx = "3.0"
+
+# The intersphinx_mapping in sphinx_astropy.sphinx refers to astropy for
+# the benefit of other packages who want to refer to objects in the
+# astropy core.
+2025-04-22 20:09:35,370 - INFO - """
+================================================================
+Convert a radial velocity to the Galactic Standard of Rest (GSR)
+================================================================
+
+Radial or line-of-sight velocities of sources are often reported in a
+Heliocentric or Solar-system barycentric reference frame. A common
+transformation incorporates the projection of the Sun's motion along the
+line-of-sight to the target, hence transforming it to a Galactic rest frame
+instead (sometimes referred to as the Galactic Standard of Rest, GSR). This
+transformation depends on the assumptions about the orientation of the Galactic
+frame relative to the bary- or Heliocentric frame. It also depends on the
+assumed solar velocity vector. Here we'll demonstrate how to perform this
+transformation using a sky position and barycentric radial-velocity.
+
+
+*By: Adrian Price-Whelan*
+
+*License: BSD*
+2025-04-22 20:09:35,370 - INFO - ================
+2025-04-22 20:09:35,370 - INFO - docs/conftest.py
+2025-04-22 20:09:35,370 - INFO - # Licensed under a 3-clause BSD style license - see LICENSE.rst
+
+# This file needs to be included here to make sure commands such
+# as ``pytest docs/...`` works, since this
+# will ignore the conftest.py file at the root of the repository
+# and the one in astropy/conftest.py
+
+import os
+import tempfile
+
+import pytest
+
+# Make sure we use temporary directories for the config and cache
+# so that the tests are insensitive to local configuration.
+
+os.environ["XDG_CONFIG_HOME"] = tempfile.mkdtemp("astropy_config")
+os.environ["XDG_CACHE_HOME"] = tempfile.mkdtemp("astropy_cache")
+
+os.mkdir(os.path.join(os.environ["XDG_CONFIG_HOME"], "astropy"))
+os.mkdir(os.path.join(os.environ["XDG_CACHE_HOME"], "astropy"))
+
+# Note that we don't need to change the environment variables back or remove
+# them after testing, because they are only changed for the duration of the
+# Python process, and this configuration only matters if running pytest
+# directly, not from e.g. an IPython session.
+
+
+@pytest.fixture(autouse=True)
+def _docdir(request):
+    """Run doctests in isolated tmp_path so outputs do not end up in repo."""
+    # Trigger ONLY for doctestplus
+    doctest_plugin = request.config.pluginmanager.getplugin("doctestplus")
+    if isinstance(request.node.parent, doctest_plugin._doctest_textfile_item_cls):
+        # Don't apply this fixture to io.rst.  It reads files and doesn't write.
+        # Implementation from https://github.com/pytest-dev/pytest/discussions/10437
+        if "io.rst" not in request.node.name:
+            old_cwd = os.getcwd()
+            tmp_path = request.getfixturevalue("tmp_path")
+            os.chdir(tmp_path)
+            yield
+            os.chdir(old_cwd)
+        else:
+            yield
+    else:
+        yield
+2025-04-22 20:09:35,370 - INFO - # Licensed under a 3-clause BSD style license - see LICENSE.rst
+#
+# Astropy documentation build configuration file.
+#
+# This file is execfile()d with the current directory set to its containing dir.
+#
+# Note that not all possible configuration values are present in this file.
+#
+# All configuration values have a default. Some values are defined in
+# the global Astropy configuration which is loaded here before anything else.
+
+# If extensions (or modules to document with autodoc) are in another directory,
+# add these directories to sys.path here. If the directory is relative to the
+# documentation root, use os.path.abspath to make it absolute, like shown here.
+# sys.path.insert(0, os.path.abspath('..'))
+# IMPORTANT: the above commented section was generated by sphinx-quickstart, but
+# is *NOT* appropriate for astropy or Astropy affiliated packages. It is left
+# commented out with this explanation to make it clear why this should not be
+# done. If the sys.path entry above is added, when the astropy.sphinx.conf
+# import occurs, it will import the *source* version of astropy instead of the
+# version installed (if invoked as "make html" or directly with sphinx), or the
+# version in the build directory.
+# Thus, any C-extensions that are needed to build the documentation will *not*
+# be accessible, and the documentation will not build correctly.
+# See sphinx_astropy.conf for which values are set there.
+2025-04-22 20:09:35,370 - INFO - # -- Options for HTML output ---------------------------------------------------
+
+# The name for this set of Sphinx documents.  If None, it defaults to
+# "<project> v<release> documentation".
+html_title = f"{project} v{release}"
+
+# Output file base name for HTML help builder.
+htmlhelp_basename = project + "doc"
+
+# A dictionary of values to pass into the template engine's context for all pages.
+html_context = {"to_be_indexed": ["stable", "latest"], "is_development": dev}
+
+# Add any extra paths that contain custom files (such as robots.txt or
+# .htaccess) here, relative to this directory. These files are copied
+# directly to the root of the documentation.
+html_extra_path = ["robots.txt"]
+
+# -- Options for LaTeX output --------------------------------------------------
+
+# Grouping the document tree into LaTeX files. List of tuples
+# (source start file, target name, title, author, documentclass [howto/manual]).
+latex_documents = [
+    ("index", project + ".tex", project + " Documentation", author, "manual")
+]
+
+latex_logo = "_static/astropy_logo.pdf"
+2025-04-22 20:09:35,371 - INFO - To make several modifications, it's better to load the file once:
+
+with fits.open(fits_file, 'update') as f:
+    for hdu in f:
+        hdu.header['OBJECT'] = 'CAT'
+
+print("After modifications:")
+print()
+print("Extension 0:")
+print(repr(fits.getheader(fits_file, 0)))
+print()
+print("Extension 1:")
+print(repr(fits.getheader(fits_file, 1)))
+2025-04-22 20:09:35,371 - INFO - # -- Options for linkcheck output -------------------------------------------
+linkcheck_retry = 5
+linkcheck_ignore = [
+    "https://journals.aas.org/manuscript-preparation/",
+    "https://maia.usno.navy.mil/",
+    "https://www.usno.navy.mil/USNO/time/gps/usno-gps-time-transfer",
+    "https://aa.usno.navy.mil/publications/docs/Circular_179.php",
+    "http://data.astropy.org",
+    "https://doi.org/",  # CI blocked by service provider
+    "https://ui.adsabs.harvard.edu",  # CI blocked by service provider
+    "https://www.tandfonline.com/",  # 403 Client Error: Forbidden
+    "https://physics.nist.gov/",  # SSL: CERTIFICATE_VERIFY_FAILED
+    "https://ieeexplore.ieee.org/",  # 418 Client Error: I'm a teapot
+    "https://pyfits.readthedocs.io/en/v3.2.1/",  # defunct page in CHANGES.rst
+    r"https://github\.com/astropy/astropy/(?:issues|pull)/\d+",
+]
+linkcheck_timeout = 180
+linkcheck_anchors = False
+
+
+def rstjinja(app, docname, source):
+    """Render pages as a jinja template to hide/show dev docs."""
+    # Make sure we're outputting HTML
+    if app.builder.format != "html":
+        return
+    files_to_render = ["index", "install", "development/index"]
+    if docname in files_to_render:
+        print(f"Jinja rendering {docname}")
+        rendered = app.builder.templates.render_string(
+            source[0], app.config.html_context
+        )
+        source[0] = rendered
+2025-04-22 20:09:35,371 - INFO - ================
+2025-04-22 20:09:35,371 - INFO - .pyinstaller/hooks/hook-skyfield.py
+2025-04-22 20:09:35,371 - INFO - # NOTE: this hook should be added to
+# https://github.com/pyinstaller/pyinstaller-hooks-contrib
+# once that repository is ready for pull requests
+from PyInstaller.utils.hooks import collect_data_files
+
+datas = collect_data_files("skyfield")
+2025-04-22 21:17:31,456 - INFO - Processing bug astropy__astropy-14995
+2025-04-22 21:26:54,173 - INFO - Processing bug astropy__astropy-14995
+2025-04-22 21:28:13,374 - INFO - Processing bug astropy__astropy-14995
+2025-04-22 21:28:47,969 - INFO - Total number of considered files: 19
+2025-04-22 21:28:47,983 - INFO - Total number of documents: 19
+2025-04-22 21:28:56,586 - INFO - Retrieving with query:
+In v5.3, NDDataRef mask propagation fails when one of the operand does not have a mask
+### Description
+
+This applies to v5.3. 
+
+It looks like when one of the operand does not have a mask, the mask propagation when doing arithmetic, in particular with `handle_mask=np.bitwise_or` fails.  This is not a problem in v5.2.
+
+I don't know enough about how all that works, but it seems from the error that the operand without a mask is set as a mask of None's and then the bitwise_or tries to operate on an integer and a None and fails.
+
+### Expected behavior
+
+When one of the operand does not have mask, the mask that exists should just be copied over to the output.  Or whatever was done in that situation in v5.2 where there's no problem.
+
+### How to Reproduce
+
+This is with v5.3.   With v5.2, there are no errors.
+
+```
+>>> import numpy as np
+>>> from astropy.nddata import NDDataRef
+
+>>> array = np.array([[0, 1, 0], [1, 0, 1], [0, 1, 0]])
+>>> mask = np.array([[0, 1, 64], [8, 0, 1], [2, 1, 0]])
+
+>>> nref_nomask = NDDataRef(array)
+>>> nref_mask = NDDataRef(array, mask=mask)
+
+# multiply no mask by constant (no mask * no mask)
+>>> nref_nomask.multiply(1., handle_mask=np.bitwise_or).mask   # returns nothing, no mask,  OK
+
+# multiply no mask by itself (no mask * no mask)
+>>> nref_nomask.multiply(nref_nomask, handle_mask=np.bitwise_or).mask # return nothing, no mask, OK
+
+# multiply mask by constant (mask * no mask)
+>>> nref_mask.multiply(1., handle_mask=np.bitwise_or).mask
+...
+TypeError: unsupported operand type(s) for |: 'int' and 'NoneType'
+
+# multiply mask by itself (mask * mask)
+>>> nref_mask.multiply(nref_mask, handle_mask=np.bitwise_or).mask
+array([[ 0,  1, 64],
+       [ 8,  0,  1],
+       [ 2,  1,  0]])
+
+# multiply mask by no mask (mask * no mask)
+>>> nref_mask.multiply(nref_nomask, handle_mask=np.bitwise_or).mask
+...
+TypeError: unsupported operand type(s) for |: 'int' and 'NoneType'
+```
+
+
+### Versions
+
+>>> import sys; print("Python", sys.version)
+Python 3.10.11 | packaged by conda-forge | (main, May 10 2023, 19:07:22) [Clang 14.0.6 ]
+>>> import astropy; print("astropy", astropy.__version__)
+astropy 5.3
+>>> import numpy; print("Numpy", numpy.__version__)
+Numpy 1.24.3
+>>> import erfa; print("pyerfa", erfa.__version__)
+pyerfa 2.0.0.3
+>>> import scipy; print("Scipy", scipy.__version__)
+Scipy 1.10.1
+>>> import matplotlib; print("Matplotlib", matplotlib.__version__)
+Matplotlib 3.7.1
+
+
+2025-04-22 21:28:56,596 - INFO - Embedding Tokens: 0
+2025-04-22 21:28:56,596 - INFO - ================
+2025-04-22 21:28:56,596 - INFO - examples/template/example-template.py
+2025-04-22 21:28:56,597 - INFO - """
+
+##############################################################################
+# Make print work the same in all versions of Python, set up numpy,
+# matplotlib, and use a nicer set of plot parameters:
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+from astropy.visualization import astropy_mpl_style
+
+plt.style.use(astropy_mpl_style)
+# uncomment if including figures:
+# import matplotlib.pyplot as plt
+# from astropy.visualization import astropy_mpl_style
+# plt.style.use(astropy_mpl_style)
+
+##############################################################################
+# This code block is executed, although it produces no output. Lines starting
+# with a simple hash are code comment and get treated as part of the code
+# block. To include this new comment string we started the new block with a
+# long line of hashes.
+#
+# The sphinx-gallery parser will assume everything after this splitter and that
+# continues to start with a **comment hash and space** (respecting code style)
+# is text that has to be rendered in
+# html format. Keep in mind to always keep your comments always together by
+# comment hashes. That means to break a paragraph you still need to comment
+# that line break.
+#
+# In this example the next block of code produces some plotable data. Code is
+# executed, figure is saved and then code is presented next, followed by the
+# inlined figure.
+
+x = np.linspace(-np.pi, np.pi, 300)
+xx, yy = np.meshgrid(x, x)
+z = np.cos(xx) + np.cos(yy)
+
+plt.figure()
+plt.imshow(z)
+plt.colorbar()
+plt.xlabel('$x$')
+plt.ylabel('$y$')
+
+###########################################################################
+# Again it is possible to continue the discussion with a new Python string. This
+# time to introduce the next code block generates 2 separate figures.
+
+plt.figure()
+plt.imshow(z, cmap=plt.cm.get_cmap('hot'))
+plt.figure()
+plt.imshow(z, cmap=plt.cm.get_cmap('Spectral'), interpolation='none')
+
+##########################################################################
+# There's some subtle differences between rendered html rendered comment
+# strings and code comment strings which I'll demonstrate below. (Some of this
+# only makes sense if you look at the
+# :download:`raw Python script <plot_notebook.py>`)
+#
+# Comments in comment blocks remain nested in the text.
+
+
+def dummy():
+    """Dummy function to make sure docstrings don't get rendered as text"""
+    pass
+2025-04-22 21:28:56,597 - INFO - ================
+2025-04-22 21:28:56,597 - INFO - docs/nddata/examples/cutout2d_tofits.py
+2025-04-22 21:28:56,597 - INFO - # Download an example FITS file, create a 2D cutout, and save it to a
+# new FITS file, including the updated cutout WCS.
+from astropy.io import fits
+from astropy.nddata import Cutout2D
+from astropy.utils.data import download_file
+from astropy.wcs import WCS
+
+
+def download_image_save_cutout(url, position, size):
+    # Download the image
+    filename = download_file(url)
+
+    # Load the image and the WCS
+    hdu = fits.open(filename)[0]
+    wcs = WCS(hdu.header)
+
+    # Make the cutout, including the WCS
+    cutout = Cutout2D(hdu.data, position=position, size=size, wcs=wcs)
+
+    # Put the cutout image in the FITS HDU
+    hdu.data = cutout.data
+
+    # Update the FITS header with the cutout WCS
+    hdu.header.update(cutout.wcs.to_header())
+
+    # Write the cutout to a new FITS file
+    cutout_filename = 'example_cutout.fits'
+    hdu.writeto(cutout_filename, overwrite=True)
+
+
+if __name__ == '__main__':
+    url = 'https://astropy.stsci.edu/data/photometry/spitzer_example_image.fits'
+
+    position = (500, 300)
+    size = (400, 400)
+    download_image_save_cutout(url, position, size)
+2025-04-22 21:28:56,597 - INFO - ================
+2025-04-22 21:28:56,598 - INFO - examples/io/skip_create-large-fits.py
+2025-04-22 21:28:56,598 - INFO - abs(header['BITPIX'])/8
+    # (this example is assuming a 64-bit float)
+    # The -1 is to account for the final byte that we are about to
+    # write:
+    fobj.seek(len(header.tostring()) + (40000 * 40000 * 8) - 1)
+    fobj.write(b'\0')
+
+##############################################################################
+# More generally, this can be written:
+
+shape = tuple(header[f'NAXIS{ii}'] for ii in range(1, header['NAXIS']+1))
+with open('large.fits', 'rb+') as fobj:
+    fobj.seek(len(header.tostring()) + (np.prod(shape) * np.abs(header['BITPIX']//8)) - 1)
+    fobj.write(b'\0')
+
+##############################################################################
+# On modern operating systems this will cause the file (past the header) to be
+# filled with zeros out to the ~12GB needed to hold a 40000 x 40000 image. On
+# filesystems that support sparse file creation (most Linux filesystems, but not
+# the HFS+ filesystem used by most Macs) this is a very fast, efficient
+# operation. On other systems your mileage may vary.
+#
+# This isn't the only way to build up a large file, but probably one of the
+# safest. This method can also be used to create large multi-extension FITS
+# files, with a little care.
+
+##############################################################################
+# Finally, we'll remove the file we created:
+
+os.remove('large.fits')
+2025-04-22 21:28:56,598 - INFO - ================
+2025-04-22 21:28:56,598 - INFO - .pyinstaller/run_astropy_tests.py
+2025-04-22 21:28:56,599 - INFO - os.remove(os.path.join("astropy_tests", "table", "mixins", "tests", "test_registry.py"))
+
+# Copy the top-level conftest.py
+shutil.copy2(
+    os.path.join(ROOT, "astropy", "conftest.py"),
+    os.path.join("astropy_tests", "conftest.py"),
+)
+
+# matplotlib hook in pyinstaller 5.0 and later no longer collects every backend, see
+# https://github.com/pyinstaller/pyinstaller/issues/6760
+matplotlib.use("svg")
+
+# We skip a few tests, which are generally ones that rely on explicitly
+# checking the name of the current module (which ends up starting with
+# astropy_tests rather than astropy).
+
+SKIP_TESTS = [
+    "test_exception_logging_origin",
+    "test_log",
+    "test_configitem",
+    "test_config_noastropy_fallback",
+    "test_no_home",
+    "test_path",
+    "test_rename_path",
+    "test_data_name_third_party_package",
+    "test_pkg_finder",
+    "test_wcsapi_extension",
+    "test_find_current_module_bundle",
+    "test_minversion",
+    "test_imports",
+    "test_generate_config",
+    "test_generate_config2",
+    "test_create_config_file",
+    "test_download_parallel_fills_cache",
+]
+
+# Run the tests!
+sys.exit(
+    pytest.main(
+        ["astropy_tests", "-k " + " and ".join("not " + test for test in SKIP_TESTS)],
+        plugins=[
+            "pytest_astropy.plugin",
+            "pytest_doctestplus.plugin",
+            "pytest_remotedata.plugin",
+            "pytest_astropy_header.display",
+        ],
+    )
+)
+2025-04-22 21:28:56,599 - INFO - ================
+2025-04-22 21:28:56,599 - INFO - docs/conf.py
+2025-04-22 21:28:56,599 - INFO - # so here we mostly need to define Astropy-specific x-refs
+numpydoc_xref_aliases.update(
+    {
+        # python & adjacent
+        "Any": "`~typing.Any`",
+        "file-like": ":term:`python:file-like object`",
+        "file": ":term:`python:file object`",
+        "path-like": ":term:`python:path-like object`",
+        "module": ":term:`python:module`",
+        "buffer-like": ":term:buffer-like",
+        "hashable": ":term:`python:hashable`",
+        # for matplotlib
+        "color": ":term:`color`",
+        # for numpy
+        "ints": ":class:`python:int`",
+        # for astropy
+        "number": ":term:`number`",
+        "Representation": ":class:`~astropy.coordinates.BaseRepresentation`",
+        "writable": ":term:`writable file-like object`",
+        "readable": ":term:`readable file-like object`",
+        "BaseHDU": ":doc:`HDU </io/fits/api/hdus>`",
+    }
+)
+# Add from sphinx-astropy 1) glossary aliases 2) physical types.
+numpydoc_xref_aliases.update(numpydoc_xref_astropy_aliases)
+
+# Turn off table of contents entries for functions and classes
+toc_object_entries = False
+
+# -- Project information ------------------------------------------------------
+
+project = "Astropy"
+author = "The Astropy Developers"
+copyright = f"2011–{datetime.utcnow().year}, " + author
+
+# The version info for the project you're documenting, acts as replacement for
+# |version| and |release|, also used in various other places throughout the
+# built documents.
+
+# The full version, including alpha/beta/rc tags.
+release = metadata.version(project)
+# The short X.Y version.
+version = ".".join(release.split(".")[:2])
+
+# Only include dev docs in dev version.
+dev = "dev" in release
+if not dev:
+    exclude_patterns += ["development/*", "testhelpers.rst"]
+
+# -- Options for the module index ---------------------------------------------
+
+modindex_common_prefix = ["astropy."]
+2025-04-22 21:28:56,599 - INFO - import os
+import shutil
+import sys
+
+import erfa  # noqa: F401
+import matplotlib
+import pytest
+
+import astropy  # noqa: F401
+
+if len(sys.argv) == 3 and sys.argv[1] == "--astropy-root":
+    ROOT = sys.argv[2]
+else:
+    # Make sure we don't allow any arguments to be passed - some tests call
+    # sys.executable which becomes this script when producing a pyinstaller
+    # bundle, but we should just error in this case since this is not the
+    # regular Python interpreter.
+    if len(sys.argv) > 1:
+        print("Extra arguments passed, exiting early")
+        sys.exit(1)
+
+for root, dirnames, files in os.walk(os.path.join(ROOT, "astropy")):
+    # NOTE: we can't simply use
+    # test_root = root.replace('astropy', 'astropy_tests')
+    # as we only want to change the one which is for the module, so instead
+    # we search for the last occurrence and replace that.
+    pos = root.rfind("astropy")
+    test_root = root[:pos] + "astropy_tests" + root[pos + 7 :]
+
+    # Copy over the astropy 'tests' directories and their contents
+    for dirname in dirnames:
+        final_dir = os.path.relpath(os.path.join(test_root, dirname), ROOT)
+        # We only copy over 'tests' directories, but not astropy/tests (only
+        # astropy/tests/tests) since that is not just a directory with tests.
+        if dirname == "tests" and not root.endswith("astropy"):
+            shutil.copytree(os.path.join(root, dirname), final_dir, dirs_exist_ok=True)
+        else:
+            # Create empty __init__.py files so that 'astropy_tests' still
+            # behaves like a single package, otherwise pytest gets confused
+            # by the different conftest.py files.
+2025-04-22 21:28:56,600 - INFO - ================
+2025-04-22 21:28:56,600 - INFO - examples/coordinates/plot_sgr-coordinate-frame.py
+2025-04-22 21:28:56,600 - INFO - ##############################################################################
+# The decorator ``@frame_transform_graph.transform(coord.StaticMatrixTransform,
+# coord.Galactic, Sagittarius)``  registers this function on the
+# ``frame_transform_graph`` as a coordinate transformation. Inside the function,
+# we simply return the previously defined rotation matrix.
+#
+# We then register the inverse transformation by using the transpose of the
+# rotation matrix (which is faster to compute than the inverse):
+
+@frame_transform_graph.transform(coord.StaticMatrixTransform, Sagittarius, coord.Galactic)
+def sgr_to_galactic():
+    """Compute the heliocentric Sgr to spherical Galactic transformation matrix."""
+    return matrix_transpose(SGR_MATRIX)
+
+
+##############################################################################
+# Now that we've registered these transformations between ``Sagittarius`` and
+# `~astropy.coordinates.Galactic`, we can transform between *any* coordinate
+# system and ``Sagittarius`` (as long as the other system has a path to
+# transform to `~astropy.coordinates.Galactic`). For example, to transform from
+# ICRS coordinates to ``Sagittarius``, we would do:
+
+icrs = coord.SkyCoord(280.161732*u.degree, 11.91934*u.degree, frame='icrs')
+sgr = icrs.transform_to(Sagittarius)
+print(sgr)
+
+##############################################################################
+# Or, to transform from the ``Sagittarius`` frame to ICRS coordinates (in this
+# case, a line along the ``Sagittarius`` x-y plane):
+
+sgr = coord.SkyCoord(Lambda=np.linspace(0, 2*np.pi, 128)*u.radian,
+                     Beta=np.zeros(128)*u.radian, frame='sagittarius')
+icrs = sgr.transform_to(coord.ICRS)
+print(icrs)
+
+##############################################################################
+# As an example, we'll now plot the points in both coordinate systems:
+
+fig, axes = plt.subplots(2, 1, figsize=(8, 10),
+                         subplot_kw={'projection': 'aitoff'})
+
+axes[0].set_title("Sagittarius")
+axes[0].plot(sgr.Lambda.wrap_at(180*u.deg).radian, sgr.Beta.radian,
+             linestyle='none', marker='.')
+2025-04-22 21:28:56,600 - INFO - #
+# Create a stub array to initialize the HDU; its
+# exact size is irrelevant, as long as it has the desired number of
+# dimensions
+
+data = np.zeros((100, 100), dtype=np.float64)
+hdu = fits.PrimaryHDU(data=data)
+header = hdu.header
+while len(header) < (36 * 4 - 1):
+    header.append()  # Adds a blank card to the end
+
+##############################################################################
+# Now adjust the NAXISn keywords to the desired size of the array, and write
+# only the header out to a file. Using the ``hdu.writeto()`` method will cause
+# astropy to "helpfully" reset the NAXISn keywords to match the size of the
+# dummy array. That is because it works hard to ensure that only valid FITS
+# files are written. Instead, we can write just the header to a file using the
+# `astropy.io.fits.Header.tofile` method:
+
+header['NAXIS1'] = 40000
+header['NAXIS2'] = 40000
+header.tofile('large.fits')
+
+##############################################################################
+# Finally, grow out the end of the file to match the length of the
+# data (plus the length of the header). This can be done very efficiently on
+# most systems by seeking past the end of the file and writing a single byte,
+# like so:
+
+with open('large.fits', 'rb+') as fobj:
+    # Seek past the length of the header, plus the length of the
+    # Data we want to write.
+    # 8 is the number of bytes per value, i.e.
+2025-04-22 21:28:56,600 - INFO - ================
+2025-04-22 21:28:56,600 - INFO - examples/coordinates/plot_obs-planning.py
+2025-04-22 21:28:56,601 - INFO - #
+# Find the alt,az coordinates of M33 at 100 times evenly spaced between 10pm
+# and 7am EDT:
+
+midnight = Time('2012-7-13 00:00:00') - utcoffset
+delta_midnight = np.linspace(-2, 10, 100)*u.hour
+frame_July13night = AltAz(obstime=midnight+delta_midnight,
+                          location=bear_mountain)
+m33altazs_July13night = m33.transform_to(frame_July13night)
+
+##############################################################################
+# convert alt, az to airmass with `~astropy.coordinates.AltAz.secz` attribute:
+
+m33airmasss_July13night = m33altazs_July13night.secz
+
+##############################################################################
+# Plot the airmass as a function of time:
+
+plt.plot(delta_midnight, m33airmasss_July13night)
+plt.xlim(-2, 10)
+plt.ylim(1, 4)
+plt.xlabel('Hours from EDT Midnight')
+plt.ylabel('Airmass [Sec(z)]')
+plt.show()
+
+##############################################################################
+# Use  `~astropy.coordinates.get_sun` to find the location of the Sun at 1000
+# evenly spaced times between noon on July 12 and noon on July 13:
+
+from astropy.coordinates import get_sun
+
+delta_midnight = np.linspace(-12, 12, 1000)*u.hour
+times_July12_to_13 = midnight + delta_midnight
+frame_July12_to_13 = AltAz(obstime=times_July12_to_13, location=bear_mountain)
+sunaltazs_July12_to_13 = get_sun(times_July12_to_13).transform_to(frame_July12_to_13)
+2025-04-22 21:28:56,601 - INFO - with open("common_links.txt") as cl:
+    rst_epilog += cl.read().format(
+        minimum_python=__minimum_python_version__, **min_versions
+    )
+
+# Manually register doctest options since matplotlib 3.5 messed up allowing them
+# from pytest-doctestplus
+IGNORE_OUTPUT = doctest.register_optionflag("IGNORE_OUTPUT")
+REMOTE_DATA = doctest.register_optionflag("REMOTE_DATA")
+FLOAT_CMP = doctest.register_optionflag("FLOAT_CMP")
+
+# Whether to create cross-references for the parameter types in the
+# Parameters, Other Parameters, Returns and Yields sections of the docstring.
+numpydoc_xref_param_type = True
+
+# Words not to cross-reference. Most likely, these are common words used in
+# parameter type descriptions that may be confused for classes of the same
+# name. The base set comes from sphinx-astropy. We add more here.
+numpydoc_xref_ignore.update(
+    {
+        "mixin",
+        "Any",  # aka something that would be annotated with `typing.Any`
+        # needed in subclassing numpy  # TODO! revisit
+        "Arguments",
+        "Path",
+        # TODO! not need to ignore.
+        "flag",
+        "bits",
+    }
+)
+
+# Mappings to fully qualified paths (or correct ReST references) for the
+# aliases/shortcuts used when specifying the types of parameters.
+# Numpy provides some defaults
+# https://github.com/numpy/numpydoc/blob/b352cd7635f2ea7748722f410a31f937d92545cc/numpydoc/xref.py#L62-L94
+# and a base set comes from sphinx-astropy.
+2025-04-22 21:28:56,601 - INFO - ================
+2025-04-22 21:28:56,601 - INFO - examples/io/split-jpeg-to-fits.py
+2025-04-22 21:28:56,601 - INFO - """
+=====================================================
+Convert a 3-color image (JPG) to separate FITS images
+=====================================================
+
+This example opens an RGB JPEG image and writes out each channel as a separate
+FITS (image) file.
+
+This example uses `pillow <https://python-pillow.org>`_ to read the image,
+`matplotlib.pyplot` to display the image, and `astropy.io.fits` to save FITS files.
+
+
+*By: Erik Bray, Adrian Price-Whelan*
+
+*License: BSD*
+2025-04-22 21:28:56,601 - INFO - """
+
+##############################################################################
+# Make `print` work the same in all versions of Python, set up numpy,
+# matplotlib, and use a nicer set of plot parameters:
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+from astropy.visualization import astropy_mpl_style
+
+plt.style.use(astropy_mpl_style)
+
+
+##############################################################################
+# Import the packages necessary for coordinates
+
+import astropy.coordinates as coord
+import astropy.units as u
+from astropy.coordinates import frame_transform_graph
+from astropy.coordinates.matrix_utilities import matrix_transpose, rotation_matrix
+
+##############################################################################
+# The first step is to create a new class, which we'll call
+# ``Sagittarius`` and make it a subclass of
+# `~astropy.coordinates.BaseCoordinateFrame`:
+2025-04-22 21:28:56,602 - INFO - axes[1].set_title("ICRS")
+axes[1].plot(icrs.ra.wrap_at(180*u.deg).radian, icrs.dec.radian,
+             linestyle='none', marker='.')
+
+plt.show()
+
+##############################################################################
+# This particular transformation is just a spherical rotation, which is a
+# special case of an Affine transformation with no vector offset. The
+# transformation of velocity components is therefore natively supported as
+# well:
+
+sgr = coord.SkyCoord(Lambda=np.linspace(0, 2*np.pi, 128)*u.radian,
+                     Beta=np.zeros(128)*u.radian,
+                     pm_Lambda_cosBeta=np.random.uniform(-5, 5, 128)*u.mas/u.yr,
+                     pm_Beta=np.zeros(128)*u.mas/u.yr,
+                     frame='sagittarius')
+icrs = sgr.transform_to(coord.ICRS)
+print(icrs)
+
+fig, axes = plt.subplots(3, 1, figsize=(8, 10), sharex=True)
+
+axes[0].set_title("Sagittarius")
+axes[0].plot(sgr.Lambda.degree,
+             sgr.pm_Lambda_cosBeta.value,
+             linestyle='none', marker='.')
+axes[0].set_xlabel(r"$\Lambda$ [deg]")
+axes[0].set_ylabel(
+    fr"$\mu_\Lambda \, \cos B$ [{sgr.pm_Lambda_cosBeta.unit.to_string('latex_inline')}]")
+
+axes[1].set_title("ICRS")
+axes[1].plot(icrs.ra.degree, icrs.pm_ra_cosdec.value,
+             linestyle='none', marker='.')
+axes[1].set_ylabel(
+    fr"$\mu_\alpha \, \cos\delta$ [{icrs.pm_ra_cosdec.unit.to_string('latex_inline')}]")
+
+axes[2].set_title("ICRS")
+axes[2].plot(icrs.ra.degree, icrs.pm_dec.value,
+             linestyle='none', marker='.')
+axes[2].set_xlabel("RA [deg]")
+axes[2].set_ylabel(
+    fr"$\mu_\delta$ [{icrs.pm_dec.unit.to_string('latex_inline')}]")
+
+plt.show()
+2025-04-22 21:28:56,602 - INFO - ================
+2025-04-22 21:28:56,602 - INFO - examples/coordinates/rv-to-gsr.py
+2025-04-22 21:28:56,602 - INFO - ################################################################################
+# We could wrap this in a function so we can control the solar velocity and
+# re-use the above code:
+def rv_to_gsr(c, v_sun=None):
+    """Transform a barycentric radial velocity to the Galactic Standard of Rest
+    (GSR).
+
+    The input radial velocity must be passed in as a
+
+    Parameters
+    ----------
+    c : `~astropy.coordinates.BaseCoordinateFrame` subclass instance
+        The radial velocity, associated with a sky coordinates, to be
+        transformed.
+    v_sun : `~astropy.units.Quantity`, optional
+        The 3D velocity of the solar system barycenter in the GSR frame.
+        Defaults to the same solar motion as in the
+        `~astropy.coordinates.Galactocentric` frame.
+
+    Returns
+    -------
+    v_gsr : `~astropy.units.Quantity`
+        The input radial velocity transformed to a GSR frame.
+
+    """
+    if v_sun is None:
+        v_sun = coord.Galactocentric().galcen_v_sun.to_cartesian()
+
+    gal = c.transform_to(coord.Galactic)
+    cart_data = gal.data.to_cartesian()
+    unit_vector = cart_data / cart_data.norm()
+
+    v_proj = v_sun.dot(unit_vector)
+
+    return c.radial_velocity + v_proj
+
+
+rv_gsr = rv_to_gsr(icrs)
+print(rv_gsr)
+2025-04-22 21:28:56,602 - INFO - ================
+2025-04-22 21:28:56,602 - INFO - docs/wcs/examples/programmatic.py
+2025-04-22 21:28:56,603 - INFO - # Set the WCS information manually by setting properties of the WCS
+# object.
+
+import numpy as np
+
+from astropy import wcs
+from astropy.io import fits
+
+# Create a new WCS object.  The number of axes must be set
+# from the start
+w = wcs.WCS(naxis=2)
+
+# Set up an "Airy's zenithal" projection
+# Vector properties may be set with Python lists, or Numpy arrays
+w.wcs.crpix = [-234.75, 8.3393]
+w.wcs.cdelt = np.array([-0.066667, 0.066667])
+w.wcs.crval = [0, -90]
+w.wcs.ctype = ["RA---AIR", "DEC--AIR"]
+w.wcs.set_pv([(2, 1, 45.0)])
+
+# Three pixel coordinates of interest.
+# The pixel coordinates are pairs of [X, Y].
+# The "origin" argument indicates whether the input coordinates
+# are 0-based (as in Numpy arrays) or
+# 1-based (as in the FITS convention, for example coordinates
+# coming from DS9).
+pixcrd = np.array([[0, 0], [24, 38], [45, 98]], dtype=np.float64)
+
+# Convert pixel coordinates to world coordinates.
+# The second argument is "origin" -- in this case we're declaring we
+# have 0-based (Numpy-like) coordinates.
+world = w.wcs_pix2world(pixcrd, 0)
+print(world)
+
+# Convert the same coordinates back to pixel coordinates.
+pixcrd2 = w.wcs_world2pix(world, 0)
+print(pixcrd2)
+
+# These should be the same as the original pixel coordinates, modulo
+# some floating-point error.
+assert np.max(np.abs(pixcrd - pixcrd2)) < 1e-6
+
+# The example below illustrates the use of "origin" to convert between
+# 0- and 1- based coordinates when executing the forward and backward
+# WCS transform.
+2025-04-22 21:28:56,603 - INFO - """
+===================================================================
+Determining and plotting the altitude/azimuth of a celestial object
+===================================================================
+
+This example demonstrates coordinate transformations and the creation of
+visibility curves to assist with observing run planning.
+
+In this example, we make a `~astropy.coordinates.SkyCoord` instance for M33.
+The altitude-azimuth coordinates are then found using
+`astropy.coordinates.EarthLocation` and `astropy.time.Time` objects.
+
+This example is meant to demonstrate the capabilities of the
+`astropy.coordinates` package. For more convenient and/or complex observation
+planning, consider the `astroplan <https://astroplan.readthedocs.org/>`_
+package.
+
+
+*By: Erik Tollerud, Kelle Cruz*
+
+*License: BSD*
+
+
+"""
+
+##############################################################################
+# Let's suppose you are planning to visit picturesque Bear Mountain State Park
+# in New York, USA. You're bringing your telescope with you (of course), and
+# someone told you M33 is a great target to observe there. You happen to know
+# you're free at 11:00 pm local time, and you want to know if it will be up.
+# Astropy can answer that.
+#
+# Import numpy and matplotlib. For the latter, use a nicer set of plot
+# parameters and set up support for plotting/converting quantities.
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+from astropy.visualization import astropy_mpl_style, quantity_support
+
+plt.style.use(astropy_mpl_style)
+quantity_support()
+
+
+##############################################################################
+# Import the packages necessary for finding coordinates and making
+# coordinate transformations
+
+import astropy.units as u
+from astropy.coordinates import AltAz, EarthLocation, SkyCoord
+from astropy.time import Time
+
+##############################################################################
+# `astropy.coordinates.SkyCoord.from_name` uses Simbad to resolve object
+# names and retrieve coordinates.
+2025-04-22 21:28:56,603 - INFO - However, we don't want to cyclically reference astropy in its
+# own build so we remove it here.
+del intersphinx_mapping["astropy"]
+
+# add any custom intersphinx for astropy
+intersphinx_mapping.update(
+    {
+        "astropy-dev": ("https://docs.astropy.org/en/latest/", None),
+        "pyerfa": ("https://pyerfa.readthedocs.io/en/stable/", None),
+        "pytest": ("https://docs.pytest.org/en/stable/", None),
+        "ipython": ("https://ipython.readthedocs.io/en/stable/", None),
+        "pandas": ("https://pandas.pydata.org/pandas-docs/stable/", None),
+        "sphinx_automodapi": (
+            "https://sphinx-automodapi.readthedocs.io/en/stable/",
+            None,
+        ),
+        "asdf-astropy": ("https://asdf-astropy.readthedocs.io/en/latest/", None),
+        "fsspec": ("https://filesystem-spec.readthedocs.io/en/latest/", None),
+    }
+)
+
+# List of patterns, relative to source directory, that match files and
+# directories to ignore when looking for source files.
+# .inc.rst mean *include* files, don't have sphinx process them
+exclude_patterns += ["_templates", "changes", "_pkgtemplate.rst", "**/*.inc.rst"]
+
+# Add any paths that contain templates here, relative to this directory.
+if "templates_path" not in locals():  # in case parent conf.py defines it
+    templates_path = []
+templates_path.append("_templates")
+
+extensions += ["sphinx_changelog"]
+
+# Grab minversion from setup.cfg
+setup_cfg = configparser.ConfigParser()
+setup_cfg.read(os.path.join(os.path.pardir, "setup.cfg"))
+__minimum_python_version__ = setup_cfg["options"]["python_requires"].replace(">=", "")
+
+min_versions = {}
+for line in metadata.requires("astropy"):
+    req = Requirement(line.split(";")[0])
+    min_versions[req.name.lower()] = str(req.specifier)
+
+
+# This is added to the end of RST files - a good place to put substitutions to
+# be used globally.
+2025-04-22 21:28:56,603 - INFO - """
+========================
+Title of Example
+========================
+
+This example <verb> <active tense> <does something>.
+
+The example uses <packages> to <do something> and <other package> to <do other
+thing>. Include links to referenced packages like this: `astropy.io.fits` to
+show the astropy.io.fits or like this `~astropy.io.fits`to show just 'fits'
+
+
+*By: <names>*
+
+*License: BSD*
+2025-04-22 21:28:56,603 - INFO - """
+==========================================
+Create a very large FITS file from scratch
+==========================================
+
+This example demonstrates how to create a large file (larger than will fit in
+memory) from scratch using `astropy.io.fits`.
+
+
+*By: Erik Bray*
+
+*License: BSD*
+
+"""
+
+##############################################################################
+#  Normally to create a single image FITS file one would do something like:
+
+import os
+
+import numpy as np
+
+from astropy.io import fits
+
+data = np.zeros((40000, 40000), dtype=np.float64)
+hdu = fits.PrimaryHDU(data=data)
+
+##############################################################################
+# Then use the `astropy.io.fits.writeto()` method to write out the new
+# file to disk
+
+hdu.writeto('large.fits')
+
+##############################################################################
+# However, a 40000 x 40000 array of doubles is nearly twelve gigabytes! Most
+# systems won't be able to create that in memory just to write out to disk. In
+# order to create such a large file efficiently requires a little extra work,
+# and a few assumptions.
+#
+# First, it is helpful to anticipate about how large (as in, how many keywords)
+# the header will have in it. FITS headers must be written in 2880 byte
+# blocks, large enough for 36 keywords per block (including the END keyword in
+# the final block). Typical headers have somewhere between 1 and 4 blocks,
+# though sometimes more.
+#
+# Since the first thing we write to a FITS file is the header, we want to write
+# enough header blocks so that there is plenty of padding in which to add new
+# keywords without having to resize the whole file. Say you want the header to
+# use 4 blocks by default. Then, excluding the END card which Astropy will add
+# automatically, create the header and pad it out to 36 * 4 cards.
+2025-04-22 21:28:56,604 - INFO - ================
+2025-04-22 21:28:56,604 - INFO - examples/coordinates/plot_galactocentric-frame.py
+2025-04-22 21:28:56,604 - INFO - Note that, as with the positions,
+# the Galactocentric frame is a right-handed system (i.e., the Sun is at negative
+# x values) so ``v_x`` is opposite of the Galactocentric radial velocity:
+
+v_sun = [11.1, 244, 7.25] * (u.km / u.s)  # [vx, vy, vz]
+gc_frame = coord.Galactocentric(
+    galcen_distance=8*u.kpc,
+    galcen_v_sun=v_sun,
+    z_sun=0*u.pc)
+
+##############################################################################
+# We can then transform to this frame instead, with our custom parameters:
+
+gc2 = c1.transform_to(gc_frame)
+print(gc2.v_x, gc2.v_y, gc2.v_z)
+
+##############################################################################
+# It's sometimes useful to specify the solar motion using the `proper motion
+# of Sgr A* <https://arxiv.org/abs/astro-ph/0408107>`_ instead of Cartesian
+# velocity components. With an assumed distance, we can convert proper motion
+# components to Cartesian velocity components using `astropy.units`:
+
+galcen_distance = 8*u.kpc
+pm_gal_sgrA = [-6.379, -0.202] * u.mas/u.yr # from Reid & Brunthaler 2004
+vy, vz = -(galcen_distance * pm_gal_sgrA).to(u.km/u.s, u.dimensionless_angles())
+
+##############################################################################
+# We still have to assume a line-of-sight velocity for the Galactic center,
+# which we will again take to be 11 km/s:
+vx = 11.1 * u.km/u.s
+v_sun2 = u.Quantity([vx, vy, vz])  # List of Quantity -> a single Quantity
+
+gc_frame2 = coord.Galactocentric(galcen_distance=galcen_distance,
+                                 galcen_v_sun=v_sun2,
+                                 z_sun=0*u.pc)
+gc3 = c1.transform_to(gc_frame2)
+print(gc3.v_x, gc3.v_y, gc3.v_z)
+
+##############################################################################
+# The transformations also work in the opposite direction. This can be useful
+# for transforming simulated or theoretical data to observable quantities.
+2025-04-22 21:28:56,604 - INFO - ================
+2025-04-22 21:28:56,604 - INFO - examples/io/create-mef.py
+2025-04-22 21:28:56,605 - INFO - """
+=====================================================
+Create a multi-extension FITS (MEF) file from scratch
+=====================================================
+
+This example demonstrates how to create a multi-extension FITS (MEF)
+file from scratch using `astropy.io.fits`.
+
+
+*By: Erik Bray*
+
+*License: BSD*
+
+
+"""
+
+import os
+
+from astropy.io import fits
+
+##############################################################################
+# HDUList objects are used to hold all the HDUs in a FITS file. This
+# ``HDUList`` class is a subclass of Python's builtin `list` and can be
+# created from scratch. For example, to create a FITS file with
+# three extensions:
+
+new_hdul = fits.HDUList()
+new_hdul.append(fits.ImageHDU())
+new_hdul.append(fits.ImageHDU())
+
+##############################################################################
+# Write out the new file to disk:
+
+new_hdul.writeto('test.fits')
+
+##############################################################################
+# Alternatively, the HDU instances can be created first (or read from an
+# existing FITS file).
+#
+# Create a multi-extension FITS file with two empty IMAGE extensions (a
+# default PRIMARY HDU is prepended automatically if one is not specified;
+# we use ``overwrite=True`` to overwrite the file if it already exists):
+
+hdu1 = fits.PrimaryHDU()
+hdu2 = fits.ImageHDU()
+new_hdul = fits.HDUList([hdu1, hdu2])
+new_hdul.writeto('test.fits', overwrite=True)
+
+##############################################################################
+# Finally, we'll remove the file we created:
+
+os.remove('test.fits')
+2025-04-22 21:28:56,605 - INFO - ================
+2025-04-22 21:28:56,605 - INFO - docs/wcs/examples/from_file.py
+2025-04-22 21:28:56,605 - INFO - def load_wcs_from_file(filename):
+    # Load the FITS hdulist using astropy.io.fits
+    hdulist = fits.open(filename)
+
+    # Parse the WCS keywords in the primary HDU
+    w = wcs.WCS(hdulist[0].header)
+
+    # Print out the "name" of the WCS, as defined in the FITS header
+    print(w.wcs.name)
+
+    # Print out all of the settings that were parsed from the header
+    w.wcs.print_contents()
+
+    # Three pixel coordinates of interest.
+    # Note we've silently assumed an NAXIS=2 image here.
+    # The pixel coordinates are pairs of [X, Y].
+    # The "origin" argument indicates whether the input coordinates
+    # are 0-based (as in Numpy arrays) or
+    # 1-based (as in the FITS convention, for example coordinates
+    # coming from DS9).
+    pixcrd = np.array([[0, 0], [24, 38], [45, 98]], dtype=np.float64)
+
+    # Convert pixel coordinates to world coordinates
+    # The second argument is "origin" -- in this case we're declaring we
+    # have 0-based (Numpy-like) coordinates.
+    world = w.wcs_pix2world(pixcrd, 0)
+    print(world)
+
+    # Convert the same coordinates back to pixel coordinates.
+    pixcrd2 = w.wcs_world2pix(world, 0)
+    print(pixcrd2)
+
+    # These should be the same as the original pixel coordinates, modulo
+    # some floating-point error.
+    assert np.max(np.abs(pixcrd - pixcrd2)) < 1e-6
+
+    # The example below illustrates the use of "origin" to convert between
+    # 0- and 1- based coordinates when executing the forward and backward
+    # WCS transform.
+    x = 0
+    y = 0
+    origin = 0
+    assert (w.wcs_pix2world(x, y, origin) ==
+            w.wcs_pix2world(x + 1, y + 1, origin + 1))
+
+
+if __name__ == '__main__':
+    load_wcs_from_file(sys.argv[-1])
+2025-04-22 21:28:56,605 - INFO - """
+
+import matplotlib.pyplot as plt
+import numpy as np
+from PIL import Image
+
+from astropy.io import fits
+from astropy.visualization import astropy_mpl_style
+
+##############################################################################
+# Set up matplotlib and use a nicer set of plot parameters
+
+plt.style.use(astropy_mpl_style)
+
+##############################################################################
+# Load and display the original 3-color jpeg image:
+
+image = Image.open('Hs-2009-14-a-web.jpg')
+xsize, ysize = image.size
+print(f"Image size: {ysize} x {xsize}")
+print(f"Image bands: {image.getbands()}")
+ax = plt.imshow(image)
+
+##############################################################################
+# Split the three channels (RGB) and get the data as Numpy arrays. The arrays
+# are flattened, so they are 1-dimensional:
+
+r, g, b = image.split()
+r_data = np.array(r.getdata()) # data is now an array of length ysize*xsize
+g_data = np.array(g.getdata())
+b_data = np.array(b.getdata())
+print(r_data.shape)
+
+##############################################################################
+# Reshape the image arrays to be 2-dimensional:
+
+r_data = r_data.reshape(ysize, xsize) # data is now a matrix (ysize, xsize)
+g_data = g_data.reshape(ysize, xsize)
+b_data = b_data.reshape(ysize, xsize)
+print(r_data.shape)
+
+##############################################################################
+# Write out the channels as separate FITS images.
+# Add and visualize header info
+
+red = fits.PrimaryHDU(data=r_data)
+red.header['LATOBS'] = "32:11:56" # add spurious header info
+red.header['LONGOBS'] = "110:56"
+red.writeto('red.fits')
+
+green = fits.PrimaryHDU(data=g_data)
+green.header['LATOBS'] = "32:11:56"
+green.header['LONGOBS'] = "110:56"
+green.writeto('green.fits')
+
+blue = fits.PrimaryHDU(data=b_data)
+blue.header['LATOBS'] = "32:11:56"
+blue.header['LONGOBS'] = "110:56"
+blue.writeto('blue.fits')
+
+from pprint import pprint
+
+pprint(red.header)
+
+##############################################################################
+# Delete the files created
+
+import os
+
+os.remove('red.fits')
+os.remove('green.fits')
+os.remove('blue.fits')
+2025-04-22 21:28:56,605 - INFO - # Code comments not preceded by the hash splitter are left in code blocks.
+
+string = """
+Triple-quoted string which tries to break parser but doesn't.
+"""
+
+############################################################################
+# Output of the script is captured:
+
+print('Some output from Python')
+
+############################################################################
+# Finally, I'll call ``show`` at the end just so someone running the Python
+# code directly will see the plots; this is not necessary for creating the docs
+
+plt.show()
+2025-04-22 21:28:56,606 - INFO - ##############################################################################
+# Breaking this down line-by-line, we define the class as a subclass of
+# `~astropy.coordinates.BaseCoordinateFrame`. Then we include a descriptive
+# docstring.  The final lines are class-level attributes that specify the
+# default representation for the data, default differential for the velocity
+# information, and mappings from the attribute names used by representation
+# objects to the names that are to be used by the ``Sagittarius`` frame. In this
+# case we override the names in the spherical representations but don't do
+# anything with other representations like cartesian or cylindrical.
+#
+# Next we have to define the transformation from this coordinate system to some
+# other built-in coordinate system; we will use Galactic coordinates. We can do
+# this by defining functions that return transformation matrices, or by simply
+# defining a function that accepts a coordinate and returns a new coordinate in
+# the new system. Because the transformation to the Sagittarius coordinate
+# system is just a spherical rotation from Galactic coordinates, we'll just
+# define a function that returns this matrix. We'll start by constructing the
+# transformation matrix using pre-determined Euler angles and the
+# ``rotation_matrix`` helper function:
+
+SGR_PHI = (180 + 3.75) * u.degree # Euler angles (from Law & Majewski 2010)
+SGR_THETA = (90 - 13.46) * u.degree
+SGR_PSI = (180 + 14.111534) * u.degree
+
+# Generate the rotation matrix using the x-convention (see Goldstein)
+SGR_MATRIX = (
+    np.diag([1.,1.,-1.])
+    @ rotation_matrix(SGR_PSI, "z")
+    @ rotation_matrix(SGR_THETA, "x")
+    @ rotation_matrix(SGR_PHI, "z")
+)
+
+
+##############################################################################
+# Since we already constructed the transformation (rotation) matrix above, and
+# the inverse of a rotation matrix is just its transpose, the required
+# transformation functions are very simple:
+
+@frame_transform_graph.transform(coord.StaticMatrixTransform, coord.Galactic, Sagittarius)
+def galactic_to_sgr():
+    """Compute the Galactic spherical to heliocentric Sgr transformation matrix."""
+    return SGR_MATRIX
+2025-04-22 21:28:56,606 - INFO - init_filename = os.path.join(final_dir, "__init__.py")
+            if not os.path.exists(os.path.join(final_dir, "__init__.py")):
+                os.makedirs(final_dir, exist_ok=True)
+                with open(os.path.join(final_dir, "__init__.py"), "w") as f:
+                    f.write("#")
+    # Copy over all conftest.py files
+    for file in files:
+        if file == "conftest.py":
+            final_file = os.path.relpath(os.path.join(test_root, file), ROOT)
+            shutil.copy2(os.path.join(root, file), final_file)
+
+# Add the top-level __init__.py file
+with open(os.path.join("astropy_tests", "__init__.py"), "w") as f:
+    f.write("#")
+
+# Remove test file that tries to import all sub-packages at collection time
+os.remove(
+    os.path.join("astropy_tests", "utils", "iers", "tests", "test_leap_second.py")
+)
+
+# Remove convolution tests for now as there are issues with the loading of the C extension.
+# FIXME: one way to fix this would be to migrate the convolution C extension away from using
+# ctypes and using the regular extension mechanism instead.
+shutil.rmtree(os.path.join("astropy_tests", "convolution"))
+os.remove(os.path.join("astropy_tests", "modeling", "tests", "test_convolution.py"))
+os.remove(os.path.join("astropy_tests", "modeling", "tests", "test_core.py"))
+os.remove(os.path.join("astropy_tests", "visualization", "tests", "test_lupton_rgb.py"))
+
+# FIXME: PIL minversion check does not work
+os.remove(
+    os.path.join("astropy_tests", "visualization", "wcsaxes", "tests", "test_misc.py")
+)
+os.remove(
+    os.path.join("astropy_tests", "visualization", "wcsaxes", "tests", "test_wcsapi.py")
+)
+
+# FIXME: The following tests rely on the fully qualified name of classes which
+# don't seem to be the same.
+2025-04-22 21:28:56,606 - INFO - """
+
+################################################################################
+# Import the required Astropy packages:
+
+import astropy.coordinates as coord
+import astropy.units as u
+
+################################################################################
+# Use the latest convention for the Galactocentric coordinates
+coord.galactocentric_frame_defaults.set('latest')
+
+################################################################################
+# For this example, let's work with the coordinates and barycentric radial
+# velocity of the star HD 155967, as obtained from
+# `Simbad <https://simbad.unistra.fr/simbad/>`_:
+icrs = coord.SkyCoord(ra=258.58356362*u.deg, dec=14.55255619*u.deg,
+                      radial_velocity=-16.1*u.km/u.s, frame='icrs')
+
+################################################################################
+# We next need to decide on the velocity of the Sun in the assumed GSR frame.
+# We'll use the same velocity vector as used in the
+# `~astropy.coordinates.Galactocentric` frame, and convert it to a
+# `~astropy.coordinates.CartesianRepresentation` object using the
+# ``.to_cartesian()`` method of the
+# `~astropy.coordinates.CartesianDifferential` object ``galcen_v_sun``:
+v_sun = coord.Galactocentric().galcen_v_sun.to_cartesian()
+
+################################################################################
+# We now need to get a unit vector in the assumed Galactic frame from the sky
+# position in the ICRS frame above. We'll use this unit vector to project the
+# solar velocity onto the line-of-sight:
+gal = icrs.transform_to(coord.Galactic)
+cart_data = gal.data.to_cartesian()
+unit_vector = cart_data / cart_data.norm()
+
+################################################################################
+# Now we project the solar velocity using this unit vector:
+v_proj = v_sun.dot(unit_vector)
+
+################################################################################
+# Finally, we add the projection of the solar velocity to the radial velocity
+# to get a GSR radial velocity:
+rv_gsr = icrs.radial_velocity + v_proj
+print(rv_gsr)
+2025-04-22 21:28:56,606 - INFO - ================
+2025-04-22 21:28:56,606 - INFO - examples/io/modify-fits-header.py
+2025-04-22 21:28:56,607 - INFO - """
+==================
+Edit a FITS header
+==================
+
+This example describes how to edit a value in a FITS header
+using `astropy.io.fits`.
+
+
+*By: Adrian Price-Whelan*
+
+*License: BSD*
+
+
+"""
+
+from astropy.io import fits
+from astropy.utils.data import get_pkg_data_filename
+
+##############################################################################
+# Download a FITS file:
+
+fits_file = get_pkg_data_filename('tutorials/FITS-Header/input_file.fits')
+
+##############################################################################
+# Look at contents of the FITS file
+
+fits.info(fits_file)
+
+##############################################################################
+# Look at the headers of the two extensions:
+
+print("Before modifications:")
+print()
+print("Extension 0:")
+print(repr(fits.getheader(fits_file, 0)))
+print()
+print("Extension 1:")
+print(repr(fits.getheader(fits_file, 1)))
+
+##############################################################################
+# `astropy.io.fits` provides an object-oriented interface for reading and
+# interacting with FITS files, but for small operations (like this example) it
+# is often easier to use the
+# `convenience functions <https://docs.astropy.org/en/latest/io/fits/index.html#convenience-functions>`_.
+#
+# To edit a single header value in the header for extension 0, use the
+# `~astropy.io.fits.setval()` function. For example, set the OBJECT keyword
+# to 'M31':
+
+fits.setval(fits_file, 'OBJECT', value='M31')
+
+##############################################################################
+# With no extra arguments, this will modify the header for extension 0, but
+# this can be changed using the ``ext`` keyword argument. For example, we can
+# specify extension 1 instead:
+
+fits.setval(fits_file, 'OBJECT', value='M31', ext=1)
+
+##############################################################################
+# This can also be used to create a new keyword-value pair ("card" in FITS
+# lingo):
+
+fits.setval(fits_file, 'ANEWKEY', value='some value')
+
+##############################################################################
+# Again, this is useful for one-off modifications, but can be inefficient
+# for operations like editing multiple headers in the same file
+# because `~astropy.io.fits.setval()` loads the whole file each time it
+# is called.
+2025-04-22 21:28:56,607 - INFO - class Sagittarius(coord.BaseCoordinateFrame):
+    """
+    A Heliocentric spherical coordinate system defined by the orbit
+    of the Sagittarius dwarf galaxy, as described in
+        https://ui.adsabs.harvard.edu/abs/2003ApJ...599.1082M
+    and further explained in
+        https://www.stsci.edu/~dlaw/Sgr/.
+
+    Parameters
+    ----------
+    representation : `~astropy.coordinates.BaseRepresentation` or None
+        A representation object or None to have no data (or use the other keywords)
+    Lambda : `~astropy.coordinates.Angle`, optional, must be keyword
+        The longitude-like angle corresponding to Sagittarius' orbit.
+    Beta : `~astropy.coordinates.Angle`, optional, must be keyword
+        The latitude-like angle corresponding to Sagittarius' orbit.
+    distance : `~astropy.units.Quantity`, optional, must be keyword
+        The Distance for this object along the line-of-sight.
+    pm_Lambda_cosBeta : `~astropy.units.Quantity`, optional, must be keyword
+        The proper motion along the stream in ``Lambda`` (including the
+        ``cos(Beta)`` factor) for this object (``pm_Beta`` must also be given).
+    pm_Beta : `~astropy.units.Quantity`, optional, must be keyword
+        The proper motion in Declination for this object (``pm_ra_cosdec`` must
+        also be given).
+    radial_velocity : `~astropy.units.Quantity`, optional, keyword-only
+        The radial velocity of this object.
+
+    """
+
+    default_representation = coord.SphericalRepresentation
+    default_differential = coord.SphericalCosLatDifferential
+
+    frame_specific_representation_info = {
+        coord.SphericalRepresentation: [
+            coord.RepresentationMapping('lon', 'Lambda'),
+            coord.RepresentationMapping('lat', 'Beta'),
+            coord.RepresentationMapping('distance', 'distance')]
+    }
+2025-04-22 21:28:56,607 - INFO - ================
+2025-04-22 21:28:56,607 - INFO - docs/wcs/examples/cube_wcs.py
+2025-04-22 21:28:56,607 - INFO - # Define the astropy.wcs.WCS object using a Python dictionary as input
+
+import astropy.wcs
+
+wcs_dict = {
+'CTYPE1': 'WAVE    ', 'CUNIT1': 'Angstrom', 'CDELT1': 0.2, 'CRPIX1': 0, 'CRVAL1': 10, 'NAXIS1': 5,
+'CTYPE2': 'HPLT-TAN', 'CUNIT2': 'deg', 'CDELT2': 0.5, 'CRPIX2': 2, 'CRVAL2': 0.5, 'NAXIS2': 4,
+'CTYPE3': 'HPLN-TAN', 'CUNIT3': 'deg', 'CDELT3': 0.4, 'CRPIX3': 2, 'CRVAL3': 1, 'NAXIS3': 3}
+input_wcs = astropy.wcs.WCS(wcs_dict)
+2025-04-22 21:28:56,607 - INFO - ================
+2025-04-22 21:28:56,608 - INFO - examples/io/fits-tables.py
+2025-04-22 21:28:56,608 - INFO - """
+=====================================================================
+Accessing data stored as a table in a multi-extension FITS (MEF) file
+=====================================================================
+
+FITS files can often contain large amount of multi-dimensional data and
+tables. This example opens a FITS file with information
+from Chandra's HETG-S instrument.
+
+The example uses `astropy.utils.data` to download multi-extension FITS (MEF)
+file, `astropy.io.fits` to investigate the header, and
+`astropy.table.Table` to explore the data.
+
+
+*By: Lia Corrales, Adrian Price-Whelan, and Kelle Cruz*
+
+*License: BSD*
+
+
+"""
+
+##############################################################################
+# Use `astropy.utils.data` subpackage to download the FITS file used in this
+# example. Also import `~astropy.table.Table` from the `astropy.table` subpackage
+# and `astropy.io.fits`
+
+from astropy.io import fits
+from astropy.table import Table
+from astropy.utils.data import get_pkg_data_filename
+
+##############################################################################
+# Download a FITS file
+
+event_filename = get_pkg_data_filename('tutorials/FITS-tables/chandra_events.fits')
+
+##############################################################################
+# Display information about the contents of the FITS file.
+
+fits.info(event_filename)
+
+##############################################################################
+# Extension 1, EVENTS, is a Table that contains information about each X-ray
+# photon that hit Chandra's HETG-S detector.
+#
+# Use `~astropy.table.Table` to read the table
+
+events = Table.read(event_filename, hdu=1)
+
+##############################################################################
+# Print the column names of the Events Table.
+
+print(events.columns)
+
+##############################################################################
+# If a column contains unit information, it will have an associated
+# `astropy.units` object.
+
+print(events['energy'].unit)
+
+##############################################################################
+# Print the data stored in the Energy column.
+
+print(events['energy'])
+2025-04-22 21:28:56,608 - INFO - """
+========================================================================
+Transforming positions and velocities to and from a Galactocentric frame
+========================================================================
+
+This document shows a few examples of how to use and customize the
+`~astropy.coordinates.Galactocentric` frame to transform Heliocentric sky
+positions, distance, proper motions, and radial velocities to a Galactocentric,
+Cartesian frame, and the same in reverse.
+
+The main configurable parameters of the `~astropy.coordinates.Galactocentric`
+frame control the position and velocity of the solar system barycenter within
+the Galaxy. These are specified by setting the ICRS coordinates of the
+Galactic center, the distance to the Galactic center (the sun-galactic center
+line is always assumed to be the x-axis of the Galactocentric frame), and the
+Cartesian 3-velocity of the sun in the Galactocentric frame. We'll first
+demonstrate how to customize these values, then show how to set the solar motion
+instead by inputting the proper motion of Sgr A*.
+
+Note that, for brevity, we may refer to the solar system barycenter as just "the
+sun" in the examples below.
+
+
+*By: Adrian Price-Whelan*
+
+*License: BSD*
+
+
+"""
+
+##############################################################################
+# Make `print` work the same in all versions of Python, set up numpy,
+# matplotlib, and use a nicer set of plot parameters:
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+from astropy.visualization import astropy_mpl_style
+
+plt.style.use(astropy_mpl_style)
+
+
+##############################################################################
+# Import the necessary astropy subpackages
+
+import astropy.coordinates as coord
+import astropy.units as u
+
+##############################################################################
+# Let's first define a barycentric coordinate and velocity in the ICRS frame.
+2025-04-22 21:28:56,608 - INFO - # -- Options for manual page output --------------------------------------------
+
+# One entry per manual page. List of tuples
+# (source start file, name, description, authors, manual section).
+man_pages = [("index", project.lower(), project + " Documentation", [author], 1)]
+
+# Setting this URL is requited by sphinx-astropy
+github_issues_url = "https://github.com/astropy/astropy/issues/"
+edit_on_github_branch = "main"
+
+# Enable nitpicky mode - which ensures that all references in the docs
+# resolve.
+
+nitpicky = True
+# See docs/nitpick-exceptions file for the actual listing.
+nitpick_ignore = []
+for line in open("nitpick-exceptions"):
+    if line.strip() == "" or line.startswith("#"):
+        continue
+    dtype, target = line.split(None, 1)
+    nitpick_ignore.append((dtype, target.strip()))
+
+# -- Options for the Sphinx gallery -------------------------------------------
+
+try:
+    import warnings
+
+    import sphinx_gallery
+
+    extensions += ["sphinx_gallery.gen_gallery"]
+
+    sphinx_gallery_conf = {
+        "backreferences_dir": "generated/modules",  # path to store the module using example template
+        "filename_pattern": "^((?!skip_).)*$",  # execute all examples except those that start with "skip_"
+        "examples_dirs": f"..{os.sep}examples",  # path to the examples scripts
+        "gallery_dirs": "generated/examples",  # path to save gallery generated examples
+        "reference_url": {
+            "astropy": None,
+            "matplotlib": "https://matplotlib.org/stable/",
+            "numpy": "https://numpy.org/doc/stable/",
+        },
+        "abort_on_example_error": True,
+    }
+
+    # Filter out backend-related warnings as described in
+    # https://github.com/sphinx-gallery/sphinx-gallery/pull/564
+    warnings.filterwarnings(
+        "ignore",
+        category=UserWarning,
+        message=(
+            "Matplotlib is currently using agg, which is a"
+            " non-GUI backend, so cannot show the figure."
+        ),
+    )
+
+except ImportError:
+    sphinx_gallery = None
+2025-04-22 21:28:56,608 - INFO - ##############################################################################
+# Do the same with `~astropy.coordinates.get_body` to find when the moon is
+# up. Be aware that this will need to download a 10MB file from the internet
+# to get a precise location of the moon.
+
+from astropy.coordinates import get_body
+
+moon_July12_to_13 = get_body("moon", times_July12_to_13)
+moonaltazs_July12_to_13 = moon_July12_to_13.transform_to(frame_July12_to_13)
+
+##############################################################################
+# Find the alt,az coordinates of M33 at those same times:
+
+m33altazs_July12_to_13 = m33.transform_to(frame_July12_to_13)
+
+##############################################################################
+# Make a beautiful figure illustrating nighttime and the altitudes of M33 and
+# the Sun over that time:
+
+plt.plot(delta_midnight, sunaltazs_July12_to_13.alt, color='r', label='Sun')
+plt.plot(delta_midnight, moonaltazs_July12_to_13.alt, color=[0.75]*3, ls='--', label='Moon')
+plt.scatter(delta_midnight, m33altazs_July12_to_13.alt,
+            c=m33altazs_July12_to_13.az, label='M33', lw=0, s=8,
+            cmap='viridis')
+plt.fill_between(delta_midnight, 0*u.deg, 90*u.deg,
+                 sunaltazs_July12_to_13.alt < -0*u.deg, color='0.5', zorder=0)
+plt.fill_between(delta_midnight, 0*u.deg, 90*u.deg,
+                 sunaltazs_July12_to_13.alt < -18*u.deg, color='k', zorder=0)
+plt.colorbar().set_label('Azimuth [deg]')
+plt.legend(loc='upper left')
+plt.xlim(-12*u.hour, 12*u.hour)
+plt.xticks((np.arange(13)*2-12)*u.hour)
+plt.ylim(0*u.deg, 90*u.deg)
+plt.xlabel('Hours from EDT Midnight')
+plt.ylabel('Altitude [deg]')
+plt.show()
+2025-04-22 21:28:56,608 - INFO - x = 0
+y = 0
+origin = 0
+assert (w.wcs_pix2world(x, y, origin) ==
+        w.wcs_pix2world(x + 1, y + 1, origin + 1))
+
+# Now, write out the WCS object as a FITS header
+header = w.to_header()
+
+# header is an astropy.io.fits.Header object.  We can use it to create a new
+# PrimaryHDU and write it to a file.
+hdu = fits.PrimaryHDU(header=header)
+# Save to FITS file
+# hdu.writeto('test.fits')
+2025-04-22 21:28:56,609 - INFO - def setup(app):
+    if sphinx_gallery is None:
+        msg = (
+            "The sphinx_gallery extension is not installed, so the "
+            "gallery will not be built.  You will probably see "
+            "additional warnings about undefined references due "
+            "to this."
+        )
+        try:
+            app.warn(msg)
+        except AttributeError:
+            # Sphinx 1.6+
+            from sphinx.util import logging
+
+            logger = logging.getLogger(__name__)
+            logger.warning(msg)
+
+    # Generate the page from Jinja template
+    app.connect("source-read", rstjinja)
+    # Set this to higher priority than intersphinx; this way when building
+    # dev docs astropy-dev: targets will go to the local docs instead of the
+    # intersphinx mapping
+    app.connect("missing-reference", resolve_astropy_and_dev_reference, priority=400)
+2025-04-22 21:28:56,609 - INFO - Here are
+# the positions and velocities of the rings; note that in the velocity plot,
+# the velocities of the 4 rings are identical and thus overlaid under the same
+# curve:
+fig,axes = plt.subplots(1, 2, figsize=(12,6))
+
+# Positions
+axes[0].plot(gc_rings.x.T, gc_rings.y.T, marker='None', linewidth=3)
+axes[0].text(-8., 0, r'$\odot$', fontsize=20)
+
+axes[0].set_xlim(-30, 30)
+axes[0].set_ylim(-30, 30)
+
+axes[0].set_xlabel('$x$ [kpc]')
+axes[0].set_ylabel('$y$ [kpc]')
+
+# Velocities
+axes[1].plot(gc_rings.v_x.T, gc_rings.v_y.T, marker='None', linewidth=3)
+
+axes[1].set_xlim(-250, 250)
+axes[1].set_ylim(-250, 250)
+
+axes[1].set_xlabel(f"$v_x$ [{(u.km / u.s).to_string('latex_inline')}]")
+axes[1].set_ylabel(f"$v_y$ [{(u.km / u.s).to_string('latex_inline')}]")
+
+fig.tight_layout()
+
+plt.show()
+
+##############################################################################
+# Now we can transform to Galactic coordinates and visualize the rings in
+# observable coordinates:
+gal_rings = gc_rings.transform_to(coord.Galactic)
+
+fig, ax = plt.subplots(1, 1, figsize=(8, 6))
+for i in range(len(ring_distances)):
+    ax.plot(gal_rings[i].l.degree, gal_rings[i].pm_l_cosb.value,
+            label=str(ring_distances[i]), marker='None', linewidth=3)
+
+ax.set_xlim(360, 0)
+
+ax.set_xlabel('$l$ [deg]')
+ax.set_ylabel(fr'$\mu_l \, \cos b$ [{(u.mas/u.yr).to_string("latex_inline")}]')
+
+ax.legend()
+
+plt.show()
+2025-04-22 21:28:56,609 - INFO - #
+# Get the coordinates of M33:
+
+m33 = SkyCoord.from_name('M33')
+
+##############################################################################
+# Use `astropy.coordinates.EarthLocation` to provide the location of Bear
+# Mountain and set the time to 11pm EDT on 2012 July 12:
+
+bear_mountain = EarthLocation(lat=41.3*u.deg, lon=-74*u.deg, height=390*u.m)
+utcoffset = -4*u.hour  # Eastern Daylight Time
+time = Time('2012-7-12 23:00:00') - utcoffset
+
+##############################################################################
+# `astropy.coordinates.EarthLocation.get_site_names` and
+# `~astropy.coordinates.EarthLocation.get_site_names` can be used to get
+# locations of major observatories.
+#
+# Use `astropy.coordinates` to find the Alt, Az coordinates of M33 at as
+# observed from Bear Mountain at 11pm on 2012 July 12.
+
+m33altaz = m33.transform_to(AltAz(obstime=time,location=bear_mountain))
+print(f"M33's Altitude = {m33altaz.alt:.2}")
+
+##############################################################################
+# This is helpful since it turns out M33 is barely above the horizon at this
+# time. It's more informative to find M33's airmass over the course of
+# the night.
+2025-04-22 21:28:56,609 - INFO - # We'll use the data for the star HD 39881 from the `Simbad
+# <https://simbad.unistra.fr/simbad/>`_ database:
+
+c1 = coord.SkyCoord(ra=89.014303*u.degree, dec=13.924912*u.degree,
+                    distance=(37.59*u.mas).to(u.pc, u.parallax()),
+                    pm_ra_cosdec=372.72*u.mas/u.yr,
+                    pm_dec=-483.69*u.mas/u.yr,
+                    radial_velocity=0.37*u.km/u.s,
+                    frame='icrs')
+
+##############################################################################
+# This is a high proper-motion star; suppose we'd like to transform its position
+# and velocity to a Galactocentric frame to see if it has a large 3D velocity
+# as well. To use the Astropy default solar position and motion parameters, we
+# can simply do:
+
+gc1 = c1.transform_to(coord.Galactocentric)
+
+##############################################################################
+# From here, we can access the components of the resulting
+# `~astropy.coordinates.Galactocentric` instance to see the 3D Cartesian
+# velocity components:
+
+print(gc1.v_x, gc1.v_y, gc1.v_z)
+
+##############################################################################
+# The default parameters for the `~astropy.coordinates.Galactocentric` frame
+# are detailed in the linked documentation, but we can modify the most commonly
+# changes values using the keywords ``galcen_distance``, ``galcen_v_sun``, and
+# ``z_sun`` which set the sun-Galactic center distance, the 3D velocity vector
+# of the sun, and the height of the sun above the Galactic midplane,
+# respectively. The velocity of the sun can be specified as an
+# `~astropy.units.Quantity` object with velocity units and is interpreted as a
+# Cartesian velocity, as in the example below.
+2025-04-22 21:28:56,609 - INFO - ================
+2025-04-22 21:28:56,610 - INFO - examples/io/plot_fits-image.py
+2025-04-22 21:28:56,610 - INFO - """
+=======================================
+Read and plot an image from a FITS file
+=======================================
+
+This example opens an image stored in a FITS file and displays it to the screen.
+
+This example uses `astropy.utils.data` to download the file, `astropy.io.fits` to open
+the file, and `matplotlib.pyplot` to display the image.
+
+
+*By: Lia R. Corrales, Adrian Price-Whelan, Kelle Cruz*
+
+*License: BSD*
+
+
+"""
+
+##############################################################################
+# Set up matplotlib and use a nicer set of plot parameters
+
+import matplotlib.pyplot as plt
+
+from astropy.visualization import astropy_mpl_style
+
+plt.style.use(astropy_mpl_style)
+
+##############################################################################
+# Download the example FITS files used by this example:
+
+from astropy.io import fits
+from astropy.utils.data import get_pkg_data_filename
+
+image_file = get_pkg_data_filename('tutorials/FITS-images/HorseHead.fits')
+
+##############################################################################
+# Use `astropy.io.fits.info()` to display the structure of the file:
+
+fits.info(image_file)
+
+##############################################################################
+# Generally the image information is located in the Primary HDU, also known
+# as extension 0. Here, we use `astropy.io.fits.getdata()` to read the image
+# data from this first extension using the keyword argument ``ext=0``:
+
+image_data = fits.getdata(image_file, ext=0)
+
+##############################################################################
+# The data is now stored as a 2D numpy array. Print the dimensions using the
+# shape attribute:
+
+print(image_data.shape)
+
+##############################################################################
+# Display the image data:
+
+plt.figure()
+plt.imshow(image_data, cmap='gray')
+plt.colorbar()
+2025-04-22 21:28:56,610 - INFO - r"""
+==========================================================
+Create a new coordinate class (for the Sagittarius stream)
+==========================================================
+
+This document describes in detail how to subclass and define a custom spherical
+coordinate frame, as discussed in :ref:`astropy:astropy-coordinates-design` and
+the docstring for `~astropy.coordinates.BaseCoordinateFrame`. In this example,
+we will define a coordinate system defined by the plane of orbit of the
+Sagittarius Dwarf Galaxy (hereafter Sgr; as defined in Majewski et al. 2003).
+The Sgr coordinate system is often referred to in terms of two angular
+coordinates, :math:`\Lambda,B`.
+
+To do this, we need to define a subclass of
+`~astropy.coordinates.BaseCoordinateFrame` that knows the names and units of the
+coordinate system angles in each of the supported representations.  In this case
+we support `~astropy.coordinates.SphericalRepresentation` with "Lambda" and
+"Beta". Then we have to define the transformation from this coordinate system to
+some other built-in system. Here we will use Galactic coordinates, represented
+by the `~astropy.coordinates.Galactic` class.
+
+See Also
+--------
+* The `gala package <http://gala.adrian.pw/>`_, which defines a number of
+  Astropy coordinate frames for stellar stream coordinate systems.
+* Majewski et al. 2003, "A Two Micron All Sky Survey View of the Sagittarius
+  Dwarf Galaxy. I. Morphology of the Sagittarius Core and Tidal Arms",
+  https://arxiv.org/abs/astro-ph/0304198
+* Law & Majewski 2010, "The Sagittarius Dwarf Galaxy: A Model for Evolution in a
+  Triaxial Milky Way Halo", https://arxiv.org/abs/1003.1132
+* David Law's Sgr info page https://www.stsci.edu/~dlaw/Sgr/
+
+
+*By: Adrian Price-Whelan, Erik Tollerud*
+
+*License: BSD*
+2025-04-22 21:28:56,610 - INFO - # Load the WCS information from a fits header, and use it
+# to convert pixel coordinates to world coordinates.
+
+import sys
+
+import numpy as np
+
+from astropy import wcs
+from astropy.io import fits
+2025-04-22 21:28:56,610 - INFO - def resolve_astropy_and_dev_reference(app, env, node, contnode):
+    """
+    Reference targets for ``astropy:`` and ``astropy-dev:`` are special cases.
+
+    Documentation links in astropy can be set up as intersphinx links so that
+    affiliate packages do not have to override the docstrings when building
+    the docs.
+
+    If we are building the development docs it is a local ref targeting the
+    label ``astropy-dev:<label>``, but for stable docs it should be an
+    intersphinx resolution to the development docs.
+
+    See https://github.com/astropy/astropy/issues/11366
+    """
+    # should the node be processed?
+    reftarget = node.get("reftarget")  # str or None
+    if str(reftarget).startswith("astropy:"):
+        # This allows Astropy to use intersphinx links to itself and have
+        # them resolve to local links. Downstream packages will see intersphinx.
+        # TODO! deprecate this if sphinx-doc/sphinx/issues/9169 is implemented.
+        process, replace = True, "astropy:"
+    elif dev and str(reftarget).startswith("astropy-dev:"):
+        process, replace = True, "astropy-dev:"
+    else:
+        process, replace = False, ""
+
+    # make link local
+    if process:
+        reftype = node.get("reftype")
+        refdoc = node.get("refdoc", app.env.docname)
+        # convert astropy intersphinx targets to local links.
+        # there are a few types of intersphinx link patterns, as described in
+        # https://docs.readthedocs.io/en/stable/guides/intersphinx.html
+        reftarget = reftarget.replace(replace, "")
+        if reftype == "doc":  # also need to replace the doc link
+            node.replace_attr("reftarget", reftarget)
+        # Delegate to the ref node's original domain/target (typically :ref:)
+        try:
+            domain = app.env.domains[node["refdomain"]]
+            return domain.resolve_xref(
+                app.env, refdoc, app.builder, reftype, reftarget, node, contnode
+            )
+        except Exception:
+            pass
+
+        # Otherwise return None which should delegate to intersphinx
+2025-04-22 21:28:56,610 - INFO - As
+# an example, we'll generate 4 theoretical circular orbits at different
+# Galactocentric radii with the same circular velocity, and transform them to
+# Heliocentric coordinates:
+
+ring_distances = np.arange(10, 25+1, 5) * u.kpc
+circ_velocity = 220 * u.km/u.s
+
+phi_grid = np.linspace(90, 270, 512) * u.degree # grid of azimuths
+ring_rep = coord.CylindricalRepresentation(
+    rho=ring_distances[:,np.newaxis],
+    phi=phi_grid[np.newaxis],
+    z=np.zeros_like(ring_distances)[:,np.newaxis])
+
+angular_velocity = (-circ_velocity / ring_distances).to(u.mas/u.yr,
+                                                        u.dimensionless_angles())
+ring_dif = coord.CylindricalDifferential(
+    d_rho=np.zeros(phi_grid.shape)[np.newaxis]*u.km/u.s,
+    d_phi=angular_velocity[:,np.newaxis],
+    d_z=np.zeros(phi_grid.shape)[np.newaxis]*u.km/u.s
+)
+
+ring_rep = ring_rep.with_differentials(ring_dif)
+gc_rings = coord.SkyCoord(ring_rep, frame=coord.Galactocentric)
+
+##############################################################################
+# First, let's visualize the geometry in Galactocentric coordinates.
+2025-04-22 21:28:56,611 - INFO - import configparser
+import doctest
+import os
+import sys
+from datetime import datetime
+from importlib import metadata
+
+from packaging.requirements import Requirement
+from packaging.specifiers import SpecifierSet
+
+# -- Check for missing dependencies -------------------------------------------
+missing_requirements = {}
+for line in metadata.requires("astropy"):
+    if 'extra == "docs"' in line:
+        req = Requirement(line.split(";")[0])
+        req_package = req.name.lower()
+        req_specifier = str(req.specifier)
+
+        try:
+            version = metadata.version(req_package)
+        except metadata.PackageNotFoundError:
+            missing_requirements[req_package] = req_specifier
+
+        if version not in SpecifierSet(req_specifier, prereleases=True):
+            missing_requirements[req_package] = req_specifier
+
+if missing_requirements:
+    print(
+        "The following packages could not be found and are required to "
+        "build the documentation:"
+    )
+    for key, val in missing_requirements.items():
+        print(f"    * {key} {val}")
+    print('Please install the "docs" requirements.')
+    sys.exit(1)
+
+from sphinx_astropy.conf.v1 import *  # noqa: E402
+from sphinx_astropy.conf.v1 import (  # noqa: E402
+    exclude_patterns,
+    extensions,
+    intersphinx_mapping,
+    numpydoc_xref_aliases,
+    numpydoc_xref_astropy_aliases,
+    numpydoc_xref_ignore,
+    rst_epilog,
+)
+
+# -- Plot configuration -------------------------------------------------------
+plot_rcparams = {
+    "axes.labelsize": "large",
+    "figure.figsize": (6, 6),
+    "figure.subplot.hspace": 0.5,
+    "savefig.bbox": "tight",
+    "savefig.facecolor": "none",
+}
+plot_apply_rcparams = True
+plot_html_show_source_link = False
+plot_formats = ["png", "svg", "pdf"]
+# Don't use the default - which includes a numpy and matplotlib import
+plot_pre_code = ""
+
+# -- General configuration ----------------------------------------------------
+
+# If your documentation needs a minimal Sphinx version, state it here.
+needs_sphinx = "3.0"
+
+# The intersphinx_mapping in sphinx_astropy.sphinx refers to astropy for
+# the benefit of other packages who want to refer to objects in the
+# astropy core.
+2025-04-22 21:28:56,611 - INFO - """
+================================================================
+Convert a radial velocity to the Galactic Standard of Rest (GSR)
+================================================================
+
+Radial or line-of-sight velocities of sources are often reported in a
+Heliocentric or Solar-system barycentric reference frame. A common
+transformation incorporates the projection of the Sun's motion along the
+line-of-sight to the target, hence transforming it to a Galactic rest frame
+instead (sometimes referred to as the Galactic Standard of Rest, GSR). This
+transformation depends on the assumptions about the orientation of the Galactic
+frame relative to the bary- or Heliocentric frame. It also depends on the
+assumed solar velocity vector. Here we'll demonstrate how to perform this
+transformation using a sky position and barycentric radial-velocity.
+
+
+*By: Adrian Price-Whelan*
+
+*License: BSD*
+2025-04-22 21:28:56,611 - INFO - ================
+2025-04-22 21:28:56,611 - INFO - docs/conftest.py
+2025-04-22 21:28:56,611 - INFO - # Licensed under a 3-clause BSD style license - see LICENSE.rst
+
+# This file needs to be included here to make sure commands such
+# as ``pytest docs/...`` works, since this
+# will ignore the conftest.py file at the root of the repository
+# and the one in astropy/conftest.py
+
+import os
+import tempfile
+
+import pytest
+
+# Make sure we use temporary directories for the config and cache
+# so that the tests are insensitive to local configuration.
+
+os.environ["XDG_CONFIG_HOME"] = tempfile.mkdtemp("astropy_config")
+os.environ["XDG_CACHE_HOME"] = tempfile.mkdtemp("astropy_cache")
+
+os.mkdir(os.path.join(os.environ["XDG_CONFIG_HOME"], "astropy"))
+os.mkdir(os.path.join(os.environ["XDG_CACHE_HOME"], "astropy"))
+
+# Note that we don't need to change the environment variables back or remove
+# them after testing, because they are only changed for the duration of the
+# Python process, and this configuration only matters if running pytest
+# directly, not from e.g. an IPython session.
+
+
+@pytest.fixture(autouse=True)
+def _docdir(request):
+    """Run doctests in isolated tmp_path so outputs do not end up in repo."""
+    # Trigger ONLY for doctestplus
+    doctest_plugin = request.config.pluginmanager.getplugin("doctestplus")
+    if isinstance(request.node.parent, doctest_plugin._doctest_textfile_item_cls):
+        # Don't apply this fixture to io.rst.  It reads files and doesn't write.
+        # Implementation from https://github.com/pytest-dev/pytest/discussions/10437
+        if "io.rst" not in request.node.name:
+            old_cwd = os.getcwd()
+            tmp_path = request.getfixturevalue("tmp_path")
+            os.chdir(tmp_path)
+            yield
+            os.chdir(old_cwd)
+        else:
+            yield
+    else:
+        yield
+2025-04-22 21:28:56,612 - INFO - # Licensed under a 3-clause BSD style license - see LICENSE.rst
+#
+# Astropy documentation build configuration file.
+#
+# This file is execfile()d with the current directory set to its containing dir.
+#
+# Note that not all possible configuration values are present in this file.
+#
+# All configuration values have a default. Some values are defined in
+# the global Astropy configuration which is loaded here before anything else.
+
+# If extensions (or modules to document with autodoc) are in another directory,
+# add these directories to sys.path here. If the directory is relative to the
+# documentation root, use os.path.abspath to make it absolute, like shown here.
+# sys.path.insert(0, os.path.abspath('..'))
+# IMPORTANT: the above commented section was generated by sphinx-quickstart, but
+# is *NOT* appropriate for astropy or Astropy affiliated packages. It is left
+# commented out with this explanation to make it clear why this should not be
+# done. If the sys.path entry above is added, when the astropy.sphinx.conf
+# import occurs, it will import the *source* version of astropy instead of the
+# version installed (if invoked as "make html" or directly with sphinx), or the
+# version in the build directory.
+# Thus, any C-extensions that are needed to build the documentation will *not*
+# be accessible, and the documentation will not build correctly.
+# See sphinx_astropy.conf for which values are set there.
+2025-04-22 21:28:56,612 - INFO - # -- Options for HTML output ---------------------------------------------------
+
+# The name for this set of Sphinx documents.  If None, it defaults to
+# "<project> v<release> documentation".
+html_title = f"{project} v{release}"
+
+# Output file base name for HTML help builder.
+htmlhelp_basename = project + "doc"
+
+# A dictionary of values to pass into the template engine's context for all pages.
+html_context = {"to_be_indexed": ["stable", "latest"], "is_development": dev}
+
+# Add any extra paths that contain custom files (such as robots.txt or
+# .htaccess) here, relative to this directory. These files are copied
+# directly to the root of the documentation.
+html_extra_path = ["robots.txt"]
+
+# -- Options for LaTeX output --------------------------------------------------
+
+# Grouping the document tree into LaTeX files. List of tuples
+# (source start file, target name, title, author, documentclass [howto/manual]).
+latex_documents = [
+    ("index", project + ".tex", project + " Documentation", author, "manual")
+]
+
+latex_logo = "_static/astropy_logo.pdf"
+2025-04-22 21:28:56,612 - INFO - To make several modifications, it's better to load the file once:
+
+with fits.open(fits_file, 'update') as f:
+    for hdu in f:
+        hdu.header['OBJECT'] = 'CAT'
+
+print("After modifications:")
+print()
+print("Extension 0:")
+print(repr(fits.getheader(fits_file, 0)))
+print()
+print("Extension 1:")
+print(repr(fits.getheader(fits_file, 1)))
+2025-04-22 21:28:56,612 - INFO - # -- Options for linkcheck output -------------------------------------------
+linkcheck_retry = 5
+linkcheck_ignore = [
+    "https://journals.aas.org/manuscript-preparation/",
+    "https://maia.usno.navy.mil/",
+    "https://www.usno.navy.mil/USNO/time/gps/usno-gps-time-transfer",
+    "https://aa.usno.navy.mil/publications/docs/Circular_179.php",
+    "http://data.astropy.org",
+    "https://doi.org/",  # CI blocked by service provider
+    "https://ui.adsabs.harvard.edu",  # CI blocked by service provider
+    "https://www.tandfonline.com/",  # 403 Client Error: Forbidden
+    "https://physics.nist.gov/",  # SSL: CERTIFICATE_VERIFY_FAILED
+    "https://ieeexplore.ieee.org/",  # 418 Client Error: I'm a teapot
+    "https://pyfits.readthedocs.io/en/v3.2.1/",  # defunct page in CHANGES.rst
+    r"https://github\.com/astropy/astropy/(?:issues|pull)/\d+",
+]
+linkcheck_timeout = 180
+linkcheck_anchors = False
+
+
+def rstjinja(app, docname, source):
+    """Render pages as a jinja template to hide/show dev docs."""
+    # Make sure we're outputting HTML
+    if app.builder.format != "html":
+        return
+    files_to_render = ["index", "install", "development/index"]
+    if docname in files_to_render:
+        print(f"Jinja rendering {docname}")
+        rendered = app.builder.templates.render_string(
+            source[0], app.config.html_context
+        )
+        source[0] = rendered
+2025-04-22 21:28:56,612 - INFO - ================
+2025-04-22 21:28:56,613 - INFO - .pyinstaller/hooks/hook-skyfield.py
+2025-04-22 21:28:56,613 - INFO - # NOTE: this hook should be added to
+# https://github.com/pyinstaller/pyinstaller-hooks-contrib
+# once that repository is ready for pull requests
+from PyInstaller.utils.hooks import collect_data_files
+
+datas = collect_data_files("skyfield")

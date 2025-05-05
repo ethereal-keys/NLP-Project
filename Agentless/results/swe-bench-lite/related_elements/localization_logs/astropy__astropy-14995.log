@@ -1,0 +1,6649 @@
+2025-04-22 21:33:43,097 - INFO - Processing bug astropy__astropy-14995
+2025-04-22 21:33:50,000 - INFO - ================ localize astropy__astropy-14995 ================
+2025-04-22 21:33:57,223 - INFO - Processing bug astropy__astropy-14995
+2025-04-22 21:35:35,457 - INFO - ================ localize astropy__astropy-14995 ================
+2025-04-22 21:35:35,747 - INFO - prompting with message:
+2025-04-22 21:35:35,747 - INFO - 
+
+Please look through the following GitHub Problem Description and the Skeleton of Relevant Files.
+Identify all locations that need inspection or editing to fix the problem, including directly related areas as well as any potentially related global variables, functions, and classes.
+For each location you provide, either give the name of the class, the name of a method in a class, the name of a function, or the name of a global variable.
+
+### GitHub Problem Description ###
+In v5.3, NDDataRef mask propagation fails when one of the operand does not have a mask
+### Description
+
+This applies to v5.3. 
+
+It looks like when one of the operand does not have a mask, the mask propagation when doing arithmetic, in particular with `handle_mask=np.bitwise_or` fails.  This is not a problem in v5.2.
+
+I don't know enough about how all that works, but it seems from the error that the operand without a mask is set as a mask of None's and then the bitwise_or tries to operate on an integer and a None and fails.
+
+### Expected behavior
+
+When one of the operand does not have mask, the mask that exists should just be copied over to the output.  Or whatever was done in that situation in v5.2 where there's no problem.
+
+### How to Reproduce
+
+This is with v5.3.   With v5.2, there are no errors.
+
+```
+>>> import numpy as np
+>>> from astropy.nddata import NDDataRef
+
+>>> array = np.array([[0, 1, 0], [1, 0, 1], [0, 1, 0]])
+>>> mask = np.array([[0, 1, 64], [8, 0, 1], [2, 1, 0]])
+
+>>> nref_nomask = NDDataRef(array)
+>>> nref_mask = NDDataRef(array, mask=mask)
+
+# multiply no mask by constant (no mask * no mask)
+>>> nref_nomask.multiply(1., handle_mask=np.bitwise_or).mask   # returns nothing, no mask,  OK
+
+# multiply no mask by itself (no mask * no mask)
+>>> nref_nomask.multiply(nref_nomask, handle_mask=np.bitwise_or).mask # return nothing, no mask, OK
+
+# multiply mask by constant (mask * no mask)
+>>> nref_mask.multiply(1., handle_mask=np.bitwise_or).mask
+...
+TypeError: unsupported operand type(s) for |: 'int' and 'NoneType'
+
+# multiply mask by itself (mask * mask)
+>>> nref_mask.multiply(nref_mask, handle_mask=np.bitwise_or).mask
+array([[ 0,  1, 64],
+       [ 8,  0,  1],
+       [ 2,  1,  0]])
+
+# multiply mask by no mask (mask * no mask)
+>>> nref_mask.multiply(nref_nomask, handle_mask=np.bitwise_or).mask
+...
+TypeError: unsupported operand type(s) for |: 'int' and 'NoneType'
+```
+
+
+### Versions
+
+>>> import sys; print("Python", sys.version)
+Python 3.10.11 | packaged by conda-forge | (main, May 10 2023, 19:07:22) [Clang 14.0.6 ]
+>>> import astropy; print("astropy", astropy.__version__)
+astropy 5.3
+>>> import numpy; print("Numpy", numpy.__version__)
+Numpy 1.24.3
+>>> import erfa; print("pyerfa", erfa.__version__)
+pyerfa 2.0.0.3
+>>> import scipy; print("Scipy", scipy.__version__)
+Scipy 1.10.1
+>>> import matplotlib; print("Matplotlib", matplotlib.__version__)
+Matplotlib 3.7.1
+
+
+
+### Skeleton of Relevant Files ###
+
+### File: astropy/nddata/nduncertainty.py ###
+```python
+# Licensed under a 3-clause BSD style license - see LICENSE.rst
+
+
+__all__ = [
+    "MissingDataAssociationException",
+    "IncompatibleUncertaintiesException",
+    "NDUncertainty",
+    "StdDevUncertainty",
+    "UnknownUncertainty",
+    "VarianceUncertainty",
+    "InverseVariance",
+]
+
+# mapping from collapsing operations to the complementary methods used for `to_variance`
+collapse_to_variance_mapping = {
+    np.sum: np.square,
+    np.mean: np.square,
+}
+
+
+def _move_preserved_axes_first(arr, preserve_axes):
+...
+
+
+def _unravel_preserved_axes(arr, collapsed_arr, preserve_axes):
+...
+
+
+def from_variance_for_mean(x, axis):
+...
+
+
+# mapping from collapsing operations to the complementary methods used for `from_variance`
+collapse_from_variance_mapping = {
+    np.sum: lambda x, axis: np.sqrt(np.ma.sum(x, axis)),
+    np.mean: from_variance_for_mean,
+    np.median: None,
+}
+
+
+class IncompatibleUncertaintiesException(Exception):
+    pass
+
+
+class MissingDataAssociationException(Exception):
+    pass
+
+
+class NDUncertainty(metaclass=ABCMeta):
+
+    def __init__(self, array=None, copy=True, unit=None):
+...
+
+    @property
+    @abstractmethod
+    def uncertainty_type(self):
+...
+
+    @property
+    def supports_correlated(self):
+...
+
+    @property
+    def array(self):
+...
+
+    @array.setter
+    def array(self, value):
+...
+
+    @property
+    def unit(self):
+...
+
+    @unit.setter
+    def unit(self, value):
+...
+
+    @property
+    def quantity(self):
+...
+
+    @property
+    def parent_nddata(self):
+...
+
+    @parent_nddata.setter
+    def parent_nddata(self, value):
+...
+
+    @abstractmethod
+    def _data_unit_to_uncertainty_unit(self, value):
+...
+
+    def __repr__(self):
+...
+
+    def __getstate__(self):
+...
+
+    def __setstate__(self, state):
+...
+
+    def __getitem__(self, item):
+...
+
+    def propagate(self, operation, other_nddata, result_data, correlation, axis=None):
+...
+
+    def _convert_uncertainty(self, other_uncert):
+...
+
+    @abstractmethod
+    def _propagate_add(self, other_uncert, result_data, correlation):
+...
+
+    @abstractmethod
+    def _propagate_subtract(self, other_uncert, result_data, correlation):
+...
+
+    @abstractmethod
+    def _propagate_multiply(self, other_uncert, result_data, correlation):
+...
+
+    @abstractmethod
+    def _propagate_divide(self, other_uncert, result_data, correlation):
+...
+
+    def represent_as(self, other_uncert):
+...
+
+
+class UnknownUncertainty(NDUncertainty):
+
+    @property
+    def supports_correlated(self):
+...
+
+    @property
+    def uncertainty_type(self):
+...
+
+    def _data_unit_to_uncertainty_unit(self, value):
+...
+
+    def _convert_uncertainty(self, other_uncert):
+...
+
+    def _propagate_add(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_subtract(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_multiply(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_divide(self, other_uncert, result_data, correlation):
+...
+
+
+class _VariancePropagationMixin:
+
+    def _propagate_collapse(self, numpy_op, axis=None):
+...
+
+    def _get_err_at_extremum(self, extremum, axis):
+...
+
+    def _propagate_add_sub(
+        self,
+        other_uncert,
+        result_data,
+        correlation,
+        subtract=False,
+        to_variance=lambda x: x,
+        from_variance=lambda x: x,
+    ):
+...
+
+    def _propagate_multiply_divide(
+        self,
+        other_uncert,
+        result_data,
+        correlation,
+        divide=False,
+        to_variance=lambda x: x,
+        from_variance=lambda x: x,
+    ):
+...
+
+
+class StdDevUncertainty(_VariancePropagationMixin, NDUncertainty):
+
+    @property
+    def supports_correlated(self):
+...
+
+    @property
+    def uncertainty_type(self):
+...
+
+    def _convert_uncertainty(self, other_uncert):
+...
+
+    def _propagate_add(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_subtract(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_multiply(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_divide(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_collapse(self, numpy_operation, axis):
+...
+
+    def _data_unit_to_uncertainty_unit(self, value):
+...
+
+    def _convert_to_variance(self):
+...
+
+    @classmethod
+    def _convert_from_variance(cls, var_uncert):
+...
+
+
+class VarianceUncertainty(_VariancePropagationMixin, NDUncertainty):
+
+    @property
+    def uncertainty_type(self):
+...
+
+    @property
+    def supports_correlated(self):
+...
+
+    def _propagate_add(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_subtract(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_multiply(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_divide(self, other_uncert, result_data, correlation):
+...
+
+    def _data_unit_to_uncertainty_unit(self, value):
+...
+
+    def _convert_to_variance(self):
+...
+
+    @classmethod
+    def _convert_from_variance(cls, var_uncert):
+...
+
+
+def _inverse(x):
+...
+
+
+class InverseVariance(_VariancePropagationMixin, NDUncertainty):
+
+    @property
+    def uncertainty_type(self):
+...
+
+    @property
+    def supports_correlated(self):
+...
+
+    def _propagate_add(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_subtract(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_multiply(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_divide(self, other_uncert, result_data, correlation):
+...
+
+    def _data_unit_to_uncertainty_unit(self, value):
+...
+
+    def _convert_to_variance(self):
+...
+
+    @classmethod
+    def _convert_from_variance(cls, var_uncert):
+...
+
+```
+
+### File: astropy/nddata/nddata.py ###
+```python
+# Licensed under a 3-clause BSD style license - see LICENSE.rst
+# This module implements the base NDData class.
+
+
+
+__all__ = ["NDData"]
+
+_meta_doc = """`dict`-like : Additional meta information about the dataset."""
+
+
+class NDData(NDDataBase):
+
+    # Instead of a custom property use the MetaData descriptor also used for
+    # Tables. It will check if the meta is dict-like or raise an exception.
+    meta = MetaData(doc=_meta_doc, copy=False)
+
+    def __init__(
+        self,
+        data,
+        uncertainty=None,
+        mask=None,
+        wcs=None,
+        meta=None,
+        unit=None,
+        copy=False,
+        psf=None,
+    ):
+...
+
+    def __str__(self):
+...
+
+    def __repr__(self):
+...
+
+    @property
+    def data(self):
+...
+
+    @property
+    def mask(self):
+...
+
+    @mask.setter
+    def mask(self, value):
+...
+
+    @property
+    def unit(self):
+...
+
+    @property
+    def wcs(self):
+...
+
+    @wcs.setter
+    def wcs(self, wcs):
+...
+
+    @property
+    def psf(self):
+...
+
+    @psf.setter
+    def psf(self, value):
+...
+
+    @property
+    def uncertainty(self):
+...
+
+    @uncertainty.setter
+    def uncertainty(self, value):
+...
+
+```
+
+### File: astropy/nddata/nddata_withmixins.py ###
+```python
+# Licensed under a 3-clause BSD style license - see LICENSE.rst
+
+
+__all__ = ["NDDataRef"]
+
+
+class NDDataRef(NDArithmeticMixin, NDIOMixin, NDSlicingMixin, NDData):
+
+    pass
+
+```
+
+
+###
+
+Please provide the complete set of locations as either a class name, a function name, or a variable name.
+Note that if you include a class, you do not need to list its specific methods.
+You can include either the entire class or don't include the class name and instead include specific methods in the class.
+### Examples:
+```
+full_path1/file1.py
+function: my_function_1
+class: MyClass1
+function: MyClass2.my_method
+
+full_path2/file2.py
+variable: my_var
+function: MyClass3.my_method
+
+full_path3/file3.py
+function: my_function_2
+function: my_function_3
+function: MyClass4.my_method_1
+class: MyClass5
+```
+
+Return just the locations wrapped with ```.
+
+2025-04-22 21:35:36,601 - INFO - prompting with message:
+
+Please look through the following GitHub Problem Description and the Skeleton of Relevant Files.
+Identify all locations that need inspection or editing to fix the problem, including directly related areas as well as any potentially related global variables, functions, and classes.
+For each location you provide, either give the name of the class, the name of a method in a class, the name of a function, or the name of a global variable.
+
+### GitHub Problem Description ###
+In v5.3, NDDataRef mask propagation fails when one of the operand does not have a mask
+### Description
+
+This applies to v5.3. 
+
+It looks like when one of the operand does not have a mask, the mask propagation when doing arithmetic, in particular with `handle_mask=np.bitwise_or` fails.  This is not a problem in v5.2.
+
+I don't know enough about how all that works, but it seems from the error that the operand without a mask is set as a mask of None's and then the bitwise_or tries to operate on an integer and a None and fails.
+
+### Expected behavior
+
+When one of the operand does not have mask, the mask that exists should just be copied over to the output.  Or whatever was done in that situation in v5.2 where there's no problem.
+
+### How to Reproduce
+
+This is with v5.3.   With v5.2, there are no errors.
+
+```
+>>> import numpy as np
+>>> from astropy.nddata import NDDataRef
+
+>>> array = np.array([[0, 1, 0], [1, 0, 1], [0, 1, 0]])
+>>> mask = np.array([[0, 1, 64], [8, 0, 1], [2, 1, 0]])
+
+>>> nref_nomask = NDDataRef(array)
+>>> nref_mask = NDDataRef(array, mask=mask)
+
+# multiply no mask by constant (no mask * no mask)
+>>> nref_nomask.multiply(1., handle_mask=np.bitwise_or).mask   # returns nothing, no mask,  OK
+
+# multiply no mask by itself (no mask * no mask)
+>>> nref_nomask.multiply(nref_nomask, handle_mask=np.bitwise_or).mask # return nothing, no mask, OK
+
+# multiply mask by constant (mask * no mask)
+>>> nref_mask.multiply(1., handle_mask=np.bitwise_or).mask
+...
+TypeError: unsupported operand type(s) for |: 'int' and 'NoneType'
+
+# multiply mask by itself (mask * mask)
+>>> nref_mask.multiply(nref_mask, handle_mask=np.bitwise_or).mask
+array([[ 0,  1, 64],
+       [ 8,  0,  1],
+       [ 2,  1,  0]])
+
+# multiply mask by no mask (mask * no mask)
+>>> nref_mask.multiply(nref_nomask, handle_mask=np.bitwise_or).mask
+...
+TypeError: unsupported operand type(s) for |: 'int' and 'NoneType'
+```
+
+
+### Versions
+
+>>> import sys; print("Python", sys.version)
+Python 3.10.11 | packaged by conda-forge | (main, May 10 2023, 19:07:22) [Clang 14.0.6 ]
+>>> import astropy; print("astropy", astropy.__version__)
+astropy 5.3
+>>> import numpy; print("Numpy", numpy.__version__)
+Numpy 1.24.3
+>>> import erfa; print("pyerfa", erfa.__version__)
+pyerfa 2.0.0.3
+>>> import scipy; print("Scipy", scipy.__version__)
+Scipy 1.10.1
+>>> import matplotlib; print("Matplotlib", matplotlib.__version__)
+Matplotlib 3.7.1
+
+
+
+### Skeleton of Relevant Files ###
+
+### File: astropy/nddata/nduncertainty.py ###
+```python
+# Licensed under a 3-clause BSD style license - see LICENSE.rst
+
+
+__all__ = [
+    "MissingDataAssociationException",
+    "IncompatibleUncertaintiesException",
+    "NDUncertainty",
+    "StdDevUncertainty",
+    "UnknownUncertainty",
+    "VarianceUncertainty",
+    "InverseVariance",
+]
+
+# mapping from collapsing operations to the complementary methods used for `to_variance`
+collapse_to_variance_mapping = {
+    np.sum: np.square,
+    np.mean: np.square,
+}
+
+
+def _move_preserved_axes_first(arr, preserve_axes):
+...
+
+
+def _unravel_preserved_axes(arr, collapsed_arr, preserve_axes):
+...
+
+
+def from_variance_for_mean(x, axis):
+...
+
+
+# mapping from collapsing operations to the complementary methods used for `from_variance`
+collapse_from_variance_mapping = {
+    np.sum: lambda x, axis: np.sqrt(np.ma.sum(x, axis)),
+    np.mean: from_variance_for_mean,
+    np.median: None,
+}
+
+
+class IncompatibleUncertaintiesException(Exception):
+    pass
+
+
+class MissingDataAssociationException(Exception):
+    pass
+
+
+class NDUncertainty(metaclass=ABCMeta):
+
+    def __init__(self, array=None, copy=True, unit=None):
+...
+
+    @property
+    @abstractmethod
+    def uncertainty_type(self):
+...
+
+    @property
+    def supports_correlated(self):
+...
+
+    @property
+    def array(self):
+...
+
+    @array.setter
+    def array(self, value):
+...
+
+    @property
+    def unit(self):
+...
+
+    @unit.setter
+    def unit(self, value):
+...
+
+    @property
+    def quantity(self):
+...
+
+    @property
+    def parent_nddata(self):
+...
+
+    @parent_nddata.setter
+    def parent_nddata(self, value):
+...
+
+    @abstractmethod
+    def _data_unit_to_uncertainty_unit(self, value):
+...
+
+    def __repr__(self):
+...
+
+    def __getstate__(self):
+...
+
+    def __setstate__(self, state):
+...
+
+    def __getitem__(self, item):
+...
+
+    def propagate(self, operation, other_nddata, result_data, correlation, axis=None):
+...
+
+    def _convert_uncertainty(self, other_uncert):
+...
+
+    @abstractmethod
+    def _propagate_add(self, other_uncert, result_data, correlation):
+...
+
+    @abstractmethod
+    def _propagate_subtract(self, other_uncert, result_data, correlation):
+...
+
+    @abstractmethod
+    def _propagate_multiply(self, other_uncert, result_data, correlation):
+...
+
+    @abstractmethod
+    def _propagate_divide(self, other_uncert, result_data, correlation):
+...
+
+    def represent_as(self, other_uncert):
+...
+
+
+class UnknownUncertainty(NDUncertainty):
+
+    @property
+    def supports_correlated(self):
+...
+
+    @property
+    def uncertainty_type(self):
+...
+
+    def _data_unit_to_uncertainty_unit(self, value):
+...
+
+    def _convert_uncertainty(self, other_uncert):
+...
+
+    def _propagate_add(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_subtract(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_multiply(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_divide(self, other_uncert, result_data, correlation):
+...
+
+
+class _VariancePropagationMixin:
+
+    def _propagate_collapse(self, numpy_op, axis=None):
+...
+
+    def _get_err_at_extremum(self, extremum, axis):
+...
+
+    def _propagate_add_sub(
+        self,
+        other_uncert,
+        result_data,
+        correlation,
+        subtract=False,
+        to_variance=lambda x: x,
+        from_variance=lambda x: x,
+    ):
+...
+
+    def _propagate_multiply_divide(
+        self,
+        other_uncert,
+        result_data,
+        correlation,
+        divide=False,
+        to_variance=lambda x: x,
+        from_variance=lambda x: x,
+    ):
+...
+
+
+class StdDevUncertainty(_VariancePropagationMixin, NDUncertainty):
+
+    @property
+    def supports_correlated(self):
+...
+
+    @property
+    def uncertainty_type(self):
+...
+
+    def _convert_uncertainty(self, other_uncert):
+...
+
+    def _propagate_add(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_subtract(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_multiply(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_divide(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_collapse(self, numpy_operation, axis):
+...
+
+    def _data_unit_to_uncertainty_unit(self, value):
+...
+
+    def _convert_to_variance(self):
+...
+
+    @classmethod
+    def _convert_from_variance(cls, var_uncert):
+...
+
+
+class VarianceUncertainty(_VariancePropagationMixin, NDUncertainty):
+
+    @property
+    def uncertainty_type(self):
+...
+
+    @property
+    def supports_correlated(self):
+...
+
+    def _propagate_add(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_subtract(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_multiply(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_divide(self, other_uncert, result_data, correlation):
+...
+
+    def _data_unit_to_uncertainty_unit(self, value):
+...
+
+    def _convert_to_variance(self):
+...
+
+    @classmethod
+    def _convert_from_variance(cls, var_uncert):
+...
+
+
+def _inverse(x):
+...
+
+
+class InverseVariance(_VariancePropagationMixin, NDUncertainty):
+
+    @property
+    def uncertainty_type(self):
+...
+
+    @property
+    def supports_correlated(self):
+...
+
+    def _propagate_add(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_subtract(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_multiply(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_divide(self, other_uncert, result_data, correlation):
+...
+
+    def _data_unit_to_uncertainty_unit(self, value):
+...
+
+    def _convert_to_variance(self):
+...
+
+    @classmethod
+    def _convert_from_variance(cls, var_uncert):
+...
+
+```
+
+### File: astropy/nddata/nddata.py ###
+```python
+# Licensed under a 3-clause BSD style license - see LICENSE.rst
+# This module implements the base NDData class.
+
+
+
+__all__ = ["NDData"]
+
+_meta_doc = """`dict`-like : Additional meta information about the dataset."""
+
+
+class NDData(NDDataBase):
+
+    # Instead of a custom property use the MetaData descriptor also used for
+    # Tables. It will check if the meta is dict-like or raise an exception.
+    meta = MetaData(doc=_meta_doc, copy=False)
+
+    def __init__(
+        self,
+        data,
+        uncertainty=None,
+        mask=None,
+        wcs=None,
+        meta=None,
+        unit=None,
+        copy=False,
+        psf=None,
+    ):
+...
+
+    def __str__(self):
+...
+
+    def __repr__(self):
+...
+
+    @property
+    def data(self):
+...
+
+    @property
+    def mask(self):
+...
+
+    @mask.setter
+    def mask(self, value):
+...
+
+    @property
+    def unit(self):
+...
+
+    @property
+    def wcs(self):
+...
+
+    @wcs.setter
+    def wcs(self, wcs):
+...
+
+    @property
+    def psf(self):
+...
+
+    @psf.setter
+    def psf(self, value):
+...
+
+    @property
+    def uncertainty(self):
+...
+
+    @uncertainty.setter
+    def uncertainty(self, value):
+...
+
+```
+
+### File: astropy/nddata/nddata_withmixins.py ###
+```python
+# Licensed under a 3-clause BSD style license - see LICENSE.rst
+
+
+__all__ = ["NDDataRef"]
+
+
+class NDDataRef(NDArithmeticMixin, NDIOMixin, NDSlicingMixin, NDData):
+
+    pass
+
+```
+
+
+###
+
+Please provide the complete set of locations as either a class name, a function name, or a variable name.
+Note that if you include a class, you do not need to list its specific methods.
+You can include either the entire class or don't include the class name and instead include specific methods in the class.
+### Examples:
+```
+full_path1/file1.py
+function: my_function_1
+class: MyClass1
+function: MyClass2.my_method
+
+full_path2/file2.py
+variable: my_var
+function: MyClass3.my_method
+
+full_path3/file3.py
+function: my_function_2
+function: my_function_3
+function: MyClass4.my_method_1
+class: MyClass5
+```
+
+Return just the locations wrapped with ```.
+
+2025-04-22 21:35:36,602 - INFO - ================================================================================
+2025-04-22 21:35:36,602 - INFO - Initializing a decoder model: meta-llama/CodeLlama-7b-Instruct-hf ...
+2025-04-22 21:38:16,374 - INFO - ==== raw output ====
+2025-04-22 21:38:16,382 - INFO - ###
+
+```
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nd
+2025-04-22 21:38:16,383 - INFO - ================================================================================
+2025-04-22 21:38:16,383 - INFO - ==== extracted locs ====
+2025-04-22 21:38:16,383 - INFO - astropy/nddata/nduncertainty.py
+2025-04-22 21:38:16,383 - INFO - astropy/nddata/nddata.py
+2025-04-22 21:38:16,384 - INFO - astropy/nddata/nddata_withmixins.py
+2025-04-22 21:38:16,384 - INFO - ================================================================================
+2025-04-22 21:38:16,599 - INFO - No valid related locations found ... retrying with higher temperature ...
+2025-04-22 21:38:16,744 - INFO - prompting with message:
+2025-04-22 21:38:16,745 - INFO - 
+
+Please look through the following GitHub Problem Description and the Skeleton of Relevant Files.
+Identify all locations that need inspection or editing to fix the problem, including directly related areas as well as any potentially related global variables, functions, and classes.
+For each location you provide, either give the name of the class, the name of a method in a class, the name of a function, or the name of a global variable.
+
+### GitHub Problem Description ###
+In v5.3, NDDataRef mask propagation fails when one of the operand does not have a mask
+### Description
+
+This applies to v5.3. 
+
+It looks like when one of the operand does not have a mask, the mask propagation when doing arithmetic, in particular with `handle_mask=np.bitwise_or` fails.  This is not a problem in v5.2.
+
+I don't know enough about how all that works, but it seems from the error that the operand without a mask is set as a mask of None's and then the bitwise_or tries to operate on an integer and a None and fails.
+
+### Expected behavior
+
+When one of the operand does not have mask, the mask that exists should just be copied over to the output.  Or whatever was done in that situation in v5.2 where there's no problem.
+
+### How to Reproduce
+
+This is with v5.3.   With v5.2, there are no errors.
+
+```
+>>> import numpy as np
+>>> from astropy.nddata import NDDataRef
+
+>>> array = np.array([[0, 1, 0], [1, 0, 1], [0, 1, 0]])
+>>> mask = np.array([[0, 1, 64], [8, 0, 1], [2, 1, 0]])
+
+>>> nref_nomask = NDDataRef(array)
+>>> nref_mask = NDDataRef(array, mask=mask)
+
+# multiply no mask by constant (no mask * no mask)
+>>> nref_nomask.multiply(1., handle_mask=np.bitwise_or).mask   # returns nothing, no mask,  OK
+
+# multiply no mask by itself (no mask * no mask)
+>>> nref_nomask.multiply(nref_nomask, handle_mask=np.bitwise_or).mask # return nothing, no mask, OK
+
+# multiply mask by constant (mask * no mask)
+>>> nref_mask.multiply(1., handle_mask=np.bitwise_or).mask
+...
+TypeError: unsupported operand type(s) for |: 'int' and 'NoneType'
+
+# multiply mask by itself (mask * mask)
+>>> nref_mask.multiply(nref_mask, handle_mask=np.bitwise_or).mask
+array([[ 0,  1, 64],
+       [ 8,  0,  1],
+       [ 2,  1,  0]])
+
+# multiply mask by no mask (mask * no mask)
+>>> nref_mask.multiply(nref_nomask, handle_mask=np.bitwise_or).mask
+...
+TypeError: unsupported operand type(s) for |: 'int' and 'NoneType'
+```
+
+
+### Versions
+
+>>> import sys; print("Python", sys.version)
+Python 3.10.11 | packaged by conda-forge | (main, May 10 2023, 19:07:22) [Clang 14.0.6 ]
+>>> import astropy; print("astropy", astropy.__version__)
+astropy 5.3
+>>> import numpy; print("Numpy", numpy.__version__)
+Numpy 1.24.3
+>>> import erfa; print("pyerfa", erfa.__version__)
+pyerfa 2.0.0.3
+>>> import scipy; print("Scipy", scipy.__version__)
+Scipy 1.10.1
+>>> import matplotlib; print("Matplotlib", matplotlib.__version__)
+Matplotlib 3.7.1
+
+
+
+### Skeleton of Relevant Files ###
+
+### File: astropy/nddata/nduncertainty.py ###
+```python
+# Licensed under a 3-clause BSD style license - see LICENSE.rst
+
+
+__all__ = [
+    "MissingDataAssociationException",
+    "IncompatibleUncertaintiesException",
+    "NDUncertainty",
+    "StdDevUncertainty",
+    "UnknownUncertainty",
+    "VarianceUncertainty",
+    "InverseVariance",
+]
+
+# mapping from collapsing operations to the complementary methods used for `to_variance`
+collapse_to_variance_mapping = {
+    np.sum: np.square,
+    np.mean: np.square,
+}
+
+
+def _move_preserved_axes_first(arr, preserve_axes):
+...
+
+
+def _unravel_preserved_axes(arr, collapsed_arr, preserve_axes):
+...
+
+
+def from_variance_for_mean(x, axis):
+...
+
+
+# mapping from collapsing operations to the complementary methods used for `from_variance`
+collapse_from_variance_mapping = {
+    np.sum: lambda x, axis: np.sqrt(np.ma.sum(x, axis)),
+    np.mean: from_variance_for_mean,
+    np.median: None,
+}
+
+
+class IncompatibleUncertaintiesException(Exception):
+    pass
+
+
+class MissingDataAssociationException(Exception):
+    pass
+
+
+class NDUncertainty(metaclass=ABCMeta):
+
+    def __init__(self, array=None, copy=True, unit=None):
+...
+
+    @property
+    @abstractmethod
+    def uncertainty_type(self):
+...
+
+    @property
+    def supports_correlated(self):
+...
+
+    @property
+    def array(self):
+...
+
+    @array.setter
+    def array(self, value):
+...
+
+    @property
+    def unit(self):
+...
+
+    @unit.setter
+    def unit(self, value):
+...
+
+    @property
+    def quantity(self):
+...
+
+    @property
+    def parent_nddata(self):
+...
+
+    @parent_nddata.setter
+    def parent_nddata(self, value):
+...
+
+    @abstractmethod
+    def _data_unit_to_uncertainty_unit(self, value):
+...
+
+    def __repr__(self):
+...
+
+    def __getstate__(self):
+...
+
+    def __setstate__(self, state):
+...
+
+    def __getitem__(self, item):
+...
+
+    def propagate(self, operation, other_nddata, result_data, correlation, axis=None):
+...
+
+    def _convert_uncertainty(self, other_uncert):
+...
+
+    @abstractmethod
+    def _propagate_add(self, other_uncert, result_data, correlation):
+...
+
+    @abstractmethod
+    def _propagate_subtract(self, other_uncert, result_data, correlation):
+...
+
+    @abstractmethod
+    def _propagate_multiply(self, other_uncert, result_data, correlation):
+...
+
+    @abstractmethod
+    def _propagate_divide(self, other_uncert, result_data, correlation):
+...
+
+    def represent_as(self, other_uncert):
+...
+
+
+class UnknownUncertainty(NDUncertainty):
+
+    @property
+    def supports_correlated(self):
+...
+
+    @property
+    def uncertainty_type(self):
+...
+
+    def _data_unit_to_uncertainty_unit(self, value):
+...
+
+    def _convert_uncertainty(self, other_uncert):
+...
+
+    def _propagate_add(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_subtract(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_multiply(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_divide(self, other_uncert, result_data, correlation):
+...
+
+
+class _VariancePropagationMixin:
+
+    def _propagate_collapse(self, numpy_op, axis=None):
+...
+
+    def _get_err_at_extremum(self, extremum, axis):
+...
+
+    def _propagate_add_sub(
+        self,
+        other_uncert,
+        result_data,
+        correlation,
+        subtract=False,
+        to_variance=lambda x: x,
+        from_variance=lambda x: x,
+    ):
+...
+
+    def _propagate_multiply_divide(
+        self,
+        other_uncert,
+        result_data,
+        correlation,
+        divide=False,
+        to_variance=lambda x: x,
+        from_variance=lambda x: x,
+    ):
+...
+
+
+class StdDevUncertainty(_VariancePropagationMixin, NDUncertainty):
+
+    @property
+    def supports_correlated(self):
+...
+
+    @property
+    def uncertainty_type(self):
+...
+
+    def _convert_uncertainty(self, other_uncert):
+...
+
+    def _propagate_add(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_subtract(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_multiply(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_divide(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_collapse(self, numpy_operation, axis):
+...
+
+    def _data_unit_to_uncertainty_unit(self, value):
+...
+
+    def _convert_to_variance(self):
+...
+
+    @classmethod
+    def _convert_from_variance(cls, var_uncert):
+...
+
+
+class VarianceUncertainty(_VariancePropagationMixin, NDUncertainty):
+
+    @property
+    def uncertainty_type(self):
+...
+
+    @property
+    def supports_correlated(self):
+...
+
+    def _propagate_add(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_subtract(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_multiply(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_divide(self, other_uncert, result_data, correlation):
+...
+
+    def _data_unit_to_uncertainty_unit(self, value):
+...
+
+    def _convert_to_variance(self):
+...
+
+    @classmethod
+    def _convert_from_variance(cls, var_uncert):
+...
+
+
+def _inverse(x):
+...
+
+
+class InverseVariance(_VariancePropagationMixin, NDUncertainty):
+
+    @property
+    def uncertainty_type(self):
+...
+
+    @property
+    def supports_correlated(self):
+...
+
+    def _propagate_add(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_subtract(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_multiply(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_divide(self, other_uncert, result_data, correlation):
+...
+
+    def _data_unit_to_uncertainty_unit(self, value):
+...
+
+    def _convert_to_variance(self):
+...
+
+    @classmethod
+    def _convert_from_variance(cls, var_uncert):
+...
+
+```
+
+### File: astropy/nddata/nddata.py ###
+```python
+# Licensed under a 3-clause BSD style license - see LICENSE.rst
+# This module implements the base NDData class.
+
+
+
+__all__ = ["NDData"]
+
+_meta_doc = """`dict`-like : Additional meta information about the dataset."""
+
+
+class NDData(NDDataBase):
+
+    # Instead of a custom property use the MetaData descriptor also used for
+    # Tables. It will check if the meta is dict-like or raise an exception.
+    meta = MetaData(doc=_meta_doc, copy=False)
+
+    def __init__(
+        self,
+        data,
+        uncertainty=None,
+        mask=None,
+        wcs=None,
+        meta=None,
+        unit=None,
+        copy=False,
+        psf=None,
+    ):
+...
+
+    def __str__(self):
+...
+
+    def __repr__(self):
+...
+
+    @property
+    def data(self):
+...
+
+    @property
+    def mask(self):
+...
+
+    @mask.setter
+    def mask(self, value):
+...
+
+    @property
+    def unit(self):
+...
+
+    @property
+    def wcs(self):
+...
+
+    @wcs.setter
+    def wcs(self, wcs):
+...
+
+    @property
+    def psf(self):
+...
+
+    @psf.setter
+    def psf(self, value):
+...
+
+    @property
+    def uncertainty(self):
+...
+
+    @uncertainty.setter
+    def uncertainty(self, value):
+...
+
+```
+
+### File: astropy/nddata/nddata_withmixins.py ###
+```python
+# Licensed under a 3-clause BSD style license - see LICENSE.rst
+
+
+__all__ = ["NDDataRef"]
+
+
+class NDDataRef(NDArithmeticMixin, NDIOMixin, NDSlicingMixin, NDData):
+
+    pass
+
+```
+
+
+###
+
+Please provide the complete set of locations as either a class name, a function name, or a variable name.
+Note that if you include a class, you do not need to list its specific methods.
+You can include either the entire class or don't include the class name and instead include specific methods in the class.
+### Examples:
+```
+full_path1/file1.py
+function: my_function_1
+class: MyClass1
+function: MyClass2.my_method
+
+full_path2/file2.py
+variable: my_var
+function: MyClass3.my_method
+
+full_path3/file3.py
+function: my_function_2
+function: my_function_3
+function: MyClass4.my_method_1
+class: MyClass5
+```
+
+Return just the locations wrapped with ```.
+
+2025-04-22 21:38:16,747 - INFO - prompting with message:
+
+Please look through the following GitHub Problem Description and the Skeleton of Relevant Files.
+Identify all locations that need inspection or editing to fix the problem, including directly related areas as well as any potentially related global variables, functions, and classes.
+For each location you provide, either give the name of the class, the name of a method in a class, the name of a function, or the name of a global variable.
+
+### GitHub Problem Description ###
+In v5.3, NDDataRef mask propagation fails when one of the operand does not have a mask
+### Description
+
+This applies to v5.3. 
+
+It looks like when one of the operand does not have a mask, the mask propagation when doing arithmetic, in particular with `handle_mask=np.bitwise_or` fails.  This is not a problem in v5.2.
+
+I don't know enough about how all that works, but it seems from the error that the operand without a mask is set as a mask of None's and then the bitwise_or tries to operate on an integer and a None and fails.
+
+### Expected behavior
+
+When one of the operand does not have mask, the mask that exists should just be copied over to the output.  Or whatever was done in that situation in v5.2 where there's no problem.
+
+### How to Reproduce
+
+This is with v5.3.   With v5.2, there are no errors.
+
+```
+>>> import numpy as np
+>>> from astropy.nddata import NDDataRef
+
+>>> array = np.array([[0, 1, 0], [1, 0, 1], [0, 1, 0]])
+>>> mask = np.array([[0, 1, 64], [8, 0, 1], [2, 1, 0]])
+
+>>> nref_nomask = NDDataRef(array)
+>>> nref_mask = NDDataRef(array, mask=mask)
+
+# multiply no mask by constant (no mask * no mask)
+>>> nref_nomask.multiply(1., handle_mask=np.bitwise_or).mask   # returns nothing, no mask,  OK
+
+# multiply no mask by itself (no mask * no mask)
+>>> nref_nomask.multiply(nref_nomask, handle_mask=np.bitwise_or).mask # return nothing, no mask, OK
+
+# multiply mask by constant (mask * no mask)
+>>> nref_mask.multiply(1., handle_mask=np.bitwise_or).mask
+...
+TypeError: unsupported operand type(s) for |: 'int' and 'NoneType'
+
+# multiply mask by itself (mask * mask)
+>>> nref_mask.multiply(nref_mask, handle_mask=np.bitwise_or).mask
+array([[ 0,  1, 64],
+       [ 8,  0,  1],
+       [ 2,  1,  0]])
+
+# multiply mask by no mask (mask * no mask)
+>>> nref_mask.multiply(nref_nomask, handle_mask=np.bitwise_or).mask
+...
+TypeError: unsupported operand type(s) for |: 'int' and 'NoneType'
+```
+
+
+### Versions
+
+>>> import sys; print("Python", sys.version)
+Python 3.10.11 | packaged by conda-forge | (main, May 10 2023, 19:07:22) [Clang 14.0.6 ]
+>>> import astropy; print("astropy", astropy.__version__)
+astropy 5.3
+>>> import numpy; print("Numpy", numpy.__version__)
+Numpy 1.24.3
+>>> import erfa; print("pyerfa", erfa.__version__)
+pyerfa 2.0.0.3
+>>> import scipy; print("Scipy", scipy.__version__)
+Scipy 1.10.1
+>>> import matplotlib; print("Matplotlib", matplotlib.__version__)
+Matplotlib 3.7.1
+
+
+
+### Skeleton of Relevant Files ###
+
+### File: astropy/nddata/nduncertainty.py ###
+```python
+# Licensed under a 3-clause BSD style license - see LICENSE.rst
+
+
+__all__ = [
+    "MissingDataAssociationException",
+    "IncompatibleUncertaintiesException",
+    "NDUncertainty",
+    "StdDevUncertainty",
+    "UnknownUncertainty",
+    "VarianceUncertainty",
+    "InverseVariance",
+]
+
+# mapping from collapsing operations to the complementary methods used for `to_variance`
+collapse_to_variance_mapping = {
+    np.sum: np.square,
+    np.mean: np.square,
+}
+
+
+def _move_preserved_axes_first(arr, preserve_axes):
+...
+
+
+def _unravel_preserved_axes(arr, collapsed_arr, preserve_axes):
+...
+
+
+def from_variance_for_mean(x, axis):
+...
+
+
+# mapping from collapsing operations to the complementary methods used for `from_variance`
+collapse_from_variance_mapping = {
+    np.sum: lambda x, axis: np.sqrt(np.ma.sum(x, axis)),
+    np.mean: from_variance_for_mean,
+    np.median: None,
+}
+
+
+class IncompatibleUncertaintiesException(Exception):
+    pass
+
+
+class MissingDataAssociationException(Exception):
+    pass
+
+
+class NDUncertainty(metaclass=ABCMeta):
+
+    def __init__(self, array=None, copy=True, unit=None):
+...
+
+    @property
+    @abstractmethod
+    def uncertainty_type(self):
+...
+
+    @property
+    def supports_correlated(self):
+...
+
+    @property
+    def array(self):
+...
+
+    @array.setter
+    def array(self, value):
+...
+
+    @property
+    def unit(self):
+...
+
+    @unit.setter
+    def unit(self, value):
+...
+
+    @property
+    def quantity(self):
+...
+
+    @property
+    def parent_nddata(self):
+...
+
+    @parent_nddata.setter
+    def parent_nddata(self, value):
+...
+
+    @abstractmethod
+    def _data_unit_to_uncertainty_unit(self, value):
+...
+
+    def __repr__(self):
+...
+
+    def __getstate__(self):
+...
+
+    def __setstate__(self, state):
+...
+
+    def __getitem__(self, item):
+...
+
+    def propagate(self, operation, other_nddata, result_data, correlation, axis=None):
+...
+
+    def _convert_uncertainty(self, other_uncert):
+...
+
+    @abstractmethod
+    def _propagate_add(self, other_uncert, result_data, correlation):
+...
+
+    @abstractmethod
+    def _propagate_subtract(self, other_uncert, result_data, correlation):
+...
+
+    @abstractmethod
+    def _propagate_multiply(self, other_uncert, result_data, correlation):
+...
+
+    @abstractmethod
+    def _propagate_divide(self, other_uncert, result_data, correlation):
+...
+
+    def represent_as(self, other_uncert):
+...
+
+
+class UnknownUncertainty(NDUncertainty):
+
+    @property
+    def supports_correlated(self):
+...
+
+    @property
+    def uncertainty_type(self):
+...
+
+    def _data_unit_to_uncertainty_unit(self, value):
+...
+
+    def _convert_uncertainty(self, other_uncert):
+...
+
+    def _propagate_add(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_subtract(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_multiply(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_divide(self, other_uncert, result_data, correlation):
+...
+
+
+class _VariancePropagationMixin:
+
+    def _propagate_collapse(self, numpy_op, axis=None):
+...
+
+    def _get_err_at_extremum(self, extremum, axis):
+...
+
+    def _propagate_add_sub(
+        self,
+        other_uncert,
+        result_data,
+        correlation,
+        subtract=False,
+        to_variance=lambda x: x,
+        from_variance=lambda x: x,
+    ):
+...
+
+    def _propagate_multiply_divide(
+        self,
+        other_uncert,
+        result_data,
+        correlation,
+        divide=False,
+        to_variance=lambda x: x,
+        from_variance=lambda x: x,
+    ):
+...
+
+
+class StdDevUncertainty(_VariancePropagationMixin, NDUncertainty):
+
+    @property
+    def supports_correlated(self):
+...
+
+    @property
+    def uncertainty_type(self):
+...
+
+    def _convert_uncertainty(self, other_uncert):
+...
+
+    def _propagate_add(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_subtract(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_multiply(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_divide(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_collapse(self, numpy_operation, axis):
+...
+
+    def _data_unit_to_uncertainty_unit(self, value):
+...
+
+    def _convert_to_variance(self):
+...
+
+    @classmethod
+    def _convert_from_variance(cls, var_uncert):
+...
+
+
+class VarianceUncertainty(_VariancePropagationMixin, NDUncertainty):
+
+    @property
+    def uncertainty_type(self):
+...
+
+    @property
+    def supports_correlated(self):
+...
+
+    def _propagate_add(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_subtract(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_multiply(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_divide(self, other_uncert, result_data, correlation):
+...
+
+    def _data_unit_to_uncertainty_unit(self, value):
+...
+
+    def _convert_to_variance(self):
+...
+
+    @classmethod
+    def _convert_from_variance(cls, var_uncert):
+...
+
+
+def _inverse(x):
+...
+
+
+class InverseVariance(_VariancePropagationMixin, NDUncertainty):
+
+    @property
+    def uncertainty_type(self):
+...
+
+    @property
+    def supports_correlated(self):
+...
+
+    def _propagate_add(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_subtract(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_multiply(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_divide(self, other_uncert, result_data, correlation):
+...
+
+    def _data_unit_to_uncertainty_unit(self, value):
+...
+
+    def _convert_to_variance(self):
+...
+
+    @classmethod
+    def _convert_from_variance(cls, var_uncert):
+...
+
+```
+
+### File: astropy/nddata/nddata.py ###
+```python
+# Licensed under a 3-clause BSD style license - see LICENSE.rst
+# This module implements the base NDData class.
+
+
+
+__all__ = ["NDData"]
+
+_meta_doc = """`dict`-like : Additional meta information about the dataset."""
+
+
+class NDData(NDDataBase):
+
+    # Instead of a custom property use the MetaData descriptor also used for
+    # Tables. It will check if the meta is dict-like or raise an exception.
+    meta = MetaData(doc=_meta_doc, copy=False)
+
+    def __init__(
+        self,
+        data,
+        uncertainty=None,
+        mask=None,
+        wcs=None,
+        meta=None,
+        unit=None,
+        copy=False,
+        psf=None,
+    ):
+...
+
+    def __str__(self):
+...
+
+    def __repr__(self):
+...
+
+    @property
+    def data(self):
+...
+
+    @property
+    def mask(self):
+...
+
+    @mask.setter
+    def mask(self, value):
+...
+
+    @property
+    def unit(self):
+...
+
+    @property
+    def wcs(self):
+...
+
+    @wcs.setter
+    def wcs(self, wcs):
+...
+
+    @property
+    def psf(self):
+...
+
+    @psf.setter
+    def psf(self, value):
+...
+
+    @property
+    def uncertainty(self):
+...
+
+    @uncertainty.setter
+    def uncertainty(self, value):
+...
+
+```
+
+### File: astropy/nddata/nddata_withmixins.py ###
+```python
+# Licensed under a 3-clause BSD style license - see LICENSE.rst
+
+
+__all__ = ["NDDataRef"]
+
+
+class NDDataRef(NDArithmeticMixin, NDIOMixin, NDSlicingMixin, NDData):
+
+    pass
+
+```
+
+
+###
+
+Please provide the complete set of locations as either a class name, a function name, or a variable name.
+Note that if you include a class, you do not need to list its specific methods.
+You can include either the entire class or don't include the class name and instead include specific methods in the class.
+### Examples:
+```
+full_path1/file1.py
+function: my_function_1
+class: MyClass1
+function: MyClass2.my_method
+
+full_path2/file2.py
+variable: my_var
+function: MyClass3.my_method
+
+full_path3/file3.py
+function: my_function_2
+function: my_function_3
+function: MyClass4.my_method_1
+class: MyClass5
+```
+
+Return just the locations wrapped with ```.
+
+2025-04-22 21:38:16,747 - INFO - ================================================================================
+2025-04-22 21:38:16,747 - INFO - Initializing a decoder model: meta-llama/CodeLlama-7b-Instruct-hf ...
+2025-04-22 21:40:39,972 - INFO - ==== raw output ====
+2025-04-22 21:40:40,006 - INFO - ###
+
+```
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nd
+2025-04-22 21:40:40,007 - INFO - ================================================================================
+2025-04-22 21:40:40,007 - INFO - ==== extracted locs ====
+2025-04-22 21:40:40,007 - INFO - astropy/nddata/nduncertainty.py
+2025-04-22 21:40:40,007 - INFO - astropy/nddata/nddata.py
+2025-04-22 21:40:40,007 - INFO - astropy/nddata/nddata_withmixins.py
+2025-04-22 21:40:40,008 - INFO - ================================================================================
+2025-04-22 21:40:40,233 - INFO - No valid related locations found ... retrying with higher temperature ...
+2025-04-22 21:40:40,389 - INFO - prompting with message:
+2025-04-22 21:40:40,390 - INFO - 
+
+Please look through the following GitHub Problem Description and the Skeleton of Relevant Files.
+Identify all locations that need inspection or editing to fix the problem, including directly related areas as well as any potentially related global variables, functions, and classes.
+For each location you provide, either give the name of the class, the name of a method in a class, the name of a function, or the name of a global variable.
+
+### GitHub Problem Description ###
+In v5.3, NDDataRef mask propagation fails when one of the operand does not have a mask
+### Description
+
+This applies to v5.3. 
+
+It looks like when one of the operand does not have a mask, the mask propagation when doing arithmetic, in particular with `handle_mask=np.bitwise_or` fails.  This is not a problem in v5.2.
+
+I don't know enough about how all that works, but it seems from the error that the operand without a mask is set as a mask of None's and then the bitwise_or tries to operate on an integer and a None and fails.
+
+### Expected behavior
+
+When one of the operand does not have mask, the mask that exists should just be copied over to the output.  Or whatever was done in that situation in v5.2 where there's no problem.
+
+### How to Reproduce
+
+This is with v5.3.   With v5.2, there are no errors.
+
+```
+>>> import numpy as np
+>>> from astropy.nddata import NDDataRef
+
+>>> array = np.array([[0, 1, 0], [1, 0, 1], [0, 1, 0]])
+>>> mask = np.array([[0, 1, 64], [8, 0, 1], [2, 1, 0]])
+
+>>> nref_nomask = NDDataRef(array)
+>>> nref_mask = NDDataRef(array, mask=mask)
+
+# multiply no mask by constant (no mask * no mask)
+>>> nref_nomask.multiply(1., handle_mask=np.bitwise_or).mask   # returns nothing, no mask,  OK
+
+# multiply no mask by itself (no mask * no mask)
+>>> nref_nomask.multiply(nref_nomask, handle_mask=np.bitwise_or).mask # return nothing, no mask, OK
+
+# multiply mask by constant (mask * no mask)
+>>> nref_mask.multiply(1., handle_mask=np.bitwise_or).mask
+...
+TypeError: unsupported operand type(s) for |: 'int' and 'NoneType'
+
+# multiply mask by itself (mask * mask)
+>>> nref_mask.multiply(nref_mask, handle_mask=np.bitwise_or).mask
+array([[ 0,  1, 64],
+       [ 8,  0,  1],
+       [ 2,  1,  0]])
+
+# multiply mask by no mask (mask * no mask)
+>>> nref_mask.multiply(nref_nomask, handle_mask=np.bitwise_or).mask
+...
+TypeError: unsupported operand type(s) for |: 'int' and 'NoneType'
+```
+
+
+### Versions
+
+>>> import sys; print("Python", sys.version)
+Python 3.10.11 | packaged by conda-forge | (main, May 10 2023, 19:07:22) [Clang 14.0.6 ]
+>>> import astropy; print("astropy", astropy.__version__)
+astropy 5.3
+>>> import numpy; print("Numpy", numpy.__version__)
+Numpy 1.24.3
+>>> import erfa; print("pyerfa", erfa.__version__)
+pyerfa 2.0.0.3
+>>> import scipy; print("Scipy", scipy.__version__)
+Scipy 1.10.1
+>>> import matplotlib; print("Matplotlib", matplotlib.__version__)
+Matplotlib 3.7.1
+
+
+
+### Skeleton of Relevant Files ###
+
+### File: astropy/nddata/nduncertainty.py ###
+```python
+# Licensed under a 3-clause BSD style license - see LICENSE.rst
+
+
+__all__ = [
+    "MissingDataAssociationException",
+    "IncompatibleUncertaintiesException",
+    "NDUncertainty",
+    "StdDevUncertainty",
+    "UnknownUncertainty",
+    "VarianceUncertainty",
+    "InverseVariance",
+]
+
+# mapping from collapsing operations to the complementary methods used for `to_variance`
+collapse_to_variance_mapping = {
+    np.sum: np.square,
+    np.mean: np.square,
+}
+
+
+def _move_preserved_axes_first(arr, preserve_axes):
+...
+
+
+def _unravel_preserved_axes(arr, collapsed_arr, preserve_axes):
+...
+
+
+def from_variance_for_mean(x, axis):
+...
+
+
+# mapping from collapsing operations to the complementary methods used for `from_variance`
+collapse_from_variance_mapping = {
+    np.sum: lambda x, axis: np.sqrt(np.ma.sum(x, axis)),
+    np.mean: from_variance_for_mean,
+    np.median: None,
+}
+
+
+class IncompatibleUncertaintiesException(Exception):
+    pass
+
+
+class MissingDataAssociationException(Exception):
+    pass
+
+
+class NDUncertainty(metaclass=ABCMeta):
+
+    def __init__(self, array=None, copy=True, unit=None):
+...
+
+    @property
+    @abstractmethod
+    def uncertainty_type(self):
+...
+
+    @property
+    def supports_correlated(self):
+...
+
+    @property
+    def array(self):
+...
+
+    @array.setter
+    def array(self, value):
+...
+
+    @property
+    def unit(self):
+...
+
+    @unit.setter
+    def unit(self, value):
+...
+
+    @property
+    def quantity(self):
+...
+
+    @property
+    def parent_nddata(self):
+...
+
+    @parent_nddata.setter
+    def parent_nddata(self, value):
+...
+
+    @abstractmethod
+    def _data_unit_to_uncertainty_unit(self, value):
+...
+
+    def __repr__(self):
+...
+
+    def __getstate__(self):
+...
+
+    def __setstate__(self, state):
+...
+
+    def __getitem__(self, item):
+...
+
+    def propagate(self, operation, other_nddata, result_data, correlation, axis=None):
+...
+
+    def _convert_uncertainty(self, other_uncert):
+...
+
+    @abstractmethod
+    def _propagate_add(self, other_uncert, result_data, correlation):
+...
+
+    @abstractmethod
+    def _propagate_subtract(self, other_uncert, result_data, correlation):
+...
+
+    @abstractmethod
+    def _propagate_multiply(self, other_uncert, result_data, correlation):
+...
+
+    @abstractmethod
+    def _propagate_divide(self, other_uncert, result_data, correlation):
+...
+
+    def represent_as(self, other_uncert):
+...
+
+
+class UnknownUncertainty(NDUncertainty):
+
+    @property
+    def supports_correlated(self):
+...
+
+    @property
+    def uncertainty_type(self):
+...
+
+    def _data_unit_to_uncertainty_unit(self, value):
+...
+
+    def _convert_uncertainty(self, other_uncert):
+...
+
+    def _propagate_add(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_subtract(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_multiply(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_divide(self, other_uncert, result_data, correlation):
+...
+
+
+class _VariancePropagationMixin:
+
+    def _propagate_collapse(self, numpy_op, axis=None):
+...
+
+    def _get_err_at_extremum(self, extremum, axis):
+...
+
+    def _propagate_add_sub(
+        self,
+        other_uncert,
+        result_data,
+        correlation,
+        subtract=False,
+        to_variance=lambda x: x,
+        from_variance=lambda x: x,
+    ):
+...
+
+    def _propagate_multiply_divide(
+        self,
+        other_uncert,
+        result_data,
+        correlation,
+        divide=False,
+        to_variance=lambda x: x,
+        from_variance=lambda x: x,
+    ):
+...
+
+
+class StdDevUncertainty(_VariancePropagationMixin, NDUncertainty):
+
+    @property
+    def supports_correlated(self):
+...
+
+    @property
+    def uncertainty_type(self):
+...
+
+    def _convert_uncertainty(self, other_uncert):
+...
+
+    def _propagate_add(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_subtract(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_multiply(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_divide(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_collapse(self, numpy_operation, axis):
+...
+
+    def _data_unit_to_uncertainty_unit(self, value):
+...
+
+    def _convert_to_variance(self):
+...
+
+    @classmethod
+    def _convert_from_variance(cls, var_uncert):
+...
+
+
+class VarianceUncertainty(_VariancePropagationMixin, NDUncertainty):
+
+    @property
+    def uncertainty_type(self):
+...
+
+    @property
+    def supports_correlated(self):
+...
+
+    def _propagate_add(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_subtract(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_multiply(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_divide(self, other_uncert, result_data, correlation):
+...
+
+    def _data_unit_to_uncertainty_unit(self, value):
+...
+
+    def _convert_to_variance(self):
+...
+
+    @classmethod
+    def _convert_from_variance(cls, var_uncert):
+...
+
+
+def _inverse(x):
+...
+
+
+class InverseVariance(_VariancePropagationMixin, NDUncertainty):
+
+    @property
+    def uncertainty_type(self):
+...
+
+    @property
+    def supports_correlated(self):
+...
+
+    def _propagate_add(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_subtract(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_multiply(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_divide(self, other_uncert, result_data, correlation):
+...
+
+    def _data_unit_to_uncertainty_unit(self, value):
+...
+
+    def _convert_to_variance(self):
+...
+
+    @classmethod
+    def _convert_from_variance(cls, var_uncert):
+...
+
+```
+
+### File: astropy/nddata/nddata.py ###
+```python
+# Licensed under a 3-clause BSD style license - see LICENSE.rst
+# This module implements the base NDData class.
+
+
+
+__all__ = ["NDData"]
+
+_meta_doc = """`dict`-like : Additional meta information about the dataset."""
+
+
+class NDData(NDDataBase):
+
+    # Instead of a custom property use the MetaData descriptor also used for
+    # Tables. It will check if the meta is dict-like or raise an exception.
+    meta = MetaData(doc=_meta_doc, copy=False)
+
+    def __init__(
+        self,
+        data,
+        uncertainty=None,
+        mask=None,
+        wcs=None,
+        meta=None,
+        unit=None,
+        copy=False,
+        psf=None,
+    ):
+...
+
+    def __str__(self):
+...
+
+    def __repr__(self):
+...
+
+    @property
+    def data(self):
+...
+
+    @property
+    def mask(self):
+...
+
+    @mask.setter
+    def mask(self, value):
+...
+
+    @property
+    def unit(self):
+...
+
+    @property
+    def wcs(self):
+...
+
+    @wcs.setter
+    def wcs(self, wcs):
+...
+
+    @property
+    def psf(self):
+...
+
+    @psf.setter
+    def psf(self, value):
+...
+
+    @property
+    def uncertainty(self):
+...
+
+    @uncertainty.setter
+    def uncertainty(self, value):
+...
+
+```
+
+### File: astropy/nddata/nddata_withmixins.py ###
+```python
+# Licensed under a 3-clause BSD style license - see LICENSE.rst
+
+
+__all__ = ["NDDataRef"]
+
+
+class NDDataRef(NDArithmeticMixin, NDIOMixin, NDSlicingMixin, NDData):
+
+    pass
+
+```
+
+
+###
+
+Please provide the complete set of locations as either a class name, a function name, or a variable name.
+Note that if you include a class, you do not need to list its specific methods.
+You can include either the entire class or don't include the class name and instead include specific methods in the class.
+### Examples:
+```
+full_path1/file1.py
+function: my_function_1
+class: MyClass1
+function: MyClass2.my_method
+
+full_path2/file2.py
+variable: my_var
+function: MyClass3.my_method
+
+full_path3/file3.py
+function: my_function_2
+function: my_function_3
+function: MyClass4.my_method_1
+class: MyClass5
+```
+
+Return just the locations wrapped with ```.
+
+2025-04-22 21:40:40,392 - INFO - prompting with message:
+
+Please look through the following GitHub Problem Description and the Skeleton of Relevant Files.
+Identify all locations that need inspection or editing to fix the problem, including directly related areas as well as any potentially related global variables, functions, and classes.
+For each location you provide, either give the name of the class, the name of a method in a class, the name of a function, or the name of a global variable.
+
+### GitHub Problem Description ###
+In v5.3, NDDataRef mask propagation fails when one of the operand does not have a mask
+### Description
+
+This applies to v5.3. 
+
+It looks like when one of the operand does not have a mask, the mask propagation when doing arithmetic, in particular with `handle_mask=np.bitwise_or` fails.  This is not a problem in v5.2.
+
+I don't know enough about how all that works, but it seems from the error that the operand without a mask is set as a mask of None's and then the bitwise_or tries to operate on an integer and a None and fails.
+
+### Expected behavior
+
+When one of the operand does not have mask, the mask that exists should just be copied over to the output.  Or whatever was done in that situation in v5.2 where there's no problem.
+
+### How to Reproduce
+
+This is with v5.3.   With v5.2, there are no errors.
+
+```
+>>> import numpy as np
+>>> from astropy.nddata import NDDataRef
+
+>>> array = np.array([[0, 1, 0], [1, 0, 1], [0, 1, 0]])
+>>> mask = np.array([[0, 1, 64], [8, 0, 1], [2, 1, 0]])
+
+>>> nref_nomask = NDDataRef(array)
+>>> nref_mask = NDDataRef(array, mask=mask)
+
+# multiply no mask by constant (no mask * no mask)
+>>> nref_nomask.multiply(1., handle_mask=np.bitwise_or).mask   # returns nothing, no mask,  OK
+
+# multiply no mask by itself (no mask * no mask)
+>>> nref_nomask.multiply(nref_nomask, handle_mask=np.bitwise_or).mask # return nothing, no mask, OK
+
+# multiply mask by constant (mask * no mask)
+>>> nref_mask.multiply(1., handle_mask=np.bitwise_or).mask
+...
+TypeError: unsupported operand type(s) for |: 'int' and 'NoneType'
+
+# multiply mask by itself (mask * mask)
+>>> nref_mask.multiply(nref_mask, handle_mask=np.bitwise_or).mask
+array([[ 0,  1, 64],
+       [ 8,  0,  1],
+       [ 2,  1,  0]])
+
+# multiply mask by no mask (mask * no mask)
+>>> nref_mask.multiply(nref_nomask, handle_mask=np.bitwise_or).mask
+...
+TypeError: unsupported operand type(s) for |: 'int' and 'NoneType'
+```
+
+
+### Versions
+
+>>> import sys; print("Python", sys.version)
+Python 3.10.11 | packaged by conda-forge | (main, May 10 2023, 19:07:22) [Clang 14.0.6 ]
+>>> import astropy; print("astropy", astropy.__version__)
+astropy 5.3
+>>> import numpy; print("Numpy", numpy.__version__)
+Numpy 1.24.3
+>>> import erfa; print("pyerfa", erfa.__version__)
+pyerfa 2.0.0.3
+>>> import scipy; print("Scipy", scipy.__version__)
+Scipy 1.10.1
+>>> import matplotlib; print("Matplotlib", matplotlib.__version__)
+Matplotlib 3.7.1
+
+
+
+### Skeleton of Relevant Files ###
+
+### File: astropy/nddata/nduncertainty.py ###
+```python
+# Licensed under a 3-clause BSD style license - see LICENSE.rst
+
+
+__all__ = [
+    "MissingDataAssociationException",
+    "IncompatibleUncertaintiesException",
+    "NDUncertainty",
+    "StdDevUncertainty",
+    "UnknownUncertainty",
+    "VarianceUncertainty",
+    "InverseVariance",
+]
+
+# mapping from collapsing operations to the complementary methods used for `to_variance`
+collapse_to_variance_mapping = {
+    np.sum: np.square,
+    np.mean: np.square,
+}
+
+
+def _move_preserved_axes_first(arr, preserve_axes):
+...
+
+
+def _unravel_preserved_axes(arr, collapsed_arr, preserve_axes):
+...
+
+
+def from_variance_for_mean(x, axis):
+...
+
+
+# mapping from collapsing operations to the complementary methods used for `from_variance`
+collapse_from_variance_mapping = {
+    np.sum: lambda x, axis: np.sqrt(np.ma.sum(x, axis)),
+    np.mean: from_variance_for_mean,
+    np.median: None,
+}
+
+
+class IncompatibleUncertaintiesException(Exception):
+    pass
+
+
+class MissingDataAssociationException(Exception):
+    pass
+
+
+class NDUncertainty(metaclass=ABCMeta):
+
+    def __init__(self, array=None, copy=True, unit=None):
+...
+
+    @property
+    @abstractmethod
+    def uncertainty_type(self):
+...
+
+    @property
+    def supports_correlated(self):
+...
+
+    @property
+    def array(self):
+...
+
+    @array.setter
+    def array(self, value):
+...
+
+    @property
+    def unit(self):
+...
+
+    @unit.setter
+    def unit(self, value):
+...
+
+    @property
+    def quantity(self):
+...
+
+    @property
+    def parent_nddata(self):
+...
+
+    @parent_nddata.setter
+    def parent_nddata(self, value):
+...
+
+    @abstractmethod
+    def _data_unit_to_uncertainty_unit(self, value):
+...
+
+    def __repr__(self):
+...
+
+    def __getstate__(self):
+...
+
+    def __setstate__(self, state):
+...
+
+    def __getitem__(self, item):
+...
+
+    def propagate(self, operation, other_nddata, result_data, correlation, axis=None):
+...
+
+    def _convert_uncertainty(self, other_uncert):
+...
+
+    @abstractmethod
+    def _propagate_add(self, other_uncert, result_data, correlation):
+...
+
+    @abstractmethod
+    def _propagate_subtract(self, other_uncert, result_data, correlation):
+...
+
+    @abstractmethod
+    def _propagate_multiply(self, other_uncert, result_data, correlation):
+...
+
+    @abstractmethod
+    def _propagate_divide(self, other_uncert, result_data, correlation):
+...
+
+    def represent_as(self, other_uncert):
+...
+
+
+class UnknownUncertainty(NDUncertainty):
+
+    @property
+    def supports_correlated(self):
+...
+
+    @property
+    def uncertainty_type(self):
+...
+
+    def _data_unit_to_uncertainty_unit(self, value):
+...
+
+    def _convert_uncertainty(self, other_uncert):
+...
+
+    def _propagate_add(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_subtract(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_multiply(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_divide(self, other_uncert, result_data, correlation):
+...
+
+
+class _VariancePropagationMixin:
+
+    def _propagate_collapse(self, numpy_op, axis=None):
+...
+
+    def _get_err_at_extremum(self, extremum, axis):
+...
+
+    def _propagate_add_sub(
+        self,
+        other_uncert,
+        result_data,
+        correlation,
+        subtract=False,
+        to_variance=lambda x: x,
+        from_variance=lambda x: x,
+    ):
+...
+
+    def _propagate_multiply_divide(
+        self,
+        other_uncert,
+        result_data,
+        correlation,
+        divide=False,
+        to_variance=lambda x: x,
+        from_variance=lambda x: x,
+    ):
+...
+
+
+class StdDevUncertainty(_VariancePropagationMixin, NDUncertainty):
+
+    @property
+    def supports_correlated(self):
+...
+
+    @property
+    def uncertainty_type(self):
+...
+
+    def _convert_uncertainty(self, other_uncert):
+...
+
+    def _propagate_add(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_subtract(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_multiply(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_divide(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_collapse(self, numpy_operation, axis):
+...
+
+    def _data_unit_to_uncertainty_unit(self, value):
+...
+
+    def _convert_to_variance(self):
+...
+
+    @classmethod
+    def _convert_from_variance(cls, var_uncert):
+...
+
+
+class VarianceUncertainty(_VariancePropagationMixin, NDUncertainty):
+
+    @property
+    def uncertainty_type(self):
+...
+
+    @property
+    def supports_correlated(self):
+...
+
+    def _propagate_add(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_subtract(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_multiply(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_divide(self, other_uncert, result_data, correlation):
+...
+
+    def _data_unit_to_uncertainty_unit(self, value):
+...
+
+    def _convert_to_variance(self):
+...
+
+    @classmethod
+    def _convert_from_variance(cls, var_uncert):
+...
+
+
+def _inverse(x):
+...
+
+
+class InverseVariance(_VariancePropagationMixin, NDUncertainty):
+
+    @property
+    def uncertainty_type(self):
+...
+
+    @property
+    def supports_correlated(self):
+...
+
+    def _propagate_add(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_subtract(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_multiply(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_divide(self, other_uncert, result_data, correlation):
+...
+
+    def _data_unit_to_uncertainty_unit(self, value):
+...
+
+    def _convert_to_variance(self):
+...
+
+    @classmethod
+    def _convert_from_variance(cls, var_uncert):
+...
+
+```
+
+### File: astropy/nddata/nddata.py ###
+```python
+# Licensed under a 3-clause BSD style license - see LICENSE.rst
+# This module implements the base NDData class.
+
+
+
+__all__ = ["NDData"]
+
+_meta_doc = """`dict`-like : Additional meta information about the dataset."""
+
+
+class NDData(NDDataBase):
+
+    # Instead of a custom property use the MetaData descriptor also used for
+    # Tables. It will check if the meta is dict-like or raise an exception.
+    meta = MetaData(doc=_meta_doc, copy=False)
+
+    def __init__(
+        self,
+        data,
+        uncertainty=None,
+        mask=None,
+        wcs=None,
+        meta=None,
+        unit=None,
+        copy=False,
+        psf=None,
+    ):
+...
+
+    def __str__(self):
+...
+
+    def __repr__(self):
+...
+
+    @property
+    def data(self):
+...
+
+    @property
+    def mask(self):
+...
+
+    @mask.setter
+    def mask(self, value):
+...
+
+    @property
+    def unit(self):
+...
+
+    @property
+    def wcs(self):
+...
+
+    @wcs.setter
+    def wcs(self, wcs):
+...
+
+    @property
+    def psf(self):
+...
+
+    @psf.setter
+    def psf(self, value):
+...
+
+    @property
+    def uncertainty(self):
+...
+
+    @uncertainty.setter
+    def uncertainty(self, value):
+...
+
+```
+
+### File: astropy/nddata/nddata_withmixins.py ###
+```python
+# Licensed under a 3-clause BSD style license - see LICENSE.rst
+
+
+__all__ = ["NDDataRef"]
+
+
+class NDDataRef(NDArithmeticMixin, NDIOMixin, NDSlicingMixin, NDData):
+
+    pass
+
+```
+
+
+###
+
+Please provide the complete set of locations as either a class name, a function name, or a variable name.
+Note that if you include a class, you do not need to list its specific methods.
+You can include either the entire class or don't include the class name and instead include specific methods in the class.
+### Examples:
+```
+full_path1/file1.py
+function: my_function_1
+class: MyClass1
+function: MyClass2.my_method
+
+full_path2/file2.py
+variable: my_var
+function: MyClass3.my_method
+
+full_path3/file3.py
+function: my_function_2
+function: my_function_3
+function: MyClass4.my_method_1
+class: MyClass5
+```
+
+Return just the locations wrapped with ```.
+
+2025-04-22 21:40:40,392 - INFO - ================================================================================
+2025-04-22 21:40:40,393 - INFO - Initializing a decoder model: meta-llama/CodeLlama-7b-Instruct-hf ...
+2025-04-22 21:43:04,264 - INFO - ==== raw output ====
+2025-04-22 21:43:04,288 - INFO - ###
+
+```
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nd
+2025-04-22 21:43:04,289 - INFO - ================================================================================
+2025-04-22 21:43:04,289 - INFO - ==== extracted locs ====
+2025-04-22 21:43:04,289 - INFO - astropy/nddata/nduncertainty.py
+2025-04-22 21:43:04,290 - INFO - astropy/nddata/nddata.py
+2025-04-22 21:43:04,290 - INFO - astropy/nddata/nddata_withmixins.py
+2025-04-22 21:43:04,290 - INFO - ================================================================================
+2025-04-22 21:43:04,505 - INFO - No valid related locations found ... retrying with higher temperature ...
+2025-04-22 21:43:04,653 - INFO - prompting with message:
+2025-04-22 21:43:04,653 - INFO - 
+
+Please look through the following GitHub Problem Description and the Skeleton of Relevant Files.
+Identify all locations that need inspection or editing to fix the problem, including directly related areas as well as any potentially related global variables, functions, and classes.
+For each location you provide, either give the name of the class, the name of a method in a class, the name of a function, or the name of a global variable.
+
+### GitHub Problem Description ###
+In v5.3, NDDataRef mask propagation fails when one of the operand does not have a mask
+### Description
+
+This applies to v5.3. 
+
+It looks like when one of the operand does not have a mask, the mask propagation when doing arithmetic, in particular with `handle_mask=np.bitwise_or` fails.  This is not a problem in v5.2.
+
+I don't know enough about how all that works, but it seems from the error that the operand without a mask is set as a mask of None's and then the bitwise_or tries to operate on an integer and a None and fails.
+
+### Expected behavior
+
+When one of the operand does not have mask, the mask that exists should just be copied over to the output.  Or whatever was done in that situation in v5.2 where there's no problem.
+
+### How to Reproduce
+
+This is with v5.3.   With v5.2, there are no errors.
+
+```
+>>> import numpy as np
+>>> from astropy.nddata import NDDataRef
+
+>>> array = np.array([[0, 1, 0], [1, 0, 1], [0, 1, 0]])
+>>> mask = np.array([[0, 1, 64], [8, 0, 1], [2, 1, 0]])
+
+>>> nref_nomask = NDDataRef(array)
+>>> nref_mask = NDDataRef(array, mask=mask)
+
+# multiply no mask by constant (no mask * no mask)
+>>> nref_nomask.multiply(1., handle_mask=np.bitwise_or).mask   # returns nothing, no mask,  OK
+
+# multiply no mask by itself (no mask * no mask)
+>>> nref_nomask.multiply(nref_nomask, handle_mask=np.bitwise_or).mask # return nothing, no mask, OK
+
+# multiply mask by constant (mask * no mask)
+>>> nref_mask.multiply(1., handle_mask=np.bitwise_or).mask
+...
+TypeError: unsupported operand type(s) for |: 'int' and 'NoneType'
+
+# multiply mask by itself (mask * mask)
+>>> nref_mask.multiply(nref_mask, handle_mask=np.bitwise_or).mask
+array([[ 0,  1, 64],
+       [ 8,  0,  1],
+       [ 2,  1,  0]])
+
+# multiply mask by no mask (mask * no mask)
+>>> nref_mask.multiply(nref_nomask, handle_mask=np.bitwise_or).mask
+...
+TypeError: unsupported operand type(s) for |: 'int' and 'NoneType'
+```
+
+
+### Versions
+
+>>> import sys; print("Python", sys.version)
+Python 3.10.11 | packaged by conda-forge | (main, May 10 2023, 19:07:22) [Clang 14.0.6 ]
+>>> import astropy; print("astropy", astropy.__version__)
+astropy 5.3
+>>> import numpy; print("Numpy", numpy.__version__)
+Numpy 1.24.3
+>>> import erfa; print("pyerfa", erfa.__version__)
+pyerfa 2.0.0.3
+>>> import scipy; print("Scipy", scipy.__version__)
+Scipy 1.10.1
+>>> import matplotlib; print("Matplotlib", matplotlib.__version__)
+Matplotlib 3.7.1
+
+
+
+### Skeleton of Relevant Files ###
+
+### File: astropy/nddata/nduncertainty.py ###
+```python
+# Licensed under a 3-clause BSD style license - see LICENSE.rst
+
+
+__all__ = [
+    "MissingDataAssociationException",
+    "IncompatibleUncertaintiesException",
+    "NDUncertainty",
+    "StdDevUncertainty",
+    "UnknownUncertainty",
+    "VarianceUncertainty",
+    "InverseVariance",
+]
+
+# mapping from collapsing operations to the complementary methods used for `to_variance`
+collapse_to_variance_mapping = {
+    np.sum: np.square,
+    np.mean: np.square,
+}
+
+
+def _move_preserved_axes_first(arr, preserve_axes):
+...
+
+
+def _unravel_preserved_axes(arr, collapsed_arr, preserve_axes):
+...
+
+
+def from_variance_for_mean(x, axis):
+...
+
+
+# mapping from collapsing operations to the complementary methods used for `from_variance`
+collapse_from_variance_mapping = {
+    np.sum: lambda x, axis: np.sqrt(np.ma.sum(x, axis)),
+    np.mean: from_variance_for_mean,
+    np.median: None,
+}
+
+
+class IncompatibleUncertaintiesException(Exception):
+    pass
+
+
+class MissingDataAssociationException(Exception):
+    pass
+
+
+class NDUncertainty(metaclass=ABCMeta):
+
+    def __init__(self, array=None, copy=True, unit=None):
+...
+
+    @property
+    @abstractmethod
+    def uncertainty_type(self):
+...
+
+    @property
+    def supports_correlated(self):
+...
+
+    @property
+    def array(self):
+...
+
+    @array.setter
+    def array(self, value):
+...
+
+    @property
+    def unit(self):
+...
+
+    @unit.setter
+    def unit(self, value):
+...
+
+    @property
+    def quantity(self):
+...
+
+    @property
+    def parent_nddata(self):
+...
+
+    @parent_nddata.setter
+    def parent_nddata(self, value):
+...
+
+    @abstractmethod
+    def _data_unit_to_uncertainty_unit(self, value):
+...
+
+    def __repr__(self):
+...
+
+    def __getstate__(self):
+...
+
+    def __setstate__(self, state):
+...
+
+    def __getitem__(self, item):
+...
+
+    def propagate(self, operation, other_nddata, result_data, correlation, axis=None):
+...
+
+    def _convert_uncertainty(self, other_uncert):
+...
+
+    @abstractmethod
+    def _propagate_add(self, other_uncert, result_data, correlation):
+...
+
+    @abstractmethod
+    def _propagate_subtract(self, other_uncert, result_data, correlation):
+...
+
+    @abstractmethod
+    def _propagate_multiply(self, other_uncert, result_data, correlation):
+...
+
+    @abstractmethod
+    def _propagate_divide(self, other_uncert, result_data, correlation):
+...
+
+    def represent_as(self, other_uncert):
+...
+
+
+class UnknownUncertainty(NDUncertainty):
+
+    @property
+    def supports_correlated(self):
+...
+
+    @property
+    def uncertainty_type(self):
+...
+
+    def _data_unit_to_uncertainty_unit(self, value):
+...
+
+    def _convert_uncertainty(self, other_uncert):
+...
+
+    def _propagate_add(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_subtract(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_multiply(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_divide(self, other_uncert, result_data, correlation):
+...
+
+
+class _VariancePropagationMixin:
+
+    def _propagate_collapse(self, numpy_op, axis=None):
+...
+
+    def _get_err_at_extremum(self, extremum, axis):
+...
+
+    def _propagate_add_sub(
+        self,
+        other_uncert,
+        result_data,
+        correlation,
+        subtract=False,
+        to_variance=lambda x: x,
+        from_variance=lambda x: x,
+    ):
+...
+
+    def _propagate_multiply_divide(
+        self,
+        other_uncert,
+        result_data,
+        correlation,
+        divide=False,
+        to_variance=lambda x: x,
+        from_variance=lambda x: x,
+    ):
+...
+
+
+class StdDevUncertainty(_VariancePropagationMixin, NDUncertainty):
+
+    @property
+    def supports_correlated(self):
+...
+
+    @property
+    def uncertainty_type(self):
+...
+
+    def _convert_uncertainty(self, other_uncert):
+...
+
+    def _propagate_add(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_subtract(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_multiply(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_divide(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_collapse(self, numpy_operation, axis):
+...
+
+    def _data_unit_to_uncertainty_unit(self, value):
+...
+
+    def _convert_to_variance(self):
+...
+
+    @classmethod
+    def _convert_from_variance(cls, var_uncert):
+...
+
+
+class VarianceUncertainty(_VariancePropagationMixin, NDUncertainty):
+
+    @property
+    def uncertainty_type(self):
+...
+
+    @property
+    def supports_correlated(self):
+...
+
+    def _propagate_add(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_subtract(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_multiply(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_divide(self, other_uncert, result_data, correlation):
+...
+
+    def _data_unit_to_uncertainty_unit(self, value):
+...
+
+    def _convert_to_variance(self):
+...
+
+    @classmethod
+    def _convert_from_variance(cls, var_uncert):
+...
+
+
+def _inverse(x):
+...
+
+
+class InverseVariance(_VariancePropagationMixin, NDUncertainty):
+
+    @property
+    def uncertainty_type(self):
+...
+
+    @property
+    def supports_correlated(self):
+...
+
+    def _propagate_add(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_subtract(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_multiply(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_divide(self, other_uncert, result_data, correlation):
+...
+
+    def _data_unit_to_uncertainty_unit(self, value):
+...
+
+    def _convert_to_variance(self):
+...
+
+    @classmethod
+    def _convert_from_variance(cls, var_uncert):
+...
+
+```
+
+### File: astropy/nddata/nddata.py ###
+```python
+# Licensed under a 3-clause BSD style license - see LICENSE.rst
+# This module implements the base NDData class.
+
+
+
+__all__ = ["NDData"]
+
+_meta_doc = """`dict`-like : Additional meta information about the dataset."""
+
+
+class NDData(NDDataBase):
+
+    # Instead of a custom property use the MetaData descriptor also used for
+    # Tables. It will check if the meta is dict-like or raise an exception.
+    meta = MetaData(doc=_meta_doc, copy=False)
+
+    def __init__(
+        self,
+        data,
+        uncertainty=None,
+        mask=None,
+        wcs=None,
+        meta=None,
+        unit=None,
+        copy=False,
+        psf=None,
+    ):
+...
+
+    def __str__(self):
+...
+
+    def __repr__(self):
+...
+
+    @property
+    def data(self):
+...
+
+    @property
+    def mask(self):
+...
+
+    @mask.setter
+    def mask(self, value):
+...
+
+    @property
+    def unit(self):
+...
+
+    @property
+    def wcs(self):
+...
+
+    @wcs.setter
+    def wcs(self, wcs):
+...
+
+    @property
+    def psf(self):
+...
+
+    @psf.setter
+    def psf(self, value):
+...
+
+    @property
+    def uncertainty(self):
+...
+
+    @uncertainty.setter
+    def uncertainty(self, value):
+...
+
+```
+
+### File: astropy/nddata/nddata_withmixins.py ###
+```python
+# Licensed under a 3-clause BSD style license - see LICENSE.rst
+
+
+__all__ = ["NDDataRef"]
+
+
+class NDDataRef(NDArithmeticMixin, NDIOMixin, NDSlicingMixin, NDData):
+
+    pass
+
+```
+
+
+###
+
+Please provide the complete set of locations as either a class name, a function name, or a variable name.
+Note that if you include a class, you do not need to list its specific methods.
+You can include either the entire class or don't include the class name and instead include specific methods in the class.
+### Examples:
+```
+full_path1/file1.py
+function: my_function_1
+class: MyClass1
+function: MyClass2.my_method
+
+full_path2/file2.py
+variable: my_var
+function: MyClass3.my_method
+
+full_path3/file3.py
+function: my_function_2
+function: my_function_3
+function: MyClass4.my_method_1
+class: MyClass5
+```
+
+Return just the locations wrapped with ```.
+
+2025-04-22 21:43:04,656 - INFO - prompting with message:
+
+Please look through the following GitHub Problem Description and the Skeleton of Relevant Files.
+Identify all locations that need inspection or editing to fix the problem, including directly related areas as well as any potentially related global variables, functions, and classes.
+For each location you provide, either give the name of the class, the name of a method in a class, the name of a function, or the name of a global variable.
+
+### GitHub Problem Description ###
+In v5.3, NDDataRef mask propagation fails when one of the operand does not have a mask
+### Description
+
+This applies to v5.3. 
+
+It looks like when one of the operand does not have a mask, the mask propagation when doing arithmetic, in particular with `handle_mask=np.bitwise_or` fails.  This is not a problem in v5.2.
+
+I don't know enough about how all that works, but it seems from the error that the operand without a mask is set as a mask of None's and then the bitwise_or tries to operate on an integer and a None and fails.
+
+### Expected behavior
+
+When one of the operand does not have mask, the mask that exists should just be copied over to the output.  Or whatever was done in that situation in v5.2 where there's no problem.
+
+### How to Reproduce
+
+This is with v5.3.   With v5.2, there are no errors.
+
+```
+>>> import numpy as np
+>>> from astropy.nddata import NDDataRef
+
+>>> array = np.array([[0, 1, 0], [1, 0, 1], [0, 1, 0]])
+>>> mask = np.array([[0, 1, 64], [8, 0, 1], [2, 1, 0]])
+
+>>> nref_nomask = NDDataRef(array)
+>>> nref_mask = NDDataRef(array, mask=mask)
+
+# multiply no mask by constant (no mask * no mask)
+>>> nref_nomask.multiply(1., handle_mask=np.bitwise_or).mask   # returns nothing, no mask,  OK
+
+# multiply no mask by itself (no mask * no mask)
+>>> nref_nomask.multiply(nref_nomask, handle_mask=np.bitwise_or).mask # return nothing, no mask, OK
+
+# multiply mask by constant (mask * no mask)
+>>> nref_mask.multiply(1., handle_mask=np.bitwise_or).mask
+...
+TypeError: unsupported operand type(s) for |: 'int' and 'NoneType'
+
+# multiply mask by itself (mask * mask)
+>>> nref_mask.multiply(nref_mask, handle_mask=np.bitwise_or).mask
+array([[ 0,  1, 64],
+       [ 8,  0,  1],
+       [ 2,  1,  0]])
+
+# multiply mask by no mask (mask * no mask)
+>>> nref_mask.multiply(nref_nomask, handle_mask=np.bitwise_or).mask
+...
+TypeError: unsupported operand type(s) for |: 'int' and 'NoneType'
+```
+
+
+### Versions
+
+>>> import sys; print("Python", sys.version)
+Python 3.10.11 | packaged by conda-forge | (main, May 10 2023, 19:07:22) [Clang 14.0.6 ]
+>>> import astropy; print("astropy", astropy.__version__)
+astropy 5.3
+>>> import numpy; print("Numpy", numpy.__version__)
+Numpy 1.24.3
+>>> import erfa; print("pyerfa", erfa.__version__)
+pyerfa 2.0.0.3
+>>> import scipy; print("Scipy", scipy.__version__)
+Scipy 1.10.1
+>>> import matplotlib; print("Matplotlib", matplotlib.__version__)
+Matplotlib 3.7.1
+
+
+
+### Skeleton of Relevant Files ###
+
+### File: astropy/nddata/nduncertainty.py ###
+```python
+# Licensed under a 3-clause BSD style license - see LICENSE.rst
+
+
+__all__ = [
+    "MissingDataAssociationException",
+    "IncompatibleUncertaintiesException",
+    "NDUncertainty",
+    "StdDevUncertainty",
+    "UnknownUncertainty",
+    "VarianceUncertainty",
+    "InverseVariance",
+]
+
+# mapping from collapsing operations to the complementary methods used for `to_variance`
+collapse_to_variance_mapping = {
+    np.sum: np.square,
+    np.mean: np.square,
+}
+
+
+def _move_preserved_axes_first(arr, preserve_axes):
+...
+
+
+def _unravel_preserved_axes(arr, collapsed_arr, preserve_axes):
+...
+
+
+def from_variance_for_mean(x, axis):
+...
+
+
+# mapping from collapsing operations to the complementary methods used for `from_variance`
+collapse_from_variance_mapping = {
+    np.sum: lambda x, axis: np.sqrt(np.ma.sum(x, axis)),
+    np.mean: from_variance_for_mean,
+    np.median: None,
+}
+
+
+class IncompatibleUncertaintiesException(Exception):
+    pass
+
+
+class MissingDataAssociationException(Exception):
+    pass
+
+
+class NDUncertainty(metaclass=ABCMeta):
+
+    def __init__(self, array=None, copy=True, unit=None):
+...
+
+    @property
+    @abstractmethod
+    def uncertainty_type(self):
+...
+
+    @property
+    def supports_correlated(self):
+...
+
+    @property
+    def array(self):
+...
+
+    @array.setter
+    def array(self, value):
+...
+
+    @property
+    def unit(self):
+...
+
+    @unit.setter
+    def unit(self, value):
+...
+
+    @property
+    def quantity(self):
+...
+
+    @property
+    def parent_nddata(self):
+...
+
+    @parent_nddata.setter
+    def parent_nddata(self, value):
+...
+
+    @abstractmethod
+    def _data_unit_to_uncertainty_unit(self, value):
+...
+
+    def __repr__(self):
+...
+
+    def __getstate__(self):
+...
+
+    def __setstate__(self, state):
+...
+
+    def __getitem__(self, item):
+...
+
+    def propagate(self, operation, other_nddata, result_data, correlation, axis=None):
+...
+
+    def _convert_uncertainty(self, other_uncert):
+...
+
+    @abstractmethod
+    def _propagate_add(self, other_uncert, result_data, correlation):
+...
+
+    @abstractmethod
+    def _propagate_subtract(self, other_uncert, result_data, correlation):
+...
+
+    @abstractmethod
+    def _propagate_multiply(self, other_uncert, result_data, correlation):
+...
+
+    @abstractmethod
+    def _propagate_divide(self, other_uncert, result_data, correlation):
+...
+
+    def represent_as(self, other_uncert):
+...
+
+
+class UnknownUncertainty(NDUncertainty):
+
+    @property
+    def supports_correlated(self):
+...
+
+    @property
+    def uncertainty_type(self):
+...
+
+    def _data_unit_to_uncertainty_unit(self, value):
+...
+
+    def _convert_uncertainty(self, other_uncert):
+...
+
+    def _propagate_add(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_subtract(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_multiply(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_divide(self, other_uncert, result_data, correlation):
+...
+
+
+class _VariancePropagationMixin:
+
+    def _propagate_collapse(self, numpy_op, axis=None):
+...
+
+    def _get_err_at_extremum(self, extremum, axis):
+...
+
+    def _propagate_add_sub(
+        self,
+        other_uncert,
+        result_data,
+        correlation,
+        subtract=False,
+        to_variance=lambda x: x,
+        from_variance=lambda x: x,
+    ):
+...
+
+    def _propagate_multiply_divide(
+        self,
+        other_uncert,
+        result_data,
+        correlation,
+        divide=False,
+        to_variance=lambda x: x,
+        from_variance=lambda x: x,
+    ):
+...
+
+
+class StdDevUncertainty(_VariancePropagationMixin, NDUncertainty):
+
+    @property
+    def supports_correlated(self):
+...
+
+    @property
+    def uncertainty_type(self):
+...
+
+    def _convert_uncertainty(self, other_uncert):
+...
+
+    def _propagate_add(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_subtract(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_multiply(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_divide(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_collapse(self, numpy_operation, axis):
+...
+
+    def _data_unit_to_uncertainty_unit(self, value):
+...
+
+    def _convert_to_variance(self):
+...
+
+    @classmethod
+    def _convert_from_variance(cls, var_uncert):
+...
+
+
+class VarianceUncertainty(_VariancePropagationMixin, NDUncertainty):
+
+    @property
+    def uncertainty_type(self):
+...
+
+    @property
+    def supports_correlated(self):
+...
+
+    def _propagate_add(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_subtract(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_multiply(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_divide(self, other_uncert, result_data, correlation):
+...
+
+    def _data_unit_to_uncertainty_unit(self, value):
+...
+
+    def _convert_to_variance(self):
+...
+
+    @classmethod
+    def _convert_from_variance(cls, var_uncert):
+...
+
+
+def _inverse(x):
+...
+
+
+class InverseVariance(_VariancePropagationMixin, NDUncertainty):
+
+    @property
+    def uncertainty_type(self):
+...
+
+    @property
+    def supports_correlated(self):
+...
+
+    def _propagate_add(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_subtract(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_multiply(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_divide(self, other_uncert, result_data, correlation):
+...
+
+    def _data_unit_to_uncertainty_unit(self, value):
+...
+
+    def _convert_to_variance(self):
+...
+
+    @classmethod
+    def _convert_from_variance(cls, var_uncert):
+...
+
+```
+
+### File: astropy/nddata/nddata.py ###
+```python
+# Licensed under a 3-clause BSD style license - see LICENSE.rst
+# This module implements the base NDData class.
+
+
+
+__all__ = ["NDData"]
+
+_meta_doc = """`dict`-like : Additional meta information about the dataset."""
+
+
+class NDData(NDDataBase):
+
+    # Instead of a custom property use the MetaData descriptor also used for
+    # Tables. It will check if the meta is dict-like or raise an exception.
+    meta = MetaData(doc=_meta_doc, copy=False)
+
+    def __init__(
+        self,
+        data,
+        uncertainty=None,
+        mask=None,
+        wcs=None,
+        meta=None,
+        unit=None,
+        copy=False,
+        psf=None,
+    ):
+...
+
+    def __str__(self):
+...
+
+    def __repr__(self):
+...
+
+    @property
+    def data(self):
+...
+
+    @property
+    def mask(self):
+...
+
+    @mask.setter
+    def mask(self, value):
+...
+
+    @property
+    def unit(self):
+...
+
+    @property
+    def wcs(self):
+...
+
+    @wcs.setter
+    def wcs(self, wcs):
+...
+
+    @property
+    def psf(self):
+...
+
+    @psf.setter
+    def psf(self, value):
+...
+
+    @property
+    def uncertainty(self):
+...
+
+    @uncertainty.setter
+    def uncertainty(self, value):
+...
+
+```
+
+### File: astropy/nddata/nddata_withmixins.py ###
+```python
+# Licensed under a 3-clause BSD style license - see LICENSE.rst
+
+
+__all__ = ["NDDataRef"]
+
+
+class NDDataRef(NDArithmeticMixin, NDIOMixin, NDSlicingMixin, NDData):
+
+    pass
+
+```
+
+
+###
+
+Please provide the complete set of locations as either a class name, a function name, or a variable name.
+Note that if you include a class, you do not need to list its specific methods.
+You can include either the entire class or don't include the class name and instead include specific methods in the class.
+### Examples:
+```
+full_path1/file1.py
+function: my_function_1
+class: MyClass1
+function: MyClass2.my_method
+
+full_path2/file2.py
+variable: my_var
+function: MyClass3.my_method
+
+full_path3/file3.py
+function: my_function_2
+function: my_function_3
+function: MyClass4.my_method_1
+class: MyClass5
+```
+
+Return just the locations wrapped with ```.
+
+2025-04-22 21:43:04,656 - INFO - ================================================================================
+2025-04-22 21:43:04,656 - INFO - Initializing a decoder model: meta-llama/CodeLlama-7b-Instruct-hf ...
+2025-04-22 21:45:27,715 - INFO - ==== raw output ====
+2025-04-22 21:45:27,729 - INFO - ###
+
+```
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nd
+2025-04-22 21:45:27,729 - INFO - ================================================================================
+2025-04-22 21:45:27,729 - INFO - ==== extracted locs ====
+2025-04-22 21:45:27,730 - INFO - astropy/nddata/nduncertainty.py
+2025-04-22 21:45:27,730 - INFO - astropy/nddata/nddata.py
+2025-04-22 21:45:27,730 - INFO - astropy/nddata/nddata_withmixins.py
+2025-04-22 21:45:27,730 - INFO - ================================================================================
+2025-04-22 21:45:27,965 - INFO - No valid related locations found ... retrying with higher temperature ...
+2025-04-22 21:45:28,130 - INFO - prompting with message:
+2025-04-22 21:45:28,130 - INFO - 
+
+Please look through the following GitHub Problem Description and the Skeleton of Relevant Files.
+Identify all locations that need inspection or editing to fix the problem, including directly related areas as well as any potentially related global variables, functions, and classes.
+For each location you provide, either give the name of the class, the name of a method in a class, the name of a function, or the name of a global variable.
+
+### GitHub Problem Description ###
+In v5.3, NDDataRef mask propagation fails when one of the operand does not have a mask
+### Description
+
+This applies to v5.3. 
+
+It looks like when one of the operand does not have a mask, the mask propagation when doing arithmetic, in particular with `handle_mask=np.bitwise_or` fails.  This is not a problem in v5.2.
+
+I don't know enough about how all that works, but it seems from the error that the operand without a mask is set as a mask of None's and then the bitwise_or tries to operate on an integer and a None and fails.
+
+### Expected behavior
+
+When one of the operand does not have mask, the mask that exists should just be copied over to the output.  Or whatever was done in that situation in v5.2 where there's no problem.
+
+### How to Reproduce
+
+This is with v5.3.   With v5.2, there are no errors.
+
+```
+>>> import numpy as np
+>>> from astropy.nddata import NDDataRef
+
+>>> array = np.array([[0, 1, 0], [1, 0, 1], [0, 1, 0]])
+>>> mask = np.array([[0, 1, 64], [8, 0, 1], [2, 1, 0]])
+
+>>> nref_nomask = NDDataRef(array)
+>>> nref_mask = NDDataRef(array, mask=mask)
+
+# multiply no mask by constant (no mask * no mask)
+>>> nref_nomask.multiply(1., handle_mask=np.bitwise_or).mask   # returns nothing, no mask,  OK
+
+# multiply no mask by itself (no mask * no mask)
+>>> nref_nomask.multiply(nref_nomask, handle_mask=np.bitwise_or).mask # return nothing, no mask, OK
+
+# multiply mask by constant (mask * no mask)
+>>> nref_mask.multiply(1., handle_mask=np.bitwise_or).mask
+...
+TypeError: unsupported operand type(s) for |: 'int' and 'NoneType'
+
+# multiply mask by itself (mask * mask)
+>>> nref_mask.multiply(nref_mask, handle_mask=np.bitwise_or).mask
+array([[ 0,  1, 64],
+       [ 8,  0,  1],
+       [ 2,  1,  0]])
+
+# multiply mask by no mask (mask * no mask)
+>>> nref_mask.multiply(nref_nomask, handle_mask=np.bitwise_or).mask
+...
+TypeError: unsupported operand type(s) for |: 'int' and 'NoneType'
+```
+
+
+### Versions
+
+>>> import sys; print("Python", sys.version)
+Python 3.10.11 | packaged by conda-forge | (main, May 10 2023, 19:07:22) [Clang 14.0.6 ]
+>>> import astropy; print("astropy", astropy.__version__)
+astropy 5.3
+>>> import numpy; print("Numpy", numpy.__version__)
+Numpy 1.24.3
+>>> import erfa; print("pyerfa", erfa.__version__)
+pyerfa 2.0.0.3
+>>> import scipy; print("Scipy", scipy.__version__)
+Scipy 1.10.1
+>>> import matplotlib; print("Matplotlib", matplotlib.__version__)
+Matplotlib 3.7.1
+
+
+
+### Skeleton of Relevant Files ###
+
+### File: astropy/nddata/nduncertainty.py ###
+```python
+# Licensed under a 3-clause BSD style license - see LICENSE.rst
+
+
+__all__ = [
+    "MissingDataAssociationException",
+    "IncompatibleUncertaintiesException",
+    "NDUncertainty",
+    "StdDevUncertainty",
+    "UnknownUncertainty",
+    "VarianceUncertainty",
+    "InverseVariance",
+]
+
+# mapping from collapsing operations to the complementary methods used for `to_variance`
+collapse_to_variance_mapping = {
+    np.sum: np.square,
+    np.mean: np.square,
+}
+
+
+def _move_preserved_axes_first(arr, preserve_axes):
+...
+
+
+def _unravel_preserved_axes(arr, collapsed_arr, preserve_axes):
+...
+
+
+def from_variance_for_mean(x, axis):
+...
+
+
+# mapping from collapsing operations to the complementary methods used for `from_variance`
+collapse_from_variance_mapping = {
+    np.sum: lambda x, axis: np.sqrt(np.ma.sum(x, axis)),
+    np.mean: from_variance_for_mean,
+    np.median: None,
+}
+
+
+class IncompatibleUncertaintiesException(Exception):
+    pass
+
+
+class MissingDataAssociationException(Exception):
+    pass
+
+
+class NDUncertainty(metaclass=ABCMeta):
+
+    def __init__(self, array=None, copy=True, unit=None):
+...
+
+    @property
+    @abstractmethod
+    def uncertainty_type(self):
+...
+
+    @property
+    def supports_correlated(self):
+...
+
+    @property
+    def array(self):
+...
+
+    @array.setter
+    def array(self, value):
+...
+
+    @property
+    def unit(self):
+...
+
+    @unit.setter
+    def unit(self, value):
+...
+
+    @property
+    def quantity(self):
+...
+
+    @property
+    def parent_nddata(self):
+...
+
+    @parent_nddata.setter
+    def parent_nddata(self, value):
+...
+
+    @abstractmethod
+    def _data_unit_to_uncertainty_unit(self, value):
+...
+
+    def __repr__(self):
+...
+
+    def __getstate__(self):
+...
+
+    def __setstate__(self, state):
+...
+
+    def __getitem__(self, item):
+...
+
+    def propagate(self, operation, other_nddata, result_data, correlation, axis=None):
+...
+
+    def _convert_uncertainty(self, other_uncert):
+...
+
+    @abstractmethod
+    def _propagate_add(self, other_uncert, result_data, correlation):
+...
+
+    @abstractmethod
+    def _propagate_subtract(self, other_uncert, result_data, correlation):
+...
+
+    @abstractmethod
+    def _propagate_multiply(self, other_uncert, result_data, correlation):
+...
+
+    @abstractmethod
+    def _propagate_divide(self, other_uncert, result_data, correlation):
+...
+
+    def represent_as(self, other_uncert):
+...
+
+
+class UnknownUncertainty(NDUncertainty):
+
+    @property
+    def supports_correlated(self):
+...
+
+    @property
+    def uncertainty_type(self):
+...
+
+    def _data_unit_to_uncertainty_unit(self, value):
+...
+
+    def _convert_uncertainty(self, other_uncert):
+...
+
+    def _propagate_add(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_subtract(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_multiply(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_divide(self, other_uncert, result_data, correlation):
+...
+
+
+class _VariancePropagationMixin:
+
+    def _propagate_collapse(self, numpy_op, axis=None):
+...
+
+    def _get_err_at_extremum(self, extremum, axis):
+...
+
+    def _propagate_add_sub(
+        self,
+        other_uncert,
+        result_data,
+        correlation,
+        subtract=False,
+        to_variance=lambda x: x,
+        from_variance=lambda x: x,
+    ):
+...
+
+    def _propagate_multiply_divide(
+        self,
+        other_uncert,
+        result_data,
+        correlation,
+        divide=False,
+        to_variance=lambda x: x,
+        from_variance=lambda x: x,
+    ):
+...
+
+
+class StdDevUncertainty(_VariancePropagationMixin, NDUncertainty):
+
+    @property
+    def supports_correlated(self):
+...
+
+    @property
+    def uncertainty_type(self):
+...
+
+    def _convert_uncertainty(self, other_uncert):
+...
+
+    def _propagate_add(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_subtract(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_multiply(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_divide(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_collapse(self, numpy_operation, axis):
+...
+
+    def _data_unit_to_uncertainty_unit(self, value):
+...
+
+    def _convert_to_variance(self):
+...
+
+    @classmethod
+    def _convert_from_variance(cls, var_uncert):
+...
+
+
+class VarianceUncertainty(_VariancePropagationMixin, NDUncertainty):
+
+    @property
+    def uncertainty_type(self):
+...
+
+    @property
+    def supports_correlated(self):
+...
+
+    def _propagate_add(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_subtract(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_multiply(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_divide(self, other_uncert, result_data, correlation):
+...
+
+    def _data_unit_to_uncertainty_unit(self, value):
+...
+
+    def _convert_to_variance(self):
+...
+
+    @classmethod
+    def _convert_from_variance(cls, var_uncert):
+...
+
+
+def _inverse(x):
+...
+
+
+class InverseVariance(_VariancePropagationMixin, NDUncertainty):
+
+    @property
+    def uncertainty_type(self):
+...
+
+    @property
+    def supports_correlated(self):
+...
+
+    def _propagate_add(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_subtract(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_multiply(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_divide(self, other_uncert, result_data, correlation):
+...
+
+    def _data_unit_to_uncertainty_unit(self, value):
+...
+
+    def _convert_to_variance(self):
+...
+
+    @classmethod
+    def _convert_from_variance(cls, var_uncert):
+...
+
+```
+
+### File: astropy/nddata/nddata.py ###
+```python
+# Licensed under a 3-clause BSD style license - see LICENSE.rst
+# This module implements the base NDData class.
+
+
+
+__all__ = ["NDData"]
+
+_meta_doc = """`dict`-like : Additional meta information about the dataset."""
+
+
+class NDData(NDDataBase):
+
+    # Instead of a custom property use the MetaData descriptor also used for
+    # Tables. It will check if the meta is dict-like or raise an exception.
+    meta = MetaData(doc=_meta_doc, copy=False)
+
+    def __init__(
+        self,
+        data,
+        uncertainty=None,
+        mask=None,
+        wcs=None,
+        meta=None,
+        unit=None,
+        copy=False,
+        psf=None,
+    ):
+...
+
+    def __str__(self):
+...
+
+    def __repr__(self):
+...
+
+    @property
+    def data(self):
+...
+
+    @property
+    def mask(self):
+...
+
+    @mask.setter
+    def mask(self, value):
+...
+
+    @property
+    def unit(self):
+...
+
+    @property
+    def wcs(self):
+...
+
+    @wcs.setter
+    def wcs(self, wcs):
+...
+
+    @property
+    def psf(self):
+...
+
+    @psf.setter
+    def psf(self, value):
+...
+
+    @property
+    def uncertainty(self):
+...
+
+    @uncertainty.setter
+    def uncertainty(self, value):
+...
+
+```
+
+### File: astropy/nddata/nddata_withmixins.py ###
+```python
+# Licensed under a 3-clause BSD style license - see LICENSE.rst
+
+
+__all__ = ["NDDataRef"]
+
+
+class NDDataRef(NDArithmeticMixin, NDIOMixin, NDSlicingMixin, NDData):
+
+    pass
+
+```
+
+
+###
+
+Please provide the complete set of locations as either a class name, a function name, or a variable name.
+Note that if you include a class, you do not need to list its specific methods.
+You can include either the entire class or don't include the class name and instead include specific methods in the class.
+### Examples:
+```
+full_path1/file1.py
+function: my_function_1
+class: MyClass1
+function: MyClass2.my_method
+
+full_path2/file2.py
+variable: my_var
+function: MyClass3.my_method
+
+full_path3/file3.py
+function: my_function_2
+function: my_function_3
+function: MyClass4.my_method_1
+class: MyClass5
+```
+
+Return just the locations wrapped with ```.
+
+2025-04-22 21:45:28,133 - INFO - prompting with message:
+
+Please look through the following GitHub Problem Description and the Skeleton of Relevant Files.
+Identify all locations that need inspection or editing to fix the problem, including directly related areas as well as any potentially related global variables, functions, and classes.
+For each location you provide, either give the name of the class, the name of a method in a class, the name of a function, or the name of a global variable.
+
+### GitHub Problem Description ###
+In v5.3, NDDataRef mask propagation fails when one of the operand does not have a mask
+### Description
+
+This applies to v5.3. 
+
+It looks like when one of the operand does not have a mask, the mask propagation when doing arithmetic, in particular with `handle_mask=np.bitwise_or` fails.  This is not a problem in v5.2.
+
+I don't know enough about how all that works, but it seems from the error that the operand without a mask is set as a mask of None's and then the bitwise_or tries to operate on an integer and a None and fails.
+
+### Expected behavior
+
+When one of the operand does not have mask, the mask that exists should just be copied over to the output.  Or whatever was done in that situation in v5.2 where there's no problem.
+
+### How to Reproduce
+
+This is with v5.3.   With v5.2, there are no errors.
+
+```
+>>> import numpy as np
+>>> from astropy.nddata import NDDataRef
+
+>>> array = np.array([[0, 1, 0], [1, 0, 1], [0, 1, 0]])
+>>> mask = np.array([[0, 1, 64], [8, 0, 1], [2, 1, 0]])
+
+>>> nref_nomask = NDDataRef(array)
+>>> nref_mask = NDDataRef(array, mask=mask)
+
+# multiply no mask by constant (no mask * no mask)
+>>> nref_nomask.multiply(1., handle_mask=np.bitwise_or).mask   # returns nothing, no mask,  OK
+
+# multiply no mask by itself (no mask * no mask)
+>>> nref_nomask.multiply(nref_nomask, handle_mask=np.bitwise_or).mask # return nothing, no mask, OK
+
+# multiply mask by constant (mask * no mask)
+>>> nref_mask.multiply(1., handle_mask=np.bitwise_or).mask
+...
+TypeError: unsupported operand type(s) for |: 'int' and 'NoneType'
+
+# multiply mask by itself (mask * mask)
+>>> nref_mask.multiply(nref_mask, handle_mask=np.bitwise_or).mask
+array([[ 0,  1, 64],
+       [ 8,  0,  1],
+       [ 2,  1,  0]])
+
+# multiply mask by no mask (mask * no mask)
+>>> nref_mask.multiply(nref_nomask, handle_mask=np.bitwise_or).mask
+...
+TypeError: unsupported operand type(s) for |: 'int' and 'NoneType'
+```
+
+
+### Versions
+
+>>> import sys; print("Python", sys.version)
+Python 3.10.11 | packaged by conda-forge | (main, May 10 2023, 19:07:22) [Clang 14.0.6 ]
+>>> import astropy; print("astropy", astropy.__version__)
+astropy 5.3
+>>> import numpy; print("Numpy", numpy.__version__)
+Numpy 1.24.3
+>>> import erfa; print("pyerfa", erfa.__version__)
+pyerfa 2.0.0.3
+>>> import scipy; print("Scipy", scipy.__version__)
+Scipy 1.10.1
+>>> import matplotlib; print("Matplotlib", matplotlib.__version__)
+Matplotlib 3.7.1
+
+
+
+### Skeleton of Relevant Files ###
+
+### File: astropy/nddata/nduncertainty.py ###
+```python
+# Licensed under a 3-clause BSD style license - see LICENSE.rst
+
+
+__all__ = [
+    "MissingDataAssociationException",
+    "IncompatibleUncertaintiesException",
+    "NDUncertainty",
+    "StdDevUncertainty",
+    "UnknownUncertainty",
+    "VarianceUncertainty",
+    "InverseVariance",
+]
+
+# mapping from collapsing operations to the complementary methods used for `to_variance`
+collapse_to_variance_mapping = {
+    np.sum: np.square,
+    np.mean: np.square,
+}
+
+
+def _move_preserved_axes_first(arr, preserve_axes):
+...
+
+
+def _unravel_preserved_axes(arr, collapsed_arr, preserve_axes):
+...
+
+
+def from_variance_for_mean(x, axis):
+...
+
+
+# mapping from collapsing operations to the complementary methods used for `from_variance`
+collapse_from_variance_mapping = {
+    np.sum: lambda x, axis: np.sqrt(np.ma.sum(x, axis)),
+    np.mean: from_variance_for_mean,
+    np.median: None,
+}
+
+
+class IncompatibleUncertaintiesException(Exception):
+    pass
+
+
+class MissingDataAssociationException(Exception):
+    pass
+
+
+class NDUncertainty(metaclass=ABCMeta):
+
+    def __init__(self, array=None, copy=True, unit=None):
+...
+
+    @property
+    @abstractmethod
+    def uncertainty_type(self):
+...
+
+    @property
+    def supports_correlated(self):
+...
+
+    @property
+    def array(self):
+...
+
+    @array.setter
+    def array(self, value):
+...
+
+    @property
+    def unit(self):
+...
+
+    @unit.setter
+    def unit(self, value):
+...
+
+    @property
+    def quantity(self):
+...
+
+    @property
+    def parent_nddata(self):
+...
+
+    @parent_nddata.setter
+    def parent_nddata(self, value):
+...
+
+    @abstractmethod
+    def _data_unit_to_uncertainty_unit(self, value):
+...
+
+    def __repr__(self):
+...
+
+    def __getstate__(self):
+...
+
+    def __setstate__(self, state):
+...
+
+    def __getitem__(self, item):
+...
+
+    def propagate(self, operation, other_nddata, result_data, correlation, axis=None):
+...
+
+    def _convert_uncertainty(self, other_uncert):
+...
+
+    @abstractmethod
+    def _propagate_add(self, other_uncert, result_data, correlation):
+...
+
+    @abstractmethod
+    def _propagate_subtract(self, other_uncert, result_data, correlation):
+...
+
+    @abstractmethod
+    def _propagate_multiply(self, other_uncert, result_data, correlation):
+...
+
+    @abstractmethod
+    def _propagate_divide(self, other_uncert, result_data, correlation):
+...
+
+    def represent_as(self, other_uncert):
+...
+
+
+class UnknownUncertainty(NDUncertainty):
+
+    @property
+    def supports_correlated(self):
+...
+
+    @property
+    def uncertainty_type(self):
+...
+
+    def _data_unit_to_uncertainty_unit(self, value):
+...
+
+    def _convert_uncertainty(self, other_uncert):
+...
+
+    def _propagate_add(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_subtract(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_multiply(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_divide(self, other_uncert, result_data, correlation):
+...
+
+
+class _VariancePropagationMixin:
+
+    def _propagate_collapse(self, numpy_op, axis=None):
+...
+
+    def _get_err_at_extremum(self, extremum, axis):
+...
+
+    def _propagate_add_sub(
+        self,
+        other_uncert,
+        result_data,
+        correlation,
+        subtract=False,
+        to_variance=lambda x: x,
+        from_variance=lambda x: x,
+    ):
+...
+
+    def _propagate_multiply_divide(
+        self,
+        other_uncert,
+        result_data,
+        correlation,
+        divide=False,
+        to_variance=lambda x: x,
+        from_variance=lambda x: x,
+    ):
+...
+
+
+class StdDevUncertainty(_VariancePropagationMixin, NDUncertainty):
+
+    @property
+    def supports_correlated(self):
+...
+
+    @property
+    def uncertainty_type(self):
+...
+
+    def _convert_uncertainty(self, other_uncert):
+...
+
+    def _propagate_add(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_subtract(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_multiply(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_divide(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_collapse(self, numpy_operation, axis):
+...
+
+    def _data_unit_to_uncertainty_unit(self, value):
+...
+
+    def _convert_to_variance(self):
+...
+
+    @classmethod
+    def _convert_from_variance(cls, var_uncert):
+...
+
+
+class VarianceUncertainty(_VariancePropagationMixin, NDUncertainty):
+
+    @property
+    def uncertainty_type(self):
+...
+
+    @property
+    def supports_correlated(self):
+...
+
+    def _propagate_add(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_subtract(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_multiply(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_divide(self, other_uncert, result_data, correlation):
+...
+
+    def _data_unit_to_uncertainty_unit(self, value):
+...
+
+    def _convert_to_variance(self):
+...
+
+    @classmethod
+    def _convert_from_variance(cls, var_uncert):
+...
+
+
+def _inverse(x):
+...
+
+
+class InverseVariance(_VariancePropagationMixin, NDUncertainty):
+
+    @property
+    def uncertainty_type(self):
+...
+
+    @property
+    def supports_correlated(self):
+...
+
+    def _propagate_add(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_subtract(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_multiply(self, other_uncert, result_data, correlation):
+...
+
+    def _propagate_divide(self, other_uncert, result_data, correlation):
+...
+
+    def _data_unit_to_uncertainty_unit(self, value):
+...
+
+    def _convert_to_variance(self):
+...
+
+    @classmethod
+    def _convert_from_variance(cls, var_uncert):
+...
+
+```
+
+### File: astropy/nddata/nddata.py ###
+```python
+# Licensed under a 3-clause BSD style license - see LICENSE.rst
+# This module implements the base NDData class.
+
+
+
+__all__ = ["NDData"]
+
+_meta_doc = """`dict`-like : Additional meta information about the dataset."""
+
+
+class NDData(NDDataBase):
+
+    # Instead of a custom property use the MetaData descriptor also used for
+    # Tables. It will check if the meta is dict-like or raise an exception.
+    meta = MetaData(doc=_meta_doc, copy=False)
+
+    def __init__(
+        self,
+        data,
+        uncertainty=None,
+        mask=None,
+        wcs=None,
+        meta=None,
+        unit=None,
+        copy=False,
+        psf=None,
+    ):
+...
+
+    def __str__(self):
+...
+
+    def __repr__(self):
+...
+
+    @property
+    def data(self):
+...
+
+    @property
+    def mask(self):
+...
+
+    @mask.setter
+    def mask(self, value):
+...
+
+    @property
+    def unit(self):
+...
+
+    @property
+    def wcs(self):
+...
+
+    @wcs.setter
+    def wcs(self, wcs):
+...
+
+    @property
+    def psf(self):
+...
+
+    @psf.setter
+    def psf(self, value):
+...
+
+    @property
+    def uncertainty(self):
+...
+
+    @uncertainty.setter
+    def uncertainty(self, value):
+...
+
+```
+
+### File: astropy/nddata/nddata_withmixins.py ###
+```python
+# Licensed under a 3-clause BSD style license - see LICENSE.rst
+
+
+__all__ = ["NDDataRef"]
+
+
+class NDDataRef(NDArithmeticMixin, NDIOMixin, NDSlicingMixin, NDData):
+
+    pass
+
+```
+
+
+###
+
+Please provide the complete set of locations as either a class name, a function name, or a variable name.
+Note that if you include a class, you do not need to list its specific methods.
+You can include either the entire class or don't include the class name and instead include specific methods in the class.
+### Examples:
+```
+full_path1/file1.py
+function: my_function_1
+class: MyClass1
+function: MyClass2.my_method
+
+full_path2/file2.py
+variable: my_var
+function: MyClass3.my_method
+
+full_path3/file3.py
+function: my_function_2
+function: my_function_3
+function: MyClass4.my_method_1
+class: MyClass5
+```
+
+Return just the locations wrapped with ```.
+
+2025-04-22 21:45:28,133 - INFO - ================================================================================
+2025-04-22 21:45:28,133 - INFO - Initializing a decoder model: meta-llama/CodeLlama-7b-Instruct-hf ...
+2025-04-22 21:47:51,268 - INFO - ==== raw output ====
+2025-04-22 21:47:51,278 - INFO - ###
+
+```
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nduncertainty.py
+astropy/nddata/nd
+2025-04-22 21:47:51,278 - INFO - ================================================================================
+2025-04-22 21:47:51,278 - INFO - ==== extracted locs ====
+2025-04-22 21:47:51,278 - INFO - astropy/nddata/nduncertainty.py
+2025-04-22 21:47:51,279 - INFO - astropy/nddata/nddata.py
+2025-04-22 21:47:51,279 - INFO - astropy/nddata/nddata_withmixins.py
+2025-04-22 21:47:51,279 - INFO - ================================================================================
+2025-04-22 21:47:51,510 - INFO - No valid related locations found ... retrying with higher temperature ...
